@@ -12,6 +12,9 @@
 		"html": false
 	},
 	"attributes": {
+		"id": {
+			"type": "string"
+		},
 		"fieldName": {
 			"type": "string",
 			"default": ""
@@ -43,5 +46,6 @@
 	"textdomain": "quick-forms",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
 }

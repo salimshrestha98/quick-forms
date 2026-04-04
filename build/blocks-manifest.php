@@ -1,7 +1,7 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
-	'quick-form' => array(
+	'form' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
 		'name' => 'quick-forms/form',
@@ -17,9 +17,8 @@ return array(
 			'html' => false
 		),
 		'attributes' => array(
-			'submitMethod' => array(
-				'type' => 'string',
-				'default' => 'GET'
+			'id' => array(
+				'type' => 'string'
 			),
 			'showLabel' => array(
 				'type' => 'boolean',
@@ -76,7 +75,8 @@ return array(
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
-		'viewScript' => 'file:./view.js'
+		'viewScript' => 'file:./view.js',
+		'render' => 'file:./render.php'
 	),
 	'submit' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -94,6 +94,9 @@ return array(
 			'html' => false
 		),
 		'attributes' => array(
+			'id' => array(
+				'type' => 'string'
+			),
 			'buttonText' => array(
 				'type' => 'string',
 				'default' => 'Submit'
@@ -128,7 +131,8 @@ return array(
 		'textdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css'
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
 	),
 	'text' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -146,6 +150,9 @@ return array(
 			'html' => false
 		),
 		'attributes' => array(
+			'id' => array(
+				'type' => 'string'
+			),
 			'fieldName' => array(
 				'type' => 'string',
 				'default' => ''
@@ -177,6 +184,7 @@ return array(
 		'textdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css'
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
 	)
 );

@@ -18,8 +18,8 @@ import './style.scss';
  * Internal dependencies
  */
 import Edit from './edit';
-import save from './save';
 import metadata from './block.json';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -32,8 +32,5 @@ registerBlockType( metadata.name, {
 	 */
 	edit: Edit,
 
-	/**
-	 * @see ./save.js
-	 */
-	save,
+	save: () => <InnerBlocks.Content />,
 } );

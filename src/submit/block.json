@@ -12,6 +12,9 @@
 		"html": false
 	},
 	"attributes": {
+		"id": {
+			"type": "string"
+		},
 		"buttonText": {
 			"type": "string",
 			"default": "Submit"
@@ -46,5 +49,6 @@
 	"textdomain": "quick-forms",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
 }

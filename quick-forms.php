@@ -17,21 +17,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function create_block_quick_forms_block_init() {
-	wp_register_block_types_from_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
-}
-add_action( 'init', 'create_block_quick_forms_block_init' );
+require_once 'vendor/autoload.php';
+require_once 'includes/QuickForms.php';
 
-add_filter( 'block_categories_all', 'add_block_category' );
-
-function add_block_category( $categories ) {
-	$my_category = array(
-		'slug'  => 'quick-forms',
-		'title' => 'Quick Forms',
-	);
-
-	array_unshift( $categories, $my_category );
-
-	return $categories;
+// Plugin Version
+if ( ! defined( 'QF_VERSION' ) ) {
+	define( 'QF_VERSION', '1.0.0' );
 }
 
+// Plugin File
+if ( ! defined( 'QF_FILE' ) ) {
+	define( 'QF_FILE', __FILE__ );
+}
+
+// Plugin Basename
+if ( ! defined( 'QF_BASENAME' ) ) {
+	define( 'QF_BASENAME', plugin_basename( QF_FILE ) );
+}
+
+// Plugin Directory Path
+if ( ! defined( 'QF_PATH' ) ) {
+	define( 'QF_PATH', plugin_dir_path( QF_FILE ) );
+}
+
+// Plugin Directory URL
+if ( ! defined( 'QF_URL' ) ) {
+	define( 'QF_URL', plugin_dir_url( QF_FILE ) );
+}
+
+// Assets URL
+if ( ! defined( 'QF_ASSETS_URL' ) ) {
+	define( 'QF_ASSETS_URL', QF_URL . 'assets/' );
+}
+
+// Includes Path
+if ( ! defined( 'QF_INCLUDES_PATH' ) ) {
+	define( 'QF_INCLUDES_PATH', QF_PATH . 'includes/' );
+}
+
+// Build Path (for block/editor assets)
+if ( ! defined( 'QF_BUILD_PATH' ) ) {
+	define( 'QF_BUILD_PATH', QF_PATH . 'build/' );
+}
+
+// Templates Path
+if ( ! defined( 'QF_TEMPLATES_PATH' ) ) {
+	define( 'QF_TEMPLATES_PATH', QF_PATH . 'templates/' );
+}
+
+// Build URL
+if ( ! defined( 'QF_BUILD_URL' ) ) {
+	define( 'QF_BUILD_URL', QF_URL . 'build/' );
+}

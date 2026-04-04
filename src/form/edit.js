@@ -13,10 +13,12 @@ import {
 	__experimentalUnitControl as UnitControl,
 	BoxControl,
 } from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
 import './editor.scss';
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
+		id,
 		fieldMargin,
 		margin,
 		padding,
@@ -32,6 +34,12 @@ export default function Edit( { attributes, setAttributes } ) {
 		[ 'quick-forms/text', {} ],
 		[ 'quick-forms/submit', {} ],
 	];
+
+	useEffect( () => {
+		if ( ! id ) {
+			setAttributes( { id: clientId } );
+		}
+	}, [] );
 
 	return (
 		<>
@@ -168,8 +176,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						padding: `${ padding.top } ${ padding.right } ${ padding.bottom } ${ padding.left } `,
 					} }
 					className="quick-form"
-					action="#"
-					method="GET"
 				>
 					<InnerBlocks
 						template={ TEMPLATE }

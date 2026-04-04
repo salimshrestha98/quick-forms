@@ -7,7 +7,6 @@ import {
 import {
 	PanelBody,
 	ToggleControl,
-	RadioControl,
 	TextControl,
 	TabPanel,
 	Dashicon,
@@ -17,8 +16,13 @@ import { useEffect } from '@wordpress/element';
 import { useDebounce } from '@wordpress/compose';
 import './editor.scss';
 
-export default function Edit( { attributes, setAttributes, context } ) {
-	const { fieldName, fieldLabel, placeholder, defaultValue, required } =
+export default function Edit( {
+	attributes,
+	setAttributes,
+	context,
+	clientId,
+} ) {
+	const { id, fieldName, fieldLabel, placeholder, defaultValue, required } =
 		attributes;
 
 	const {
@@ -28,6 +32,12 @@ export default function Edit( { attributes, setAttributes, context } ) {
 		'quick-form/fieldWidth': fieldWidth,
 		'quick-form/fieldMargin': fieldMargin,
 	} = context;
+
+	useEffect( () => {
+		if ( ! id ) {
+			setAttributes( { id: clientId } );
+		}
+	}, [] );
 
 	const debouncedUpdate = useDebounce( ( value ) => {
 		const tempFieldName = value.replaceAll( ' ', '-' ).toLowerCase();

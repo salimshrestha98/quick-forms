@@ -13,11 +13,18 @@ import {
 	BoxControl,
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
 import './editor.scss';
 
-export default function Edit( { attributes, setAttributes } ) {
-	const { buttonText, buttonWidthType, buttonWidth, margin, padding } =
+export default function Edit( { attributes, setAttributes, clientId } ) {
+	const { id, buttonText, buttonWidthType, buttonWidth, margin, padding } =
 		attributes;
+
+	useEffect( () => {
+		if ( ! id ) {
+			setAttributes( { id: clientId } );
+		}
+	}, [] );
 
 	const buttonStyles = {
 		margin: `${ margin.top } ${ margin.right } ${ margin.bottom } ${ margin.left }`,
@@ -134,7 +141,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...useBlockProps() }>
-				<button type="submit" style={ buttonStyles }>
+				<button style={ buttonStyles } onClick={ () => null }>
 					<RichText
 						tagName="span"
 						value={ buttonText }

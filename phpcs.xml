@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Quick Forms">
+    <rule ref="WordPress-Extra">
+		<exclude name="WordPress.NamingConventions.ValidVariableName"/>
+        <exclude name="WordPress.NamingConventions.ValidVariableName"/>
+        <exclude name="WordPress.Files.FileName"/>
+	</rule>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
+
+	<!-- Only check PHP files -->
+    <arg name="extensions" value="php"/>
+</ruleset>
