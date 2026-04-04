@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "quick-forms/submit",
+	"version": "0.1.0",
+	"title": "Submit",
+	"category": "quick-forms",
+	"icon": "plus",
+	"description": "Submit Button",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"buttonText": {
+			"type": "string",
+			"default": "Submit"
+		},
+		"buttonWidthType": {
+			"type": "string",
+			"default": "auto"
+		},
+		"buttonWidth": {
+			"type": "string",
+			"default": "100px"
+		},
+		"margin": {
+			"type": "object",
+			"default": {
+				"top": "20px",
+				"left": "0px",
+				"right": "0px",
+				"bottom": "0px"
+			}
+		},
+		"padding": {
+			"type": "object",
+			"default": {
+				"top": "10px",
+				"left": "10px",
+				"right": "10px",
+				"bottom": "10px"
+			}
+		}
+	},
+	"textdomain": "quick-forms",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

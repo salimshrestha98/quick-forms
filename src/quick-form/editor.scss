@@ -1,0 +1,11 @@
+.qf-tab-panel{
+	.components-button.components-tab-panel__tabs-item {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.active-tab {
+		border-bottom: 4px solid grey;
+	}
+}

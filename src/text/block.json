@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "quick-forms/text",
+	"version": "0.1.0",
+	"title": "Text",
+	"category": "quick-forms",
+	"icon": "plus",
+	"description": "Text Field",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"fieldName": {
+			"type": "string",
+			"default": ""
+		},
+		"fieldLabel": {
+			"type": "string",
+			"default": "Field Label"
+		},
+		"placeholder": {
+			"type": "string",
+			"default": ""
+		},
+		"defaultValue": {
+			"type": "string",
+			"default": ""
+		},
+		"required": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"usesContext": [
+		"quick-form/showLabel",
+		"quick-form/labelPosition",
+		"quick-form/labelWidth",
+		"quick-form/fieldWidth",
+		"quick-form/fieldMargin"
+	],
+	"textdomain": "quick-forms",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

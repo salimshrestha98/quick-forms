@@ -1,0 +1,168 @@
+import { __ } from '@wordpress/i18n';
+import {
+	useBlockProps,
+	RichText,
+	InspectorControls,
+} from '@wordpress/block-editor';
+import {
+	PanelBody,
+	ToggleControl,
+	RadioControl,
+	TextControl,
+	TabPanel,
+	Dashicon,
+	__experimentalUnitControl as UnitControl,
+} from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
+import { useDebounce } from '@wordpress/compose';
+import './editor.scss';
+
+export default function Edit( { attributes, setAttributes, context } ) {
+	const { fieldName, fieldLabel, placeholder, defaultValue, required } =
+		attributes;
+
+	const {
+		'quick-form/showLabel': showLabel,
+		'quick-form/labelPosition': labelPosition,
+		'quick-form/labelWidth': labelWidth,
+		'quick-form/fieldWidth': fieldWidth,
+		'quick-form/fieldMargin': fieldMargin,
+	} = context;
+
+	const debouncedUpdate = useDebounce( ( value ) => {
+		const tempFieldName = value.replaceAll( ' ', '-' ).toLowerCase();
+		setAttributes( { fieldName: tempFieldName } );
+	}, 1000 );
+
+	useEffect( () => {
+		if ( fieldName === '' && fieldLabel && fieldLabel !== 'Field Label' ) {
+			debouncedUpdate( fieldLabel );
+		}
+	}, [ fieldLabel ] );
+
+	const labelStyles = {
+		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
+		display:
+			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
+	};
+	const inputStyles = {
+		display:
+			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
+		width: fieldWidth,
+	};
+
+	const blockProps = useBlockProps( {
+		style: {
+			margin: `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`,
+		},
+	} );
+
+	return (
+		<>
+			<InspectorControls>
+				<TabPanel
+					className="qf-tab-panel"
+					activeClass="active-tab"
+					tabs={ [
+						{
+							name: 'settings',
+							title: <Dashicon icon="admin-generic" />,
+							className: 'tab-settings',
+						},
+						{
+							name: 'styles',
+							title: <Dashicon icon="admin-customizer" />,
+							className: 'tab-styles',
+						},
+					] }
+				>
+					{ ( tab ) => {
+						if ( tab.name === 'settings' ) {
+							return (
+								<>
+									<PanelBody title="General Settings">
+										<TextControl
+											__next40pxDefaultSize
+											label="Field Label"
+											value={ fieldLabel }
+											onChange={ ( value ) =>
+												setAttributes( {
+													fieldLabel: value,
+												} )
+											}
+										/>
+
+										<TextControl
+											__next40pxDefaultSize
+											label="Field Name"
+											value={ fieldName }
+											onChange={ ( value ) =>
+												setAttributes( {
+													fieldName: value,
+												} )
+											}
+										/>
+
+										<TextControl
+											__next40pxDefaultSize
+											label="Placeholder Text"
+											value={ placeholder }
+											onChange={ ( value ) =>
+												setAttributes( {
+													placeholder: value,
+												} )
+											}
+										/>
+
+										<TextControl
+											__next40pxDefaultSize
+											label="Default Vaue"
+											value={ defaultValue }
+											onChange={ ( value ) =>
+												setAttributes( {
+													defaultValue: value,
+												} )
+											}
+										/>
+
+										<ToggleControl
+											label="Required"
+											checked={ required }
+											onChange={ () => {
+												setAttributes( {
+													required: ! required,
+												} );
+											} }
+										/>
+									</PanelBody>
+								</>
+							);
+						}
+					} }
+				</TabPanel>
+			</InspectorControls>
+
+			<div { ...blockProps }>
+				{ showLabel && (
+					<RichText
+						tagName="label"
+						value={ fieldLabel }
+						onChange={ ( value ) =>
+							setAttributes( { fieldLabel: value } )
+						}
+						placeholder={ __( 'Field Label' ) }
+						style={ labelStyles }
+					/>
+				) }
+
+				<input
+					type="text"
+					placeholder={ placeholder }
+					value={ defaultValue }
+					style={ inputStyles }
+					onChange={ () => false }
+				/>
+			</div>
+		</>
+	);
+}

@@ -1,25 +1,182 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
-	'quick-forms' => array(
+	'quick-form' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'create-block/quick-forms',
+		'name' => 'quick-forms/form',
 		'version' => '0.1.0',
-		'title' => 'Quick Forms',
-		'category' => 'widgets',
+		'title' => 'Form',
+		'category' => 'quick-forms',
 		'icon' => 'smiley',
-		'description' => 'Example block scaffolded with Create Block tool.',
+		'description' => 'Quick Form wrapper block',
 		'example' => array(
 			
 		),
 		'supports' => array(
 			'html' => false
 		),
+		'attributes' => array(
+			'submitMethod' => array(
+				'type' => 'string',
+				'default' => 'GET'
+			),
+			'showLabel' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'labelPosition' => array(
+				'type' => 'string',
+				'default' => 'above'
+			),
+			'fieldWidth' => array(
+				'type' => 'string',
+				'default' => '150px'
+			),
+			'fieldMargin' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'left' => '0px',
+					'right' => '0px',
+					'bottom' => '0px'
+				)
+			),
+			'labelWidth' => array(
+				'type' => 'string',
+				'default' => '150px'
+			),
+			'margin' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'left' => '0px',
+					'right' => '0px',
+					'bottom' => '0px'
+				)
+			),
+			'padding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'left' => '20px',
+					'right' => '20px',
+					'bottom' => '20px'
+				)
+			)
+		),
+		'providesContext' => array(
+			'quick-form/showLabel' => 'showLabel',
+			'quick-form/labelPosition' => 'labelPosition',
+			'quick-form/labelWidth' => 'labelWidth',
+			'quick-form/fieldWidth' => 'fieldWidth',
+			'quick-form/fieldMargin' => 'fieldMargin'
+		),
 		'textdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
 		'viewScript' => 'file:./view.js'
+	),
+	'submit' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'quick-forms/submit',
+		'version' => '0.1.0',
+		'title' => 'Submit',
+		'category' => 'quick-forms',
+		'icon' => 'plus',
+		'description' => 'Submit Button',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'buttonText' => array(
+				'type' => 'string',
+				'default' => 'Submit'
+			),
+			'buttonWidthType' => array(
+				'type' => 'string',
+				'default' => 'auto'
+			),
+			'buttonWidth' => array(
+				'type' => 'string',
+				'default' => '100px'
+			),
+			'margin' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'left' => '0px',
+					'right' => '0px',
+					'bottom' => '0px'
+				)
+			),
+			'padding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '10px',
+					'left' => '10px',
+					'right' => '10px',
+					'bottom' => '10px'
+				)
+			)
+		),
+		'textdomain' => 'quick-forms',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'text' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'quick-forms/text',
+		'version' => '0.1.0',
+		'title' => 'Text',
+		'category' => 'quick-forms',
+		'icon' => 'plus',
+		'description' => 'Text Field',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'fieldName' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'fieldLabel' => array(
+				'type' => 'string',
+				'default' => 'Field Label'
+			),
+			'placeholder' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'defaultValue' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'required' => array(
+				'type' => 'boolean',
+				'default' => false
+			)
+		),
+		'usesContext' => array(
+			'quick-form/showLabel',
+			'quick-form/labelPosition',
+			'quick-form/labelWidth',
+			'quick-form/fieldWidth',
+			'quick-form/fieldMargin'
+		),
+		'textdomain' => 'quick-forms',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
 	)
 );

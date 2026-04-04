@@ -1,0 +1,13 @@
+form.quick-form {
+	border: 1px solid;
+
+	label, input {
+		box-sizing: border-box;
+	}
+
+	input {
+		padding: 5px 10px;
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+}

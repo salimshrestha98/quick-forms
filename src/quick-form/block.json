@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "quick-forms/form",
+	"version": "0.1.0",
+	"title": "Form",
+	"category": "quick-forms",
+	"icon": "smiley",
+	"description": "Quick Form wrapper block",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes" : {
+		"submitMethod": {
+			"type": "string",
+			"default": "GET"
+		},
+		"showLabel": {
+			"type": "boolean",
+			"default": true
+		},
+		"labelPosition": {
+			"type": "string",
+			"default": "above"
+		},
+		"fieldWidth": {
+			"type": "string",
+			"default": "150px"
+		},
+		"fieldMargin": {
+			"type": "object",
+			"default": {
+				"top": "20px",
+				"left": "0px",
+				"right": "0px",
+				"bottom": "0px"
+			}
+		},
+		"labelWidth": {
+			"type": "string",
+			"default": "150px"
+		},
+		"margin": {
+			"type": "object",
+			"default": {
+				"top": "20px",
+				"left": "0px",
+				"right": "0px",
+				"bottom": "0px"
+			}
+		},
+		"padding": {
+			"type": "object",
+			"default": {
+				"top": "20px",
+				"left": "20px",
+				"right": "20px",
+				"bottom": "20px"
+			}
+		}
+	},
+	"providesContext": {
+		"quick-form/showLabel": "showLabel",
+		"quick-form/labelPosition": "labelPosition",
+		"quick-form/labelWidth": "labelWidth",
+		"quick-form/fieldWidth": "fieldWidth",
+		"quick-form/fieldMargin": "fieldMargin"
+	},
+	"textdomain": "quick-forms",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
