@@ -53,17 +53,6 @@ export default function Edit( {
 		}
 	}, [] );
 
-	const debouncedUpdate = useDebounce( ( value ) => {
-		const tempFieldName = value.replaceAll( ' ', '-' ).toLowerCase();
-		setAttributes( { fieldName: tempFieldName } );
-	}, 1000 );
-
-	useEffect( () => {
-		if ( fieldName === '' && fieldLabel && fieldLabel !== 'Field Label' ) {
-			debouncedUpdate( fieldLabel );
-		}
-	}, [ fieldLabel ] );
-
 	const labelStyles = {
 		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
 		display:

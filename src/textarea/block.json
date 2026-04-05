@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "quick-forms/textarea",
+	"version": "0.1.0",
+	"title": "Textarea",
+	"category": "quick-forms",
+	"icon": "editor-textcolor",
+	"description": "Textarea Field",
+	"parent": [
+		"quick-forms/form"
+	],
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"id": {
+			"type": "string"
+		},
+		"fieldName": {
+			"type": "string"
+		},
+		"fieldLabel": {
+			"type": "string",
+			"default": "Textarea"
+		},
+		"rowsCount": {
+			"type": "number",
+			"default": 5
+		},
+		"placeholder": {
+			"type": "string",
+			"default": ""
+		},
+		"defaultValue": {
+			"type": "string",
+			"default": ""
+		},
+		"required": {
+			"type": "boolean",
+			"default": false
+		},
+		"margin": {
+			"type": "object",
+			"default": {
+				"top": "20px",
+				"left": "0px",
+				"right": "0px",
+				"bottom": "0px"
+			}
+		}
+	},
+	"usesContext": [
+		"quick-form/showLabel",
+		"quick-form/labelPosition",
+		"quick-form/labelWidth",
+		"quick-form/fieldWidth",
+		"quick-form/fieldMargin"
+	],
+	"inputdomain": "quick-forms",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

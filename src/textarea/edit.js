@@ -1,0 +1,197 @@
+import { __ } from '@wordpress/i18n';
+import {
+	useBlockProps,
+	RichText,
+	InspectorControls,
+} from '@wordpress/block-editor';
+import {
+	PanelBody,
+	ToggleControl,
+	TextControl,
+	TabPanel,
+	Dashicon,
+	SelectControl,
+	__experimentalNumberControl as NumberControl,
+	__experimentalUnitControl as UnitControl,
+} from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
+import { useDebounce } from '@wordpress/compose';
+import './editor.scss';
+
+export default function Edit( {
+	attributes,
+	setAttributes,
+	context,
+	clientId,
+} ) {
+	const {
+		id,
+		fieldName,
+		fieldLabel,
+		rowsCount,
+		placeholder,
+		defaultValue,
+		required,
+	} = attributes;
+
+	const {
+		'quick-form/showLabel': showLabel,
+		'quick-form/labelPosition': labelPosition,
+		'quick-form/labelWidth': labelWidth,
+		'quick-form/fieldWidth': fieldWidth,
+		'quick-form/fieldMargin': fieldMargin,
+	} = context;
+
+	useEffect( () => {
+		if ( ! id ) {
+			setAttributes( { id: clientId.slice( 0, 8 ) } );
+		}
+
+		if ( ! fieldName ) {
+			setAttributes( { fieldName: clientId.slice( 0, 8 ) } );
+		}
+	}, [] );
+
+	const labelStyles = {
+		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
+		display:
+			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
+	};
+	const textareaStyles = {
+		display:
+			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
+		width: fieldWidth,
+	};
+
+	const blockProps = useBlockProps( {
+		style: {
+			margin: fieldMargin
+				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
+				: '',
+		},
+	} );
+
+	return (
+		<>
+			<InspectorControls>
+				<TabPanel
+					className="qf-tab-panel"
+					activeClass="active-tab"
+					tabs={ [
+						{
+							name: 'settings',
+							title: <Dashicon icon="admin-generic" />,
+							className: 'tab-settings',
+						},
+						{
+							name: 'styles',
+							title: <Dashicon icon="admin-customizer" />,
+							className: 'tab-styles',
+						},
+					] }
+				>
+					{ ( tab ) => {
+						if ( tab.name === 'settings' ) {
+							return (
+								<>
+									<PanelBody title="General Settings">
+										<TextControl
+											__next40pxDefaultSize
+											label="Field Label"
+											value={ fieldLabel }
+											onChange={ ( value ) =>
+												setAttributes( {
+													fieldLabel: value,
+												} )
+											}
+										/>
+
+										<TextControl
+											__next40pxDefaultSize
+											label="Field Name"
+											value={ fieldName }
+											help="Please provide a unique field name for each field."
+											onChange={ ( value ) =>
+												setAttributes( {
+													fieldName: value,
+												} )
+											}
+										/>
+
+										<NumberControl
+											__next40pxDefaultSize
+											isShiftStepEnabled={ true }
+											shiftStep={ 1 }
+											min={ 1 }
+											label="Number of Rows"
+											value={ rowsCount }
+											onChange={ ( value ) =>
+												setAttributes( {
+													rowsCount: value,
+												} )
+											}
+										/>
+
+										<TextControl
+											__next40pxDefaultSize
+											label="Placeholder Text"
+											value={ placeholder }
+											onChange={ ( value ) =>
+												setAttributes( {
+													placeholder: value,
+												} )
+											}
+										/>
+
+										<TextControl
+											__next40pxDefaultSize
+											label="Default Vaue"
+											value={ defaultValue }
+											onChange={ ( value ) =>
+												setAttributes( {
+													defaultValue: value,
+												} )
+											}
+										/>
+
+										<ToggleControl
+											label="Required"
+											checked={ required }
+											onChange={ () => {
+												setAttributes( {
+													required: ! required,
+												} );
+											} }
+										/>
+									</PanelBody>
+								</>
+							);
+						}
+					} }
+				</TabPanel>
+			</InspectorControls>
+
+			<div { ...blockProps }>
+				{ showLabel && (
+					<RichText
+						tagName="label"
+						value={ fieldLabel }
+						onChange={ ( value ) =>
+							setAttributes( { fieldLabel: value } )
+						}
+						placeholder={ __( 'Field Label' ) }
+						style={ labelStyles }
+					/>
+				) }
+
+				<textarea
+					placeholder={ placeholder }
+					value={ defaultValue }
+					style={ textareaStyles }
+					rows={ rowsCount }
+					onChange={ () => false }
+				></textarea>
+			</div>
+		</>
+	);
+}
