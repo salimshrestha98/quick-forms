@@ -7,6 +7,9 @@
 	"category": "quick-forms",
 	"icon": "arrow-right-alt",
 	"description": "Submit Button",
+	"parent": [
+		"quick-forms/form"
+	],
 	"example": {},
 	"supports": {
 		"html": false

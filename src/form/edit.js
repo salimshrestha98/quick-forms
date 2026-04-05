@@ -32,9 +32,27 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { allowedBlocks } = [ 'create-block/text' ];
 
 	const TEMPLATE = [
-		[ 'core/paragraph', { placeholder: 'Contact Form' } ],
-		[ 'quick-forms/text', {} ],
-		[ 'quick-forms/submit', {} ],
+		[
+			'core/heading',
+			{
+				level: 2,
+				content: 'Quick Contact Form',
+				textAlign: 'center',
+				style: {
+					spacing: {
+						margin: {
+							bottom: '40px',
+						},
+					},
+				},
+			},
+		],
+		[ 'quick-forms/input', { inputType: 'text', fieldLabel: 'Your Name' } ],
+		[
+			'quick-forms/input',
+			{ inputType: 'email', fieldLabel: 'Your Email' },
+		],
+		[ 'quick-forms/submit', { lock: { move: false, remove: true } } ],
 	];
 
 	useEffect( () => {

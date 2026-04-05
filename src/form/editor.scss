@@ -1,10 +1,16 @@
-.qf-tab-panel{
+.qf-hidden-field-placeholder {
+	border: 1px solid #ddd;
+	color: #ddd;
+	padding: 20px 10px;
+}
+
+.qf-tab-panel {
 	.components-button.components-tab-panel__tabs-item {
 		flex: 1;
 		display: flex;
 		justify-content: center;
 	}
-	
+
 	.active-tab {
 		border-bottom: 4px solid grey;
 	}

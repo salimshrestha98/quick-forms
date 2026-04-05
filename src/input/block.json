@@ -1,12 +1,15 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "quick-forms/text",
+	"name": "quick-forms/input",
 	"version": "0.1.0",
-	"title": "Text",
+	"title": "Input",
 	"category": "quick-forms",
 	"icon": "editor-textcolor",
-	"description": "Text Field",
+	"description": "Input Field",
+	"parent": [
+		"quick-forms/form"
+	],
 	"example": {},
 	"supports": {
 		"html": false
@@ -14,6 +17,10 @@
 	"attributes": {
 		"id": {
 			"type": "string"
+		},
+		"inputType": {
+			"type": "string",
+			"default": "text"
 		},
 		"fieldName": {
 			"type": "string"
@@ -33,6 +40,23 @@
 		"required": {
 			"type": "boolean",
 			"default": false
+		},
+		"minimum": {
+			"type": "string",
+			"default": ""
+		},
+		"maximum": {
+			"type": "string",
+			"default": ""
+		},
+		"margin": {
+			"type": "object",
+			"default": {
+				"top": "20px",
+				"left": "0px",
+				"right": "0px",
+				"bottom": "0px"
+			}
 		}
 	},
 	"usesContext": [
@@ -42,7 +66,7 @@
 		"quick-form/fieldWidth",
 		"quick-form/fieldMargin"
 	],
-	"textdomain": "quick-forms",
+	"inputdomain": "quick-forms",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

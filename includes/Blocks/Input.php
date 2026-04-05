@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use QuickForms\Helpers\BlockHelper;
 
-final class Text extends Block {
+final class Input extends Block {
 	public function __construct( $attributes, $content, $block ) {
 		$this->attributes = $attributes;
 		$this->content    = $content;

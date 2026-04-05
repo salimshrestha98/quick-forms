@@ -20,7 +20,6 @@ class Submissions_Table extends WP_List_Table {
 	private $columns = array(
 		'cb'           => '<input type="checkbox" />',
 		'id'           => 'ID',
-		'form_name'    => 'Form',
 		'submitted_at' => 'Date',
 	);
 
@@ -199,13 +198,11 @@ class Submissions_Table extends WP_List_Table {
 		$form_id       = $items[0]['form_id'];
 		$new_columns   = array();
 		$form_settings = BlockHelper::get_form_settings( $form_id );
-		$form_name     = $form_settings['attrs']['formName'] ?? 'Contact Form';
 
 		foreach ( $items as $key => $form ) {
 			$data        = unserialize( $form['data'] );
-			$new_columns = array_merge( $new_columns, array_fill_keys( array_keys( $data ), '' ) );
+			$new_columns = array_merge( $new_columns, array_keys( $data ) );
 
-			$data['form_name']   = $form_name;
 			$this->items[ $key ] = array_merge( $form, $data );
 		}
 
@@ -214,12 +211,10 @@ class Submissions_Table extends WP_List_Table {
 				$field_name  = $field['attrs']['fieldName'] ?? '';
 				$field_label = $field['attrs']['fieldLabel'] ?? '';
 
-				if ( in_array( $field_name, array_keys( $new_columns ), true ) ) {
-					$new_columns[ $field_name ] = $field_label;
+				if ( in_array( $field_name, $new_columns, true ) ) {
+					$this->columns[ $field_name ] = $field_label;
 				}
 			}
 		}
-
-		$this->columns = array_merge( $this->columns, $new_columns );
 	}
 }

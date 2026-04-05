@@ -82,6 +82,82 @@ return array(
 		'viewScript' => 'file:./view.js',
 		'render' => 'file:./render.php'
 	),
+	'input' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'quick-forms/input',
+		'version' => '0.1.0',
+		'title' => 'Input',
+		'category' => 'quick-forms',
+		'icon' => 'editor-textcolor',
+		'description' => 'Input Field',
+		'parent' => array(
+			'quick-forms/form'
+		),
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'id' => array(
+				'type' => 'string'
+			),
+			'inputType' => array(
+				'type' => 'string',
+				'default' => 'text'
+			),
+			'fieldName' => array(
+				'type' => 'string'
+			),
+			'fieldLabel' => array(
+				'type' => 'string',
+				'default' => 'Field Label'
+			),
+			'placeholder' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'defaultValue' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'required' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'minimum' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'maximum' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'margin' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'left' => '0px',
+					'right' => '0px',
+					'bottom' => '0px'
+				)
+			)
+		),
+		'usesContext' => array(
+			'quick-form/showLabel',
+			'quick-form/labelPosition',
+			'quick-form/labelWidth',
+			'quick-form/fieldWidth',
+			'quick-form/fieldMargin'
+		),
+		'inputdomain' => 'quick-forms',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
+	),
 	'submit' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -91,6 +167,9 @@ return array(
 		'category' => 'quick-forms',
 		'icon' => 'arrow-right-alt',
 		'description' => 'Submit Button',
+		'parent' => array(
+			'quick-forms/form'
+		),
 		'example' => array(
 			
 		),
@@ -131,58 +210,6 @@ return array(
 					'bottom' => '10px'
 				)
 			)
-		),
-		'textdomain' => 'quick-forms',
-		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
-		'render' => 'file:./render.php'
-	),
-	'text' => array(
-		'$schema' => 'https://schemas.wp.org/trunk/block.json',
-		'apiVersion' => 3,
-		'name' => 'quick-forms/text',
-		'version' => '0.1.0',
-		'title' => 'Text',
-		'category' => 'quick-forms',
-		'icon' => 'editor-textcolor',
-		'description' => 'Text Field',
-		'example' => array(
-			
-		),
-		'supports' => array(
-			'html' => false
-		),
-		'attributes' => array(
-			'id' => array(
-				'type' => 'string'
-			),
-			'fieldName' => array(
-				'type' => 'string'
-			),
-			'fieldLabel' => array(
-				'type' => 'string',
-				'default' => 'Field Label'
-			),
-			'placeholder' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'defaultValue' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'required' => array(
-				'type' => 'boolean',
-				'default' => false
-			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'textdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
