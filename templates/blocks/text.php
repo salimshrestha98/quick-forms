@@ -8,5 +8,5 @@ $blockProps = get_block_wrapper_attributes();
 		echo wp_kses_post( "<label>$fieldLabel</label>" );
 	}
 	?>
-	<input type="text" placeholder='<?php echo esc_attr( $placeholder ); ?>' value='<?php echo esc_attr( $defaultValue ); ?>'/>
+	<input type="text" name='<?php echo esc_attr( $fieldName ); ?>' placeholder='<?php echo esc_attr( $placeholder ); ?>' value='<?php echo esc_attr( $defaultValue ); ?>'/>
 </div>

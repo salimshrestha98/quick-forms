@@ -69,3 +69,5 @@ if ( ! defined( 'QF_TEMPLATES_PATH' ) ) {
 if ( ! defined( 'QF_BUILD_URL' ) ) {
 	define( 'QF_BUILD_URL', QF_URL . 'build/' );
 }
+
+register_activation_hook( __FILE__, array( QuickForms\Activator::class, 'activate' ) );

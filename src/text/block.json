@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Text",
 	"category": "quick-forms",
-	"icon": "plus",
+	"icon": "editor-textcolor",
 	"description": "Text Field",
 	"example": {},
 	"supports": {
@@ -16,8 +16,7 @@
 			"type": "string"
 		},
 		"fieldName": {
-			"type": "string",
-			"default": ""
+			"type": "string"
 		},
 		"fieldLabel": {
 			"type": "string",

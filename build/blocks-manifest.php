@@ -8,7 +8,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Form',
 		'category' => 'quick-forms',
-		'icon' => 'smiley',
+		'icon' => 'feedback',
 		'description' => 'Quick Form wrapper block',
 		'example' => array(
 			
@@ -20,6 +20,10 @@ return array(
 			'id' => array(
 				'type' => 'string'
 			),
+			'formName' => array(
+				'type' => 'string',
+				'default' => 'Contact Form'
+			),
 			'showLabel' => array(
 				'type' => 'boolean',
 				'default' => true
@@ -30,7 +34,7 @@ return array(
 			),
 			'fieldWidth' => array(
 				'type' => 'string',
-				'default' => '150px'
+				'default' => '500px'
 			),
 			'fieldMargin' => array(
 				'type' => 'object',
@@ -85,7 +89,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Submit',
 		'category' => 'quick-forms',
-		'icon' => 'plus',
+		'icon' => 'arrow-right-alt',
 		'description' => 'Submit Button',
 		'example' => array(
 			
@@ -141,7 +145,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Text',
 		'category' => 'quick-forms',
-		'icon' => 'plus',
+		'icon' => 'editor-textcolor',
 		'description' => 'Text Field',
 		'example' => array(
 			
@@ -154,8 +158,7 @@ return array(
 				'type' => 'string'
 			),
 			'fieldName' => array(
-				'type' => 'string',
-				'default' => ''
+				'type' => 'string'
 			),
 			'fieldLabel' => array(
 				'type' => 'string',

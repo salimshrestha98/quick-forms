@@ -4,7 +4,7 @@ namespace QuickForms\Blocks;
 
 use stdClass;
 
-defined( ABSPATH ) && exit;
+defined( 'ABSPATH' ) || exit;
 
 abstract class Block {
 	public $block;

@@ -2,7 +2,7 @@
 
 namespace QuickForms\Blocks;
 
-defined( ABSPATH ) && exit;
+defined( 'ABSPATH' ) || exit;
 
 use QuickForms\Helpers\BlockHelper;
 

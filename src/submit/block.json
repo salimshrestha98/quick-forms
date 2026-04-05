@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Submit",
 	"category": "quick-forms",
-	"icon": "plus",
+	"icon": "arrow-right-alt",
 	"description": "Submit Button",
 	"example": {},
 	"supports": {

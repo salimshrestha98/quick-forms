@@ -22,7 +22,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 	useEffect( () => {
 		if ( ! id ) {
-			setAttributes( { id: clientId } );
+			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
 

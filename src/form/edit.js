@@ -10,6 +10,7 @@ import {
 	RadioControl,
 	TabPanel,
 	Dashicon,
+	TextControl,
 	__experimentalUnitControl as UnitControl,
 	BoxControl,
 } from '@wordpress/components';
@@ -19,6 +20,7 @@ import './editor.scss';
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		id,
+		formName,
 		fieldMargin,
 		margin,
 		padding,
@@ -37,7 +39,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 	useEffect( () => {
 		if ( ! id ) {
-			setAttributes( { id: clientId } );
+			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
 
@@ -64,6 +66,21 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						if ( tab.name === 'settings' ) {
 							return (
 								<>
+									<PanelBody
+										title="General Settings"
+										initialOpen={ false }
+									>
+										<TextControl
+											__next40pxDefaultSize
+											label="Form Name"
+											value={ formName }
+											onChange={ ( value ) =>
+												setAttributes( {
+													formName: value,
+												} )
+											}
+										/>
+									</PanelBody>
 									<PanelBody
 										title="Field Settings"
 										initialOpen={ false }

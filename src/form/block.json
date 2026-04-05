@@ -5,15 +5,19 @@
 	"version": "0.1.0",
 	"title": "Form",
 	"category": "quick-forms",
-	"icon": "smiley",
+	"icon": "feedback",
 	"description": "Quick Form wrapper block",
 	"example": {},
 	"supports": {
 		"html": false
 	},
-	"attributes" : {
+	"attributes": {
 		"id": {
 			"type": "string"
+		},
+		"formName": {
+			"type": "string",
+			"default": "Contact Form"
 		},
 		"showLabel": {
 			"type": "boolean",
@@ -25,7 +29,7 @@
 		},
 		"fieldWidth": {
 			"type": "string",
-			"default": "150px"
+			"default": "500px"
 		},
 		"fieldMargin": {
 			"type": "object",

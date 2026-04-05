@@ -35,7 +35,11 @@ export default function Edit( {
 
 	useEffect( () => {
 		if ( ! id ) {
-			setAttributes( { id: clientId } );
+			setAttributes( { id: clientId.slice( 0, 8 ) } );
+		}
+
+		if ( ! fieldName ) {
+			setAttributes( { fieldName: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
 
@@ -106,6 +110,7 @@ export default function Edit( {
 											__next40pxDefaultSize
 											label="Field Name"
 											value={ fieldName }
+											help="Please provide a unique field name for each field."
 											onChange={ ( value ) =>
 												setAttributes( {
 													fieldName: value,
