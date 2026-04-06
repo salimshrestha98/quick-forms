@@ -32,19 +32,13 @@ import domReady from '@wordpress/dom-ready';
 			const blockId = block.dataset.id;
 
 			formData.append( 'id', blockId );
+			formData.append( 'action', 'qf_form_submit' );
+			formData.append( 'nonce', l10n.ajax_nonce );
 
 			fetch( l10n.ajax_url, {
 				method: 'POST',
-				body: new URLSearchParams( {
-					action: 'qf_form_submit',
-					data: JSON.stringify( Object.fromEntries( formData ) ),
-					nonce: l10n.ajax_nonce,
-				} ),
+				body: formData,
 				credentials: 'same-origin',
-				headers: {
-					'Content-Type':
-						'application/x-www-form-urlencoded; charset=UTF-8',
-				},
 			} )
 				.then( ( response ) => response.json() )
 				.then( ( data ) => {

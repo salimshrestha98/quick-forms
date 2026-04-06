@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "quick-forms/checkbox",
+	"name": "quick-forms/file-upload",
 	"version": "0.1.0",
-	"title": "Checkbox",
+	"title": "File Upload",
 	"category": "quick-forms",
-	"icon": "yes",
-	"description": "Checkbox Field",
+	"icon": "cloud-upload",
+	"description": "File Upload Field",
 	"parent": [
 		"quick-forms/form"
 	],
@@ -18,11 +18,11 @@
 		"id": {
 			"type": "string"
 		},
-		"placeholder": {
+		"fieldLabel": {
 			"type": "string",
-			"default": "I agree to all terms and conditions."
+			"default": "File Upload"
 		},
-		"defaultValue": {
+		"placeholder": {
 			"type": "string",
 			"default": ""
 		},
@@ -30,7 +30,11 @@
 			"type": "boolean",
 			"default": false
 		},
-		"checkedByDefault": {
+		"accept": {
+			"type": "string",
+			"default": ""
+		},
+		"multiple": {
 			"type": "boolean",
 			"default": false
 		},

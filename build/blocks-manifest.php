@@ -25,7 +25,7 @@ return array(
 			),
 			'placeholder' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => 'I agree to all terms and conditions.'
 			),
 			'defaultValue' => array(
 				'type' => 'string',
@@ -99,6 +99,69 @@ return array(
 				'default' => ''
 			),
 			'required' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'margin' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'left' => '0px',
+					'right' => '0px',
+					'bottom' => '0px'
+				)
+			)
+		),
+		'usesContext' => array(
+			'quick-form/showLabel',
+			'quick-form/labelPosition',
+			'quick-form/labelWidth',
+			'quick-form/fieldWidth',
+			'quick-form/fieldMargin'
+		),
+		'inputdomain' => 'quick-forms',
+		'editorScript' => 'file:./index.js',
+		'render' => 'file:./render.php'
+	),
+	'file-upload' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'quick-forms/file-upload',
+		'version' => '0.1.0',
+		'title' => 'File Upload',
+		'category' => 'quick-forms',
+		'icon' => 'cloud-upload',
+		'description' => 'File Upload Field',
+		'parent' => array(
+			'quick-forms/form'
+		),
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'id' => array(
+				'type' => 'string'
+			),
+			'fieldLabel' => array(
+				'type' => 'string',
+				'default' => 'File Upload'
+			),
+			'placeholder' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'required' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'accept' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'multiple' => array(
 				'type' => 'boolean',
 				'default' => false
 			),

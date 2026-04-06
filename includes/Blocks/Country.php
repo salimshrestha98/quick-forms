@@ -18,7 +18,7 @@ final class Country extends Block {
 		extract( $attributes );
 
 		$styles = array(
-			''       => array(
+			''           => array(
 				'display' => $showLabel && 'inline' === $labelPosition ? 'flex' : 'block',
 				'margin'  => sprintf(
 					'%s %s %s %s',
@@ -28,9 +28,12 @@ final class Country extends Block {
 					$fieldMargin['left']
 				),
 			),
-			' label' => array(
+			' label'     => array(
 				'width'   => $showLabel && 'inline' === $labelPosition ? $labelWidth : 'auto',
 				'display' => $showLabel && 'above' === $labelPosition ? 'block' : 'inline-block',
+			),
+			' .qf-field' => array(
+				'max-width' => $fieldWidth,
 			),
 		);
 

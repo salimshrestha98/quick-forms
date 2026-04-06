@@ -6,7 +6,8 @@ defined( 'ABSPATH' ) || exit;
 
 use QuickForms\Helpers\BlockHelper;
 
-final class Select extends Block {
+final class FileUpload extends Block {
+
 	public function __construct( $attributes, $content, $block ) {
 		$this->attributes = $attributes;
 		$this->content    = $content;

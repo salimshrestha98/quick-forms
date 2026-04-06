@@ -22,12 +22,12 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 				id="<?php echo esc_attr( $id ); ?>"
 				<?php echo $required ? 'required' : ''; ?>
 			>
-				<?php foreach ( $options_list as $option ) : ?>
+				<?php foreach ( $options_list as $key => $label ) : ?>
 					<option
-						value="<?php echo esc_attr( $option['value'] ); ?>"
-						<?php selected( $option['value'], $defaultValue ); ?>
+						value="<?php echo esc_attr( $key ); ?>"
+						<?php selected( $key, $defaultValue ); ?>
 					>
-						<?php echo esc_html( trim( $option['label'] ) ); ?>
+						<?php echo esc_html( trim( $label ) ); ?>
 					</option>
 				<?php endforeach; ?>
 			</select>

@@ -1,8 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
-	RichText,
 	InspectorControls,
+	RichText,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -10,10 +10,8 @@ import {
 	TextControl,
 	TabPanel,
 	Dashicon,
-	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import './editor.scss';
 
 export default function Edit( {
 	attributes,
@@ -21,13 +19,20 @@ export default function Edit( {
 	context,
 	clientId,
 } ) {
-	const { id, fieldLabel, rowsCount, placeholder, defaultValue, required } =
-		attributes;
+	const {
+		id,
+		fieldLabel,
+		placeholder,
+		required,
+		checkedByDefault,
+		accept,
+		multiple,
+	} = attributes;
 
 	const {
-		'quick-form/showLabel': showLabel,
 		'quick-form/labelPosition': labelPosition,
 		'quick-form/labelWidth': labelWidth,
+		'quick-form/showLabel': showLabel,
 		'quick-form/fieldWidth': fieldWidth,
 		'quick-form/fieldMargin': fieldMargin,
 	} = context;
@@ -42,11 +47,6 @@ export default function Edit( {
 		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
 		display:
 			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-	const textareaStyles = {
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-		width: fieldWidth,
 	};
 
 	const blockProps = useBlockProps( {
@@ -82,30 +82,32 @@ export default function Edit( {
 								<>
 									<PanelBody title="General Settings">
 										<TextControl
-											__next40pxDefaultSize
 											label="Field Label"
 											value={ fieldLabel }
-											onChange={ ( value ) =>
+											onChange={ ( val ) =>
 												setAttributes( {
-													fieldLabel: value,
+													fieldLabel: val,
 												} )
 											}
 										/>
-
-										<NumberControl
-											__next40pxDefaultSize
-											isShiftStepEnabled={ true }
-											shiftStep={ 1 }
-											min={ 1 }
-											label="Number of Rows"
-											value={ rowsCount }
-											onChange={ ( value ) =>
-												setAttributes( {
-													rowsCount: value,
-												} )
+										<TextControl
+											label="Allowed File Types (accept)"
+											help="e.g. .jpg,.png,.pdf"
+											value={ accept }
+											onChange={ ( val ) =>
+												setAttributes( { accept: val } )
 											}
 										/>
 
+										<ToggleControl
+											label="Allow Multiple Files"
+											checked={ multiple }
+											onChange={ ( val ) =>
+												setAttributes( {
+													multiple: val,
+												} )
+											}
+										/>
 										<TextControl
 											__next40pxDefaultSize
 											label="Placeholder Text"
@@ -117,15 +119,15 @@ export default function Edit( {
 											}
 										/>
 
-										<TextControl
-											__next40pxDefaultSize
-											label="Default Vaue"
-											value={ defaultValue }
-											onChange={ ( value ) =>
+										<ToggleControl
+											label="Checked by Default"
+											checked={ checkedByDefault }
+											onChange={ () => {
 												setAttributes( {
-													defaultValue: value,
-												} )
-											}
+													checkedByDefault:
+														! checkedByDefault,
+												} );
+											} }
 										/>
 
 										<ToggleControl
@@ -157,15 +159,17 @@ export default function Edit( {
 						style={ labelStyles }
 					/>
 				) }
-
-				<div className="qf-field qf-textarea-field">
-					<textarea
-						placeholder={ placeholder }
-						value={ defaultValue }
-						style={ textareaStyles }
-						rows={ rowsCount }
-						onChange={ () => false }
-					></textarea>
+				<div
+					className="qf-field qf-file-upload-field"
+					style={ { maxWidth: fieldWidth } }
+				>
+					<input type="file" disabled />
+					<p style={ { fontSize: '12px', opacity: 0.6 } }>
+						File upload field preview (disabled in editor)
+					</p>
+					<span className="qf-file-upload-placeholder">
+						{ placeholder }
+					</span>
 				</div>
 			</div>
 		</>

@@ -15,16 +15,16 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 	?>
 	<div class="qf-field qf-radio-field">
 		<?php if ( ! empty( $options_list ) ) : ?>
-			<?php foreach ( $options_list as $index => $option ) : ?>
+			<?php foreach ( $options_list as $key => $label ) : ?>
 				<div class="qf-radio-item">
 					<input
 						type="radio"
 						name=<?php echo esc_attr( $id ); ?>
-						value="<?php echo esc_attr( $option['value'] ); ?>"
-						<?php checked( $option['value'], $defaultValue ); ?>
+						value="<?php echo esc_attr( $key ); ?>"
+						<?php checked( $key, $defaultValue ); ?>
 						<?php echo $required ? 'required' : ''; ?>
 					/>
-					<?php echo trim( $option['label'] ); ?>
+					<?php echo trim( $label ); ?>
 				</div>
 			<?php endforeach; ?>
 		<?php endif; ?>

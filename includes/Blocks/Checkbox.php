@@ -18,7 +18,7 @@ final class Checkbox extends Block {
 		extract( $attributes );
 
 		$styles = array(
-			'' => array(
+			''           => array(
 				'display' => $showLabel && 'inline' === $labelPosition ? 'flex' : 'block',
 				'margin'  => sprintf(
 					'%s %s %s %s',
@@ -27,6 +27,10 @@ final class Checkbox extends Block {
 					$fieldMargin['bottom'],
 					$fieldMargin['left']
 				),
+			),
+
+			' .qf-field' => array(
+				'max-width' => $fieldWidth,
 			),
 		);
 

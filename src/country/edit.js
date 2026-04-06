@@ -126,7 +126,7 @@ export default function Edit( {
 					/>
 				) }
 				<div
-					className="qf-field qf-select-field"
+					className="qf-field qf-country-field"
 					style={ { maxWidth: fieldWidth } }
 				>
 					<select value={ defaultValue } onChange={ () => false }>

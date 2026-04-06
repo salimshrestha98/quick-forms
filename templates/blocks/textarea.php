@@ -16,5 +16,7 @@ $textarea_attributes .= $placeholder ? sprintf( ' placeholder="%s"', esc_attr( $
 		echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" );
 	}
 	?>
-	<textarea<?php echo $textarea_attributes; ?>><?php echo $defaultValue; ?></textarea>
+	<div class="qf-field qf-textarea-field">
+		<textarea<?php echo $textarea_attributes; ?>><?php echo $defaultValue; ?></textarea>
+	</div>
 </div>

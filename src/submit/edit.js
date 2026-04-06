@@ -141,16 +141,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			</InspectorControls>
 
 			<div { ...useBlockProps() }>
-				<button style={ buttonStyles } onClick={ () => null }>
-					<RichText
-						tagName="span"
-						value={ buttonText }
-						onChange={ ( value ) =>
-							setAttributes( { buttonText: value } )
-						}
-						placeholder={ __( 'Enter Button Text Here' ) }
-					/>
-				</button>
+				<div className="qf-field qf-submit-field">
+					<button style={ buttonStyles } onClick={ () => null }>
+						<RichText
+							tagName="span"
+							value={ buttonText }
+							onChange={ ( value ) =>
+								setAttributes( { buttonText: value } )
+							}
+							placeholder={ __( 'Enter Button Text Here' ) }
+						/>
+					</button>
+				</div>
 			</div>
 		</>
 	);

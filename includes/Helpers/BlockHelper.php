@@ -115,10 +115,7 @@ class BlockHelper {
 				continue;
 			}
 
-			$result[] = array(
-				'value' => $value,
-				'label' => $label,
-			);
+			$result[ $value ] = $label;
 		}
 
 		return $result;

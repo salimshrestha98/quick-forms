@@ -21,5 +21,7 @@ $input_attributes .= $maximum ? sprintf( ' max="%s"', esc_attr( $maximum ) ) : '
 		echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" );
 	}
 	?>
-	<input<?php echo $input_attributes; ?>/>
+	<div class="qf-field qf-input-field">
+		<input<?php echo $input_attributes; ?>/>
+	</div>
 </div>

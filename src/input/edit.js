@@ -293,19 +293,22 @@ export default function Edit( {
 					/>
 				) }
 
-				{ 'hidden' === inputType && (
-					<p className="qf-hidden-field-placeholder">
-						This is a hidden field and will not be visible to users.
-					</p>
-				) }
+				<div className="qf-field qf-input-field">
+					{ 'hidden' === inputType && (
+						<p className="qf-hidden-field-placeholder">
+							This is a hidden field and will not be visible to
+							users.
+						</p>
+					) }
 
-				<input
-					type={ inputType }
-					placeholder={ placeholder }
-					value={ defaultValue }
-					style={ inputStyles }
-					onChange={ () => false }
-				/>
+					<input
+						type={ inputType }
+						placeholder={ placeholder }
+						value={ defaultValue }
+						style={ inputStyles }
+						onChange={ () => false }
+					/>
+				</div>
 			</div>
 		</>
 	);

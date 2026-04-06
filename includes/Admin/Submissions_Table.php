@@ -77,6 +77,15 @@ class Submissions_Table extends WP_List_Table {
 			$country = BlockHelper::get_country( $value );
 
 			return $country['name'] ?? $value;
+		} elseif ( 'quick-forms/file-upload' === $field_name && is_array( $value ) ) {
+			return sprintf(
+				'<a href=%s target="_blank">%s</a>',
+				$value['url'],
+				$value['name']
+			);
+		} elseif ( 'quick-forms/radio' === $field_name || 'quick-forms/select' === $field_name ) {
+			$options = BlockHelper::parse_radio_options( $field['attrs']['options'] ?? '' );
+			return $options[ $value ] ?? $value;
 		}
 
 		if ( is_iterable( $value ) ) {
@@ -86,11 +95,7 @@ class Submissions_Table extends WP_List_Table {
 		return $value;
 	}
 
-	private function get_field_type( $field_id ) {
-		return $this->form['fields'][ $field_id ]['blockName'] ?? '';
-	}
-
-		/* ---------------- Bulk Actions ---------------- */
+	/* ---------------- Bulk Actions ---------------- */
 
 	protected function get_bulk_actions() {
 		return array(
@@ -140,9 +145,9 @@ class Submissions_Table extends WP_List_Table {
 		}
 		?>
 			</select>
-			<?php submit_button( 'Filter', '', 'filter_action', false ); ?>
+		<?php submit_button( 'Filter', '', 'filter_action', false ); ?>
 		</div>
-			<?php
+		<?php
 	}
 
 				/* ---------------- Data ---------------- */
