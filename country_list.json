@@ -1,0 +1,218 @@
+{
+	"af": {
+		"name": "Afghanistan",
+		"telCode": "93"
+	},
+	"ax": {
+		"name": "Aland Islands",
+		"telCode": "358"
+	},
+	"al": {
+		"name": "Albania",
+		"telCode": "355"
+	},
+	"dz": {
+		"name": "Algeria",
+		"telCode": "213"
+	},
+	"as": {
+		"name": "American Samoa",
+		"telCode": "1684"
+	},
+	"ad": {
+		"name": "Andorra",
+		"telCode": "376"
+	},
+	"ao": {
+		"name": "Angola",
+		"telCode": "244"
+	},
+	"ai": {
+		"name": "Anguilla",
+		"telCode": "1264"
+	},
+	"aq": {
+		"name": "Antarctica",
+		"telCode": "672"
+	},
+	"ag": {
+		"name": "Antigua and Barbuda",
+		"telCode": "1268"
+	},
+	"ar": {
+		"name": "Argentina",
+		"telCode": "54"
+	},
+	"am": {
+		"name": "Armenia",
+		"telCode": "374"
+	},
+	"aw": {
+		"name": "Aruba",
+		"telCode": "297"
+	},
+	"au": {
+		"name": "Australia",
+		"telCode": "61"
+	},
+	"at": {
+		"name": "Austria",
+		"telCode": "43"
+	},
+	"az": {
+		"name": "Azerbaijan",
+		"telCode": "994"
+	},
+	"bs": {
+		"name": "Bahamas",
+		"telCode": "1242"
+	},
+	"bh": {
+		"name": "Bahrain",
+		"telCode": "973"
+	},
+	"bd": {
+		"name": "Bangladesh",
+		"telCode": "880"
+	},
+	"bb": {
+		"name": "Barbados",
+		"telCode": "1246"
+	},
+	"by": {
+		"name": "Belarus",
+		"telCode": "375"
+	},
+	"be": {
+		"name": "Belgium",
+		"telCode": "32"
+	},
+	"bz": {
+		"name": "Belize",
+		"telCode": "501"
+	},
+	"bj": {
+		"name": "Benin",
+		"telCode": "229"
+	},
+	"bm": {
+		"name": "Bermuda",
+		"telCode": "1441"
+	},
+	"bt": {
+		"name": "Bhutan",
+		"telCode": "975"
+	},
+	"bo": {
+		"name": "Bolivia",
+		"telCode": "591"
+	},
+	"bq": {
+		"name": "Bonaire, Sint Eustatius and Saba",
+		"telCode": "599"
+	},
+	"ba": {
+		"name": "Bosnia and Herzegovina",
+		"telCode": "387"
+	},
+	"bw": {
+		"name": "Botswana",
+		"telCode": "267"
+	},
+	"br": {
+		"name": "Brazil",
+		"telCode": "55"
+	},
+	"io": {
+		"name": "British Indian Ocean Territory",
+		"telCode": "246"
+	},
+	"vg": {
+		"name": "British Virgin Islands",
+		"telCode": "1284"
+	},
+	"bn": {
+		"name": "Brunei Darussalam",
+		"telCode": "673"
+	},
+	"bg": {
+		"name": "Bulgaria",
+		"telCode": "359"
+	},
+	"bf": {
+		"name": "Burkina Faso",
+		"telCode": "226"
+	},
+	"bi": {
+		"name": "Burundi",
+		"telCode": "257"
+	},
+	"kh": {
+		"name": "Cambodia",
+		"telCode": "855"
+	},
+	"cm": {
+		"name": "Cameroon",
+		"telCode": "237"
+	},
+	"ca": {
+		"name": "Canada",
+		"telCode": "1"
+	},
+	"cv": {
+		"name": "Cape Verde",
+		"telCode": "238"
+	},
+	"ky": {
+		"name": "Cayman Islands",
+		"telCode": "1345"
+	},
+	"cf": {
+		"name": "Central African Republic",
+		"telCode": "236"
+	},
+	"td": {
+		"name": "Chad",
+		"telCode": "235"
+	},
+	"cl": {
+		"name": "Chile",
+		"telCode": "56"
+	},
+	"cn": {
+		"name": "China",
+		"telCode": "86"
+	},
+	"cx": {
+		"name": "Christmas Island",
+		"telCode": "61"
+	},
+	"cc": {
+		"name": "Cocos (Keeling) Islands",
+		"telCode": "61"
+	},
+	"co": {
+		"name": "Colombia",
+		"telCode": "57"
+	},
+	"km": {
+		"name": "Comoros",
+		"telCode": "269"
+	},
+	"ck": {
+		"name": "Cook Islands",
+		"telCode": "682"
+	},
+	"cr": {
+		"name": "Costa Rica",
+		"telCode": "506"
+	},
+	"hr": {
+		"name": "Croatia",
+		"telCode": "385"
+	},
+	"cu": {
+		"name": "Cuba",
+		"telCode": "53"
+	}
+}

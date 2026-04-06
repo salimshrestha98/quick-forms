@@ -1,0 +1,64 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "quick-forms/country",
+	"version": "0.1.0",
+	"title": "Country",
+	"category": "quick-forms",
+	"icon": "editor-textcolor",
+	"description": "Country Field",
+	"parent": [
+		"quick-forms/form"
+	],
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"id": {
+			"type": "string"
+		},
+		"fieldName": {
+			"type": "string"
+		},
+		"fieldLabel": {
+			"type": "string",
+			"default": "Country"
+		},
+		"options": {
+			"type": "string",
+			"default": ""
+		},
+		"optionsLayout": {
+			"type": "string",
+			"default": "inline"
+		},
+		"defaultValue": {
+			"type": "string",
+			"default": ""
+		},
+		"required": {
+			"type": "boolean",
+			"default": false
+		},
+		"margin": {
+			"type": "object",
+			"default": {
+				"top": "20px",
+				"left": "0px",
+				"right": "0px",
+				"bottom": "0px"
+			}
+		}
+	},
+	"usesContext": [
+		"quick-form/showLabel",
+		"quick-form/labelPosition",
+		"quick-form/labelWidth",
+		"quick-form/fieldWidth",
+		"quick-form/fieldMargin"
+	],
+	"inputdomain": "quick-forms",
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}
