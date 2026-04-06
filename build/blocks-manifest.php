@@ -1,6 +1,68 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'checkbox' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'quick-forms/checkbox',
+		'version' => '0.1.0',
+		'title' => 'Checkbox',
+		'category' => 'quick-forms',
+		'icon' => 'editor-textcolor',
+		'description' => 'Checkbox Field',
+		'parent' => array(
+			'quick-forms/form'
+		),
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'id' => array(
+				'type' => 'string'
+			),
+			'fieldName' => array(
+				'type' => 'string'
+			),
+			'placeholder' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'defaultValue' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'required' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'checkedByDefault' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'margin' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'left' => '0px',
+					'right' => '0px',
+					'bottom' => '0px'
+				)
+			)
+		),
+		'usesContext' => array(
+			'quick-form/showLabel',
+			'quick-form/labelPosition',
+			'quick-form/labelWidth',
+			'quick-form/fieldWidth',
+			'quick-form/fieldMargin'
+		),
+		'inputdomain' => 'quick-forms',
+		'editorScript' => 'file:./index.js',
+		'render' => 'file:./render.php'
+	),
 	'form' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
