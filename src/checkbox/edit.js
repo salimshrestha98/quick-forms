@@ -15,8 +15,7 @@ export default function Edit( {
 	context,
 	clientId,
 } ) {
-	const { id, fieldName, placeholder, required, checkedByDefault } =
-		attributes;
+	const { id, placeholder, required, checkedByDefault } = attributes;
 
 	const {
 		'quick-form/fieldWidth': fieldWidth,
@@ -26,10 +25,6 @@ export default function Edit( {
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
-		}
-
-		if ( ! fieldName ) {
-			setAttributes( { fieldName: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
 
@@ -65,18 +60,6 @@ export default function Edit( {
 							return (
 								<>
 									<PanelBody title="General Settings">
-										<TextControl
-											__next40pxDefaultSize
-											label="Field Name"
-											value={ fieldName }
-											help="Please provide a unique field name for each field."
-											onChange={ ( value ) =>
-												setAttributes( {
-													fieldName: value,
-												} )
-											}
-										/>
-
 										<TextControl
 											__next40pxDefaultSize
 											label="Placeholder Text"

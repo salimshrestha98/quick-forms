@@ -13,14 +13,13 @@ class Submissions_Table extends WP_List_Table {
 
 	private $table;
 
-	private $parsed_items;
-
 	private $form_ids;
 
+	private $form;
+
 	private $columns = array(
-		'cb'           => '<input type="checkbox" />',
-		'id'           => 'ID',
-		'submitted_at' => 'Date',
+		'cb' => '<input type="checkbox" />',
+		'id' => 'ID',
 	);
 
 	public function __construct() {
@@ -35,6 +34,10 @@ class Submissions_Table extends WP_List_Table {
 		global $wpdb;
 		$this->table = $wpdb->prefix . 'qf_submissions';
 		$this->get_available_forms();
+
+		if ( isset( $_GET['form_filter'] ) && $_GET['form_filter'] ) {
+			$this->form = BlockHelper::get_form_settings( sanitize_text_field( $_GET['form_filter'] ) );
+		}
 	}
 
 	private function get_available_forms() {
@@ -66,10 +69,28 @@ class Submissions_Table extends WP_List_Table {
 	}
 
 	protected function column_default( $item, $column_name ) {
-		return $item[ $column_name ] ?? '';
+		$value      = $item[ $column_name ] ?? '';
+		$field      = $this->form['fields'][ $column_name ] ?? array();
+		$field_name = $field['blockName'] ?? '';
+
+		if ( 'quick-forms/country' === $field_name ) {
+			$country = BlockHelper::get_country( $value );
+
+			return $country['name'] ?? $value;
+		}
+
+		if ( is_iterable( $value ) ) {
+			return print_r( $value, true );
+		}
+
+		return $value;
 	}
 
-	/* ---------------- Bulk Actions ---------------- */
+	private function get_field_type( $field_id ) {
+		return $this->form['fields'][ $field_id ]['blockName'] ?? '';
+	}
+
+		/* ---------------- Bulk Actions ---------------- */
 
 	protected function get_bulk_actions() {
 		return array(
@@ -92,7 +113,7 @@ class Submissions_Table extends WP_List_Table {
 		}
 	}
 
-	/* ---------------- Filters ---------------- */
+		/* ---------------- Filters ---------------- */
 
 	protected function extra_tablenav( $which ) {
 		if ( $which !== 'top' ) {
@@ -105,23 +126,23 @@ class Submissions_Table extends WP_List_Table {
 		<div class="alignleft actions">
 			<select name="form_filter">
 				<option value=''> -- Choose a form --</option>
-				<?php
-				foreach ( $this->form_ids as $form_id ) {
-					$form_settings = BlockHelper::get_form_settings( $form_id );
-					$form_name     = $form_settings['attrs']['formName'] ?? 'Contact Form';
+		<?php
+		foreach ( $this->form_ids as $form_id ) {
+			$form_settings = BlockHelper::get_form_settings( $form_id );
+			$form_name     = $form_settings['attrs']['formName'] ?? 'Contact Form';
 
-					printf(
-						"<option value='%s' %s>%s</option>",
-						esc_attr( $form_id ),
-						selected( $form_filter, esc_attr( $form_id ) ),
-						esc_html( $form_name )
-					);
-				}
-				?>
+			printf(
+				"<option value='%s' %s>%s</option>",
+				esc_attr( $form_id ),
+				selected( $form_filter, esc_attr( $form_id ) ),
+				esc_html( $form_name )
+			);
+		}
+		?>
 			</select>
-					<?php submit_button( 'Filter', '', 'filter_action', false ); ?>
+			<?php submit_button( 'Filter', '', 'filter_action', false ); ?>
 		</div>
-					<?php
+			<?php
 	}
 
 				/* ---------------- Data ---------------- */
@@ -208,7 +229,7 @@ class Submissions_Table extends WP_List_Table {
 
 		if ( isset( $form_settings['fields'] ) ) {
 			foreach ( $form_settings['fields'] as $field ) {
-				$field_name  = $field['attrs']['fieldName'] ?? '';
+				$field_name  = $field['attrs']['id'] ?? '';
 				$field_label = $field['attrs']['fieldLabel'] ?? '';
 
 				if ( in_array( $field_name, $new_columns, true ) ) {
@@ -216,5 +237,8 @@ class Submissions_Table extends WP_List_Table {
 				}
 			}
 		}
+
+		// Add Date column to last only.
+		$this->columns['submitted_at'] = 'Date';
 	}
 }

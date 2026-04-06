@@ -18,9 +18,6 @@
 		"id": {
 			"type": "string"
 		},
-		"fieldName": {
-			"type": "string"
-		},
 		"fieldLabel": {
 			"type": "string",
 			"default": "Textarea"

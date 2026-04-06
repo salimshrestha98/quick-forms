@@ -20,8 +20,7 @@ export default function Edit( {
 	context,
 	clientId,
 } ) {
-	const { id, fieldName, fieldLabel, options, defaultValue, required } =
-		attributes;
+	const { id, fieldLabel, options, defaultValue, required } = attributes;
 
 	const {
 		'quick-form/showLabel': showLabel,
@@ -34,10 +33,6 @@ export default function Edit( {
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
-		}
-
-		if ( ! fieldName ) {
-			setAttributes( { fieldName: clientId.slice( 0, 8 ) } );
 		}
 
 		if ( ! options ) {
@@ -122,18 +117,6 @@ option-2 | Option 2`, // Do not change this.
 											}
 										/>
 
-										<TextControl
-											__next40pxDefaultSize
-											label="Field Name"
-											value={ fieldName }
-											help="Please provide a unique field name for each field."
-											onChange={ ( value ) =>
-												setAttributes( {
-													fieldName: value,
-												} )
-											}
-										/>
-
 										<TextareaControl
 											label="Radio Options"
 											help={ `Enter the options for radio field in the pipe format:
@@ -190,7 +173,7 @@ option-2 | Option 2`, // Do not change this.
 					className="qf-field qf-select-field"
 					style={ { maxWidth: fieldWidth } }
 				>
-					<select name={ fieldName } defaultValue={ defaultValue }>
+					<select defaultValue={ defaultValue }>
 						{ optionsList.map( ( option, index ) => (
 							<option
 								key={ index }

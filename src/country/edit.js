@@ -20,8 +20,7 @@ export default function Edit( {
 	context,
 	clientId,
 } ) {
-	const { id, fieldName, fieldLabel, options, defaultValue, required } =
-		attributes;
+	const { id, fieldLabel, defaultValue, required } = attributes;
 
 	const {
 		'quick-form/showLabel': showLabel,
@@ -35,13 +34,7 @@ export default function Edit( {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
-
-		if ( ! fieldName ) {
-			setAttributes( { fieldName: clientId.slice( 0, 8 ) } );
-		}
 	}, [] );
-
-	console.log( countryList );
 
 	const labelStyles = {
 		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
@@ -88,18 +81,6 @@ export default function Edit( {
 											onChange={ ( value ) =>
 												setAttributes( {
 													fieldLabel: value,
-												} )
-											}
-										/>
-
-										<TextControl
-											__next40pxDefaultSize
-											label="Field Name"
-											value={ fieldName }
-											help="Please provide a unique field name for each field."
-											onChange={ ( value ) =>
-												setAttributes( {
-													fieldName: value,
 												} )
 											}
 										/>

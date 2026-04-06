@@ -23,9 +23,6 @@ return array(
 			'id' => array(
 				'type' => 'string'
 			),
-			'fieldName' => array(
-				'type' => 'string'
-			),
 			'placeholder' => array(
 				'type' => 'string',
 				'default' => ''
@@ -83,9 +80,6 @@ return array(
 		),
 		'attributes' => array(
 			'id' => array(
-				'type' => 'string'
-			),
-			'fieldName' => array(
 				'type' => 'string'
 			),
 			'fieldLabel' => array(
@@ -236,9 +230,6 @@ return array(
 				'type' => 'string',
 				'default' => 'text'
 			),
-			'fieldName' => array(
-				'type' => 'string'
-			),
 			'fieldLabel' => array(
 				'type' => 'string',
 				'default' => 'Field Label'
@@ -308,9 +299,6 @@ return array(
 			'id' => array(
 				'type' => 'string'
 			),
-			'fieldName' => array(
-				'type' => 'string'
-			),
 			'fieldLabel' => array(
 				'type' => 'string',
 				'default' => 'Radio'
@@ -372,9 +360,6 @@ return array(
 		),
 		'attributes' => array(
 			'id' => array(
-				'type' => 'string'
-			),
-			'fieldName' => array(
 				'type' => 'string'
 			),
 			'fieldLabel' => array(
@@ -497,9 +482,6 @@ return array(
 		),
 		'attributes' => array(
 			'id' => array(
-				'type' => 'string'
-			),
-			'fieldName' => array(
 				'type' => 'string'
 			),
 			'fieldLabel' => array(

@@ -10,7 +10,7 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 	if ( $showLabel ) :
 		$required_icon = $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
 		?>
-		<label for="<?php echo esc_attr( $fieldName ); ?>">
+		<label for="<?php echo esc_attr( $id ); ?>">
 			<?php echo esc_html( $fieldLabel ); ?> <?php echo wp_kses_post( $required_icon ); ?>
 		</label>
 	<?php endif; ?>
@@ -18,8 +18,8 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 	<div class="qf-field qf-select-field">
 		<?php if ( ! empty( $options_list ) ) : ?>
 			<select
-				name="<?php echo esc_attr( $fieldName ); ?>"
-				id="<?php echo esc_attr( $fieldName ); ?>"
+				name="<?php echo esc_attr( $id ); ?>"
+				id="<?php echo esc_attr( $id ); ?>"
 				<?php echo $required ? 'required' : ''; ?>
 			>
 				<?php foreach ( $options_list as $option ) : ?>

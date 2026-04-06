@@ -22,9 +22,6 @@
 			"type": "string",
 			"default": "text"
 		},
-		"fieldName": {
-			"type": "string"
-		},
 		"fieldLabel": {
 			"type": "string",
 			"default": "Field Label"

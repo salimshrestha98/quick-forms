@@ -10,7 +10,7 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 	if ( $showLabel ) {
 		$required_icon = $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
 
-		echo wp_kses_post( "<label for='$fieldName'>$fieldLabel $required_icon</label>" );
+		echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" );
 	}
 	?>
 	<div class="qf-field qf-radio-field">
@@ -19,7 +19,7 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 				<div class="qf-radio-item">
 					<input
 						type="radio"
-						name=<?php echo esc_attr( $fieldName ); ?>
+						name=<?php echo esc_attr( $id ); ?>
 						value="<?php echo esc_attr( $option['value'] ); ?>"
 						<?php checked( $option['value'], $defaultValue ); ?>
 						<?php echo $required ? 'required' : ''; ?>

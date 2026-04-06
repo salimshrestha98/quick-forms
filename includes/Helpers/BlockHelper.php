@@ -81,10 +81,6 @@ class BlockHelper {
 
 		$block['attrs'] = wp_parse_args( $block['attrs'], $defaults );
 
-		if ( isset( $block['attrs']['fieldName'] ) && empty( $block['attrs']['fieldName'] ) ) {
-			$block['attrs']['fieldName'] = 'field-' . $block['attrs']['id'];
-		}
-
 		return $block;
 	}
 
@@ -126,5 +122,22 @@ class BlockHelper {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Return country details for a country from country_list.json
+	 */
+	public static function get_country( $country_code ) {
+		$country_file = QF_PATH . 'country_list.json';
+		$country_list = array();
+
+		if ( file_exists( $country_file ) ) {
+			$json_content = file_get_contents( $country_file );
+			$country_list = json_decode( $json_content, true );
+
+			return $country_list[ $country_code ] ?? array();
+		}
+
+		return null;
 	}
 }

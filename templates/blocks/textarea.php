@@ -2,8 +2,8 @@
 $blockProps = get_block_wrapper_attributes();
 
 $textarea_attributes  = '';
-$textarea_attributes .= sprintf( ' id="%s"', esc_attr( $fieldName ) );
-$textarea_attributes .= sprintf( ' name="%s"', esc_attr( $fieldName ) );
+$textarea_attributes .= sprintf( ' id="%s"', esc_attr( $id ) );
+$textarea_attributes .= sprintf( ' name="%s"', esc_attr( $id ) );
 $textarea_attributes .= sprintf( ' rows="%d"', esc_attr( $rowsCount ) );
 $textarea_attributes .= $placeholder ? sprintf( ' placeholder="%s"', esc_attr( $placeholder ) ) : '';
 ?>
@@ -13,7 +13,7 @@ $textarea_attributes .= $placeholder ? sprintf( ' placeholder="%s"', esc_attr( $
 	if ( $showLabel ) {
 		$required_icon = $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
 
-		echo wp_kses_post( "<label for='$fieldName'>$fieldLabel $required_icon</label>" );
+		echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" );
 	}
 	?>
 	<textarea<?php echo $textarea_attributes; ?>><?php echo $defaultValue; ?></textarea>
