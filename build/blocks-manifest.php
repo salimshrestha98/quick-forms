@@ -8,7 +8,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Checkbox',
 		'category' => 'quick-forms',
-		'icon' => 'editor-textcolor',
+		'icon' => 'yes',
 		'description' => 'Checkbox Field',
 		'parent' => array(
 			'quick-forms/form'
@@ -67,7 +67,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Country',
 		'category' => 'quick-forms',
-		'icon' => 'editor-textcolor',
+		'icon' => 'admin-site-alt2',
 		'description' => 'Country Field',
 		'parent' => array(
 			'quick-forms/form'
@@ -284,7 +284,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Radio',
 		'category' => 'quick-forms',
-		'icon' => 'editor-textcolor',
+		'icon' => 'editor-ul',
 		'description' => 'Radio Field',
 		'parent' => array(
 			'quick-forms/form'
@@ -347,7 +347,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Select',
 		'category' => 'quick-forms',
-		'icon' => 'editor-textcolor',
+		'icon' => 'arrow-down-alt2',
 		'description' => 'Select Field',
 		'parent' => array(
 			'quick-forms/form'
@@ -469,7 +469,7 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Textarea',
 		'category' => 'quick-forms',
-		'icon' => 'editor-textcolor',
+		'icon' => 'editor-paragraph',
 		'description' => 'Textarea Field',
 		'parent' => array(
 			'quick-forms/form'

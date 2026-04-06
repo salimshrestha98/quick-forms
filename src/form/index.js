@@ -33,4 +33,5 @@ registerBlockType( metadata.name, {
 	edit: Edit,
 
 	save: () => <InnerBlocks.Content />,
+	__experimentalMenuOrder: 1,
 } );

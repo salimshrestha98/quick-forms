@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Select",
 	"category": "quick-forms",
-	"icon": "editor-textcolor",
+	"icon": "arrow-down-alt2",
 	"description": "Select Field",
 	"parent": [
 		"quick-forms/form"

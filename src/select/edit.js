@@ -173,7 +173,10 @@ option-2 | Option 2`, // Do not change this.
 					className="qf-field qf-select-field"
 					style={ { maxWidth: fieldWidth } }
 				>
-					<select defaultValue={ defaultValue }>
+					<select
+						defaultValue={ defaultValue }
+						onChange={ () => false }
+					>
 						{ optionsList.map( ( option, index ) => (
 							<option
 								key={ index }

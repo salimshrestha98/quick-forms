@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Radio",
 	"category": "quick-forms",
-	"icon": "editor-textcolor",
+	"icon": "editor-ul",
 	"description": "Radio Field",
 	"parent": [
 		"quick-forms/form"

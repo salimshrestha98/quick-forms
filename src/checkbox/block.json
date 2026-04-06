@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Checkbox",
 	"category": "quick-forms",
-	"icon": "editor-textcolor",
+	"icon": "yes",
 	"description": "Checkbox Field",
 	"parent": [
 		"quick-forms/form"

@@ -129,7 +129,7 @@ export default function Edit( {
 					className="qf-field qf-select-field"
 					style={ { maxWidth: fieldWidth } }
 				>
-					<select value={ defaultValue }>
+					<select value={ defaultValue } onChange={ () => false }>
 						<option value="">Select Country</option>
 						{ Object.entries( countryList ).map(
 							( [ iso2, details ] ) => (
