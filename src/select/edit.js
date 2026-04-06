@@ -11,7 +11,6 @@ import {
 	TabPanel,
 	Dashicon,
 	TextareaControl,
-	SelectControl,
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
@@ -21,15 +20,8 @@ export default function Edit( {
 	context,
 	clientId,
 } ) {
-	const {
-		id,
-		fieldName,
-		fieldLabel,
-		options,
-		optionsLayout,
-		defaultValue,
-		required,
-	} = attributes;
+	const { id, fieldName, fieldLabel, options, defaultValue, required } =
+		attributes;
 
 	const {
 		'quick-form/showLabel': showLabel,
@@ -60,10 +52,6 @@ option-2 | Option 2`, // Do not change this.
 		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
 		display:
 			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-
-	const radioStyles = {
-		display: optionsLayout,
 	};
 
 	const blockProps = useBlockProps( {
@@ -158,27 +146,6 @@ option-2 | Option 2`, // Do not change this.
 											}
 										/>
 
-										<SelectControl
-											label="Options Layout"
-											value={ optionsLayout }
-											options={ [
-												{
-													label: 'Horizontal',
-													value: 'inline',
-												},
-												{
-													label: 'Vertical',
-													value: 'block',
-												},
-											] }
-											onChange={ ( value ) =>
-												setAttributes( {
-													optionsLayout: value,
-												} )
-											}
-											__next40pxDefaultSize
-										/>
-
 										<TextControl
 											__next40pxDefaultSize
 											label="Default Vaue"
@@ -220,24 +187,20 @@ option-2 | Option 2`, // Do not change this.
 					/>
 				) }
 				<div
-					className="qf-field qf-radio-field"
+					className="qf-field qf-select-field"
 					style={ { maxWidth: fieldWidth } }
 				>
-					{ optionsList.map( ( option, index ) => (
-						<div
-							key={ index }
-							className="qf-radio-item"
-							style={ radioStyles }
-						>
-							<input
-								type="radio"
-								name={ fieldLabel }
+					<select name={ fieldName } defaultValue={ defaultValue }>
+						{ optionsList.map( ( option, index ) => (
+							<option
+								key={ index }
+								className="qf-select-item"
 								value={ option.value }
-								defaultChecked={ option.value === defaultValue }
-							/>
-							{ option.label }
-						</div>
-					) ) }
+							>
+								{ option.label }
+							</option>
+						) ) }
+					</select>
 				</div>
 			</div>
 		</>

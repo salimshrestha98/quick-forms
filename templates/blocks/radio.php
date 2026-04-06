@@ -19,7 +19,7 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 				<div class="qf-radio-item">
 					<input
 						type="radio"
-						name=<?php echo esc_attr( $fieldLabel ); ?>
+						name=<?php echo esc_attr( $fieldName ); ?>
 						value="<?php echo esc_attr( $option['value'] ); ?>"
 						<?php checked( $option['value'], $defaultValue ); ?>
 						<?php echo $required ? 'required' : ''; ?>
