@@ -87,4 +87,44 @@ class BlockHelper {
 
 		return $block;
 	}
+
+	/**
+	 * Parse options for radio block from pipe format.
+	 */
+	public static function parse_radio_options( $options ) {
+		if ( empty( $options ) ) {
+			return array();
+		}
+
+		$lines = explode( "\n", $options );
+
+		$result = array();
+
+		foreach ( $lines as $line ) {
+			$line = trim( $line );
+
+			if ( empty( $line ) ) {
+				continue;
+			}
+
+			$parts = array_map( 'trim', explode( '|', $line ) );
+
+			if ( count( $parts ) !== 2 ) {
+				continue;
+			}
+
+			list( $value, $label ) = $parts;
+
+			if ( empty( $value ) || empty( $label ) ) {
+				continue;
+			}
+
+			$result[] = array(
+				'value' => $value,
+				'label' => $label,
+			);
+		}
+
+		return $result;
+	}
 }
