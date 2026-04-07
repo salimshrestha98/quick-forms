@@ -1,42 +1,39 @@
+name: Create Release
+
 on:
     push:
         tags:
             - '*'
 
-name: Create Release
+permissions:
+    contents: write
+
+env:
+    FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # optional but recommended
 
 jobs:
     build:
         name: Create Release
         runs-on: ubuntu-latest
+        env:
+            NODE_OPTIONS: --openssl-legacy-provider   # ← Best place for this
         steps:
             - name: Checkout code
-              uses: actions/checkout@master
-
-            - name: Get the version
-              id: get_version
-              run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-
-            - name: Set OpenSSL Legacy Provider
-              run: |
-                  echo "NODE_OPTIONS=--openssl-legacy-provider"
-                  echo "export NODE_OPTIONS=--openssl-legacy-provider"
+              uses: actions/checkout@v4
 
             - name: Build project
               run: |
                   npm install --force
-                  npm run build  --openssl-legacy-provider
+                  npm run build
 
             - name: Install Composer dependencies
-              run: |
-                  composer install --no-dev --optimize-autoloader
+              run: composer install --no-dev --optimize-autoloader
 
             - name: Zip Folder
               run: |
-                  zip -r quick-forms-plugin.zip . -x ".git/*" ".github/*" "node_modules/*" ".editorconfig" ".gitignore" "DOCKER_ENV" "docker_tag" "Dockerfile-php-build" "gulpfile.js" "openapi.json" "output.log" "package-lock.json" "package.json" "README.md" "composer.json" "composer.lock" "webpack-free.config.js" "webpack-pro.config.js" "resources/*" "pro/resources/*" "blocks/*" ".distignore" ".travis.yml" "bin/*" "tests/*" "phpunit.xml.dist" "readme.md" "app/src/blocks/*" "app/src/admin/*" "src/blocks/*" "src/admin/*" "pro/src/blocks/*" "pro/src/admin/*" ".cursorrules" "CLAUDE.md" "docs/*" "docs" "webpack.config.js" ".eslintrc.js" ".prettierrc" "phpcs.xml" "pro/.phpcs.xml.dist"
+                  zip -r quick-forms-plugin.zip . -x ".git/*" ".github/*" "node_modules/*" "src/*" ".vscode/*" ".editorconfig" ".eslintrc.json" ".gitignore" "composer.json" "composer.lock" "package.json" "package-lock.json" "phpcs.xml"
 
             - name: Release
-              uses: softprops/action-gh-release@v1
+              uses: softprops/action-gh-release@v2
               with:
-                  files: |
-                    quick-forms-plugin.zip
+                  files: quick-forms-plugin.zip
