@@ -44,9 +44,24 @@
 			"type": "string",
 			"default": "150px"
 		},
+		"redirectionUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"hideFormAfterSubmit": {
+			"type": "boolean",
+			"default": true
+		},
 		"honeypot": {
 			"type": "boolean",
 			"default": true
+		},
+		"messages": {
+			"type": "object",
+			"default": {
+				"success": "The form has been submitted successfully!",
+				"error": "The form submission has failed. Please check the errors."
+			}
 		},
 		"margin": {
 			"type": "object",
@@ -66,13 +81,6 @@
 				"bottom": "20px"
 			}
 		}
-	},
-	"providesContext": {
-		"quick-form/showLabel": "showLabel",
-		"quick-form/labelPosition": "labelPosition",
-		"quick-form/labelWidth": "labelWidth",
-		"quick-form/fieldWidth": "fieldWidth",
-		"quick-form/fieldMargin": "fieldMargin"
 	},
 	"textdomain": "quick-forms",
 	"editorScript": "file:./index.js",

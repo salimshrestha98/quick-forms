@@ -9,32 +9,14 @@ import {
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context,
-	clientId,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { id, placeholder, required, checkedByDefault } = attributes;
-
-	const {
-		'quick-form/fieldWidth': fieldWidth,
-		'quick-form/fieldMargin': fieldMargin,
-	} = context;
 
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
-
-	const blockProps = useBlockProps( {
-		style: {
-			margin: fieldMargin
-				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
-				: '',
-		},
-	} );
 
 	return (
 		<>
@@ -99,13 +81,16 @@ export default function Edit( {
 				</TabPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				<div
-					className="qf-field qf-checkbox-field"
-					style={ { maxWidth: fieldWidth } }
-				>
-					<input type="checkbox" onChange={ () => false } />
-					<span>{ placeholder }</span>
+			<div
+				{ ...useBlockProps( {
+					className: `qf-block qf-checkbox-block`,
+				} ) }
+			>
+				<div className="wrapper">
+					<div className="qf-field qf-checkbox-field">
+						<input type="checkbox" onChange={ () => false } />
+						<span>{ placeholder }</span>
+					</div>
 				</div>
 			</div>
 		</>

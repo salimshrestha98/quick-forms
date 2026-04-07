@@ -45,27 +45,9 @@
 		"maximum": {
 			"type": "string",
 			"default": ""
-		},
-		"margin": {
-			"type": "object",
-			"default": {
-				"top": "20px",
-				"left": "0px",
-				"right": "0px",
-				"bottom": "0px"
-			}
 		}
 	},
-	"usesContext": [
-		"quick-form/showLabel",
-		"quick-form/labelPosition",
-		"quick-form/labelWidth",
-		"quick-form/fieldWidth",
-		"quick-form/fieldMargin"
-	],
 	"inputdomain": "quick-forms",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
 	"render": "file:./render.php"
 }

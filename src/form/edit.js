@@ -3,8 +3,8 @@ import {
 	InnerBlocks,
 	useBlockProps,
 	InspectorControls,
-	store as blockEditorStore,
 } from '@wordpress/block-editor';
+import { generateStyles } from '../hooks/styleGenerator';
 import {
 	PanelBody,
 	ToggleControl,
@@ -17,7 +17,6 @@ import {
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import './editor.scss';
-import { useSelect } from '@wordpress/data';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -30,7 +29,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		showLabel,
 		labelPosition,
 		labelWidth,
+		hideFormAfterSubmit,
+		redirectionUrl,
 		honeypot,
+		messages,
 	} = attributes;
 	const { allowedBlocks } = [ 'create-block/text' ];
 
@@ -63,6 +65,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
+
+	const css = generateStyles( attributes, clientId );
+	// useDynamicStyles( { css, clientId } );
+
+	const blockProps = useBlockProps();
 
 	return (
 		<>
@@ -169,6 +176,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										<BoxControl
 											__next40pxDefaultSize
 											label="Field Margin"
+											resetValues={ {
+												top: '20px',
+												right: '0px',
+												bottom: '0px',
+												left: '0px',
+											} }
 											values={ fieldMargin }
 											onChange={ ( val ) =>
 												setAttributes( {
@@ -189,14 +202,22 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									>
 										<BoxControl
 											__next40pxDefaultSize
+											__nextHasNoMarginBottom
 											label="Margin"
 											values={ margin }
 											onChange={ ( val ) =>
 												setAttributes( { margin: val } )
 											}
+											resetValues={ {
+												top: '20px',
+												right: '0px',
+												bottom: '0px',
+												left: '0px',
+											} }
 										/>
 										<BoxControl
 											__next40pxDefaultSize
+											__nextHasNoMarginBottom
 											label="Padding"
 											values={ padding }
 											onChange={ ( val ) =>
@@ -204,6 +225,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 													padding: val,
 												} )
 											}
+											resetValues={ {
+												top: '20px',
+												right: '20px',
+												bottom: '20px',
+												left: '20px',
+											} }
 										/>
 									</PanelBody>
 								</>
@@ -213,6 +240,34 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						if ( tab.name === 'advanced' ) {
 							return (
 								<>
+									<PanelBody
+										title="Form Settings"
+										initialOpen={ false }
+									>
+										<ToggleControl
+											help="Hide the form after the form is submitted successfully."
+											label="Hide Form after Submission"
+											checked={ hideFormAfterSubmit }
+											onChange={ () => {
+												setAttributes( {
+													hideFormAfterSubmit:
+														! hideFormAfterSubmit,
+												} );
+											} }
+										/>
+										<TextControl
+											__next40pxDefaultSize
+											help="Redirect the user to certain page after the form is submitted successfully."
+											label="Redirection URL"
+											value={ redirectionUrl }
+											placeholder="https://example.com/"
+											onChange={ ( value ) =>
+												setAttributes( {
+													redirectionUrl: value,
+												} )
+											}
+										/>
+									</PanelBody>
 									<PanelBody
 										title="Spam Settings"
 										initialOpen={ false }
@@ -228,25 +283,61 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											} }
 										/>
 									</PanelBody>
+									<PanelBody
+										title="Messages"
+										initialOpen={ false }
+									>
+										<TextControl
+											__next40pxDefaultSize
+											help="Message to show when form submits successfully."
+											label="Success Message"
+											value={ messages.success }
+											onChange={ ( value ) =>
+												setAttributes( {
+													messages: {
+														...messages,
+														success: value,
+													},
+												} )
+											}
+										/>
+										<TextControl
+											__next40pxDefaultSize
+											label="Error Message"
+											help="Message to show when form submission fails."
+											value={ messages.error }
+											onChange={ ( value ) =>
+												setAttributes( {
+													messages: {
+														...messages,
+														error: value,
+													},
+												} )
+											}
+										/>
+									</PanelBody>
 								</>
 							);
 						}
 					} }
 				</TabPanel>
 			</InspectorControls>
-			<div { ...useBlockProps() }>
-				<form
-					style={ {
-						margin: `${ margin.top } ${ margin.right } ${ margin.bottom } ${ margin.left } `,
-						padding: `${ padding.top } ${ padding.right } ${ padding.bottom } ${ padding.left } `,
-					} }
-					className="quick-form"
-				>
-					<InnerBlocks
-						template={ TEMPLATE }
-						allowedBlocks={ allowedBlocks }
-					/>
-				</form>
+			<div { ...blockProps }>
+				<style>{ css }</style>
+				<div className="wrapper">
+					<form className="quick-form">
+						<InnerBlocks
+							template={ TEMPLATE }
+							allowedBlocks={ allowedBlocks }
+						/>
+					</form>
+					<div className="qf-form-message qf-message-success">
+						{ messages.success }
+					</div>
+					<div className="qf-form-message qf-message-error">
+						{ messages.error }
+					</div>
+				</div>
 			</div>
 		</>
 	);

@@ -19,9 +19,6 @@
 			"type": "string"
 		}
 	},
-	"usesContext": [
-		"quick-form/fieldMargin"
-	],
 	"inputdomain": "quick-forms",
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"

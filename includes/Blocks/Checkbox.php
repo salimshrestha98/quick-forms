@@ -12,28 +12,4 @@ final class Checkbox extends Block {
 		$this->content    = $content;
 		$this->block      = $block;
 	}
-
-	public function generate_stylesheet() {
-		$attributes = $this->get_attributes();
-		extract( $attributes );
-
-		$styles = array(
-			''           => array(
-				'display' => $showLabel && 'inline' === $labelPosition ? 'flex' : 'block',
-				'margin'  => sprintf(
-					'%s %s %s %s',
-					$fieldMargin['top'],
-					$fieldMargin['right'],
-					$fieldMargin['bottom'],
-					$fieldMargin['left']
-				),
-			),
-
-			' .qf-field' => array(
-				'max-width' => $fieldWidth,
-			),
-		);
-
-		BlockHelper::generate_css( $styles, "[data-id='$id']" );
-	}
 }

@@ -13,23 +13,4 @@ final class Recaptcha extends Block {
 		$this->content    = $content;
 		$this->block      = $block;
 	}
-
-	public function generate_stylesheet() {
-		$attributes = $this->get_attributes();
-		extract( $attributes );
-
-		$styles = array(
-			'' => array(
-				'margin' => sprintf(
-					'%s %s %s %s',
-					$fieldMargin['top'],
-					$fieldMargin['right'],
-					$fieldMargin['bottom'],
-					$fieldMargin['left']
-				),
-			),
-		);
-
-		BlockHelper::generate_css( $styles, "[data-id='$id']" );
-	}
 }

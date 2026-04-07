@@ -14,21 +14,8 @@ import {
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context,
-	clientId,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { id, fieldLabel, options, defaultValue, required } = attributes;
-
-	const {
-		'quick-form/showLabel': showLabel,
-		'quick-form/labelPosition': labelPosition,
-		'quick-form/labelWidth': labelWidth,
-		'quick-form/fieldWidth': fieldWidth,
-		'quick-form/fieldMargin': fieldMargin,
-	} = context;
 
 	useEffect( () => {
 		if ( ! id ) {
@@ -42,20 +29,6 @@ option-2 | Option 2`, // Do not change this.
 			} );
 		}
 	}, [] );
-
-	const labelStyles = {
-		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-
-	const blockProps = useBlockProps( {
-		style: {
-			margin: fieldMargin
-				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
-				: '',
-		},
-	} );
 
 	function getOptions() {
 		if ( ! options ) {
@@ -157,8 +130,12 @@ option-2 | Option 2`, // Do not change this.
 				</TabPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				{ showLabel && (
+			<div
+				{ ...useBlockProps( {
+					className: 'qf-block qf-select-block',
+				} ) }
+			>
+				<div className="wrapper">
 					<RichText
 						tagName="label"
 						value={ fieldLabel }
@@ -166,27 +143,23 @@ option-2 | Option 2`, // Do not change this.
 							setAttributes( { fieldLabel: value } )
 						}
 						placeholder={ __( 'Field Label' ) }
-						style={ labelStyles }
 					/>
-				) }
-				<div
-					className="qf-field qf-select-field"
-					style={ { maxWidth: fieldWidth } }
-				>
-					<select
-						defaultValue={ defaultValue }
-						onChange={ () => false }
-					>
-						{ optionsList.map( ( option, index ) => (
-							<option
-								key={ index }
-								className="qf-select-item"
-								value={ option.value }
-							>
-								{ option.label }
-							</option>
-						) ) }
-					</select>
+					<div className="qf-field qf-select-field">
+						<select
+							defaultValue={ defaultValue }
+							onChange={ () => false }
+						>
+							{ optionsList.map( ( option, index ) => (
+								<option
+									key={ index }
+									className="qf-select-item"
+									value={ option.value }
+								>
+									{ option.label }
+								</option>
+							) ) }
+						</select>
+					</div>
 				</div>
 			</div>
 		</>

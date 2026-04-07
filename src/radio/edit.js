@@ -45,23 +45,9 @@ option-2 | Option 2`, // Do not change this.
 		}
 	}, [] );
 
-	const labelStyles = {
-		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-
 	const radioStyles = {
 		display: optionsLayout,
 	};
-
-	const blockProps = useBlockProps( {
-		style: {
-			margin: fieldMargin
-				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
-				: '',
-		},
-	} );
 
 	function getOptions() {
 		if ( ! options ) {
@@ -184,8 +170,10 @@ option-2 | Option 2`, // Do not change this.
 				</TabPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				{ showLabel && (
+			<div
+				{ ...useBlockProps( { className: `qf-block qf-radio-block` } ) }
+			>
+				<div className="wrapper">
 					<RichText
 						tagName="label"
 						value={ fieldLabel }
@@ -193,28 +181,29 @@ option-2 | Option 2`, // Do not change this.
 							setAttributes( { fieldLabel: value } )
 						}
 						placeholder={ __( 'Field Label' ) }
-						style={ labelStyles }
 					/>
-				) }
-				<div
-					className="qf-field qf-radio-field"
-					style={ { maxWidth: fieldWidth } }
-				>
-					{ optionsList.map( ( option, index ) => (
-						<div
-							key={ index }
-							className="qf-radio-item"
-							style={ radioStyles }
-						>
-							<input
-								type="radio"
-								name={ fieldLabel }
-								value={ option.value }
-								defaultChecked={ option.value === defaultValue }
-							/>
-							{ option.label }
-						</div>
-					) ) }
+					<div
+						className="qf-field qf-radio-field"
+						style={ { maxWidth: fieldWidth } }
+					>
+						{ optionsList.map( ( option, index ) => (
+							<div
+								key={ index }
+								className="qf-radio-item"
+								style={ radioStyles }
+							>
+								<input
+									type="radio"
+									name={ fieldLabel }
+									value={ option.value }
+									defaultChecked={
+										option.value === defaultValue
+									}
+								/>
+								{ option.label }
+							</div>
+						) ) }
+					</div>
 				</div>
 			</div>
 		</>

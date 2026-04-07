@@ -13,12 +13,7 @@ import {
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context,
-	clientId,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		id,
 		fieldLabel,
@@ -29,32 +24,14 @@ export default function Edit( {
 		multiple,
 	} = attributes;
 
-	const {
-		'quick-form/labelPosition': labelPosition,
-		'quick-form/labelWidth': labelWidth,
-		'quick-form/showLabel': showLabel,
-		'quick-form/fieldWidth': fieldWidth,
-		'quick-form/fieldMargin': fieldMargin,
-	} = context;
-
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
 
-	const labelStyles = {
-		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-
 	const blockProps = useBlockProps( {
-		style: {
-			margin: fieldMargin
-				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
-				: '',
-		},
+		className: `qf-block qf-file-upload-block`,
 	} );
 
 	return (
@@ -148,7 +125,7 @@ export default function Edit( {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				{ showLabel && (
+				<div className="wrapper">
 					<RichText
 						tagName="label"
 						value={ fieldLabel }
@@ -156,20 +133,16 @@ export default function Edit( {
 							setAttributes( { fieldLabel: value } )
 						}
 						placeholder={ __( 'Field Label' ) }
-						style={ labelStyles }
 					/>
-				) }
-				<div
-					className="qf-field qf-file-upload-field"
-					style={ { maxWidth: fieldWidth } }
-				>
-					<input type="file" disabled />
-					<p style={ { fontSize: '12px', opacity: 0.6 } }>
-						File upload field preview (disabled in editor)
-					</p>
-					<span className="qf-file-upload-placeholder">
-						{ placeholder }
-					</span>
+					<div className="qf-field qf-file-upload-field">
+						<input type="file" disabled />
+						<p style={ { fontSize: '12px', opacity: 0.6 } }>
+							File upload field preview (disabled in editor)
+						</p>
+						<span className="qf-file-upload-placeholder">
+							{ placeholder }
+						</span>
+					</div>
 				</div>
 			</div>
 		</>

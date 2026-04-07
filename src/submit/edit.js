@@ -11,14 +11,21 @@ import {
 	Dashicon,
 	SelectControl,
 	BoxControl,
+	ColorPicker,
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import './editor.scss';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
-	const { id, buttonText, buttonWidthType, buttonWidth, margin, padding } =
-		attributes;
+	const {
+		id,
+		buttonText,
+		buttonWidthType,
+		buttonWidth,
+		textColor,
+		bgColor,
+		padding,
+	} = attributes;
 
 	useEffect( () => {
 		if ( ! id ) {
@@ -27,12 +34,19 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	}, [] );
 
 	const buttonStyles = {
-		margin: `${ margin.top } ${ margin.right } ${ margin.bottom } ${ margin.left }`,
 		padding: `${ padding.top } ${ padding.right } ${ padding.bottom } ${ padding.left }`,
 	};
 
 	if ( 'custom' === buttonWidthType ) {
 		buttonStyles.width = buttonWidth;
+	}
+
+	if ( textColor ) {
+		buttonStyles.color = textColor;
+	}
+
+	if ( bgColor ) {
+		buttonStyles.background = bgColor;
 	}
 
 	return (
@@ -71,7 +85,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 
 										<SelectControl
-											label="Button Width Type"
+											label="Button Width"
 											value={ buttonWidthType }
 											options={ [
 												{
@@ -111,17 +125,30 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							return (
 								<>
 									<PanelBody
+										title="Color Settings"
+										initialOpen={ false }
+									>
+										<ColorPicker
+											color={ textColor }
+											onChange={ ( value ) =>
+												setAttributes( {
+													textColor: value,
+												} )
+											}
+										/>
+										<ColorPicker
+											color={ bgColor }
+											onChange={ ( value ) =>
+												setAttributes( {
+													bgColor: value,
+												} )
+											}
+										/>
+									</PanelBody>
+									<PanelBody
 										title="Spacing Settings"
 										initialOpen={ false }
 									>
-										<BoxControl
-											__next40pxDefaultSize
-											label="Margin"
-											values={ margin }
-											onChange={ ( val ) =>
-												setAttributes( { margin: val } )
-											}
-										/>
 										<BoxControl
 											__next40pxDefaultSize
 											label="Padding"
@@ -140,18 +167,24 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				</TabPanel>
 			</InspectorControls>
 
-			<div { ...useBlockProps() }>
-				<div className="qf-field qf-submit-field">
-					<button style={ buttonStyles } onClick={ () => null }>
-						<RichText
-							tagName="span"
-							value={ buttonText }
-							onChange={ ( value ) =>
-								setAttributes( { buttonText: value } )
-							}
-							placeholder={ __( 'Enter Button Text Here' ) }
-						/>
-					</button>
+			<div
+				{ ...useBlockProps( {
+					className: 'qf-block qf-submit-button',
+				} ) }
+			>
+				<div className="wrapper">
+					<div className="qf-field qf-submit-field">
+						<button style={ buttonStyles } onClick={ () => null }>
+							<RichText
+								tagName="span"
+								value={ buttonText }
+								onChange={ ( value ) =>
+									setAttributes( { buttonText: value } )
+								}
+								placeholder={ __( 'Enter Button Text Here' ) }
+							/>
+						</button>
+					</div>
 				</div>
 			</div>
 		</>

@@ -1,6 +1,11 @@
 <?php
 
-$blockProps   = get_block_wrapper_attributes();
+$blockProps   = get_block_wrapper_attributes(
+	array(
+		'class'   => 'qf-block qf-country-block',
+		'data-id' => esc_attr( $id ),
+	)
+);
 $country_file = QF_PATH . 'country_list.json';
 $country_list = array();
 
@@ -19,17 +24,13 @@ if ( ! empty( $country_list ) ) {
 	);
 }
 
+$required_icon = QuickForms\Helpers\BlockHelper::required( $required );
+
 ?>
 
 <div <?php echo $blockProps; ?> data-id="<?php echo esc_attr( $id ); ?>">
-	<?php
-	if ( $showLabel ) :
-		$required_icon = $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
-		?>
-		<label for="<?php echo esc_attr( $id ); ?>">
-			<?php echo esc_html( $fieldLabel ); ?> <?php echo wp_kses_post( $required_icon ); ?>
-		</label>
-	<?php endif; ?>
+<div class="wrapper">
+	<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>
 
 	<div class="qf-field qf-country-field">
 		<?php if ( ! empty( $country_list ) ) : ?>
@@ -50,4 +51,5 @@ if ( ! empty( $country_list ) ) {
 			</select>
 		<?php endif; ?>
 	</div>
+</div>
 </div>

@@ -38,23 +38,7 @@ return array(
 			'checkedByDefault' => array(
 				'type' => 'boolean',
 				'default' => false
-			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
 			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
@@ -101,23 +85,7 @@ return array(
 			'required' => array(
 				'type' => 'boolean',
 				'default' => false
-			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
 			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
@@ -164,23 +132,7 @@ return array(
 			'multiple' => array(
 				'type' => 'boolean',
 				'default' => false
-			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
 			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
@@ -234,9 +186,24 @@ return array(
 				'type' => 'string',
 				'default' => '150px'
 			),
+			'redirectionUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'hideFormAfterSubmit' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
 			'honeypot' => array(
 				'type' => 'boolean',
 				'default' => true
+			),
+			'messages' => array(
+				'type' => 'object',
+				'default' => array(
+					'success' => 'The form has been submitted successfully!',
+					'error' => 'The form submission has failed. Please check the errors.'
+				)
 			),
 			'margin' => array(
 				'type' => 'object',
@@ -256,13 +223,6 @@ return array(
 					'bottom' => '20px'
 				)
 			)
-		),
-		'providesContext' => array(
-			'quick-form/showLabel' => 'showLabel',
-			'quick-form/labelPosition' => 'labelPosition',
-			'quick-form/labelWidth' => 'labelWidth',
-			'quick-form/fieldWidth' => 'fieldWidth',
-			'quick-form/fieldMargin' => 'fieldMargin'
 		),
 		'textdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
@@ -320,28 +280,10 @@ return array(
 			'maximum' => array(
 				'type' => 'string',
 				'default' => ''
-			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
 			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php'
 	),
 	'radio' => array(
@@ -385,23 +327,7 @@ return array(
 			'required' => array(
 				'type' => 'boolean',
 				'default' => false
-			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
 			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
@@ -429,9 +355,6 @@ return array(
 			'id' => array(
 				'type' => 'string'
 			)
-		),
-		'usesContext' => array(
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
@@ -478,23 +401,7 @@ return array(
 			'required' => array(
 				'type' => 'boolean',
 				'default' => false
-			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
 			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
@@ -528,35 +435,32 @@ return array(
 			),
 			'buttonWidthType' => array(
 				'type' => 'string',
-				'default' => 'auto'
+				'default' => 'custom'
 			),
 			'buttonWidth' => array(
 				'type' => 'string',
 				'default' => '100px'
 			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
+			'textColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'bgColor' => array(
+				'type' => 'string',
+				'default' => '#e7e7e7'
 			),
 			'padding' => array(
 				'type' => 'object',
 				'default' => array(
-					'top' => '10px',
-					'left' => '10px',
-					'right' => '10px',
-					'bottom' => '10px'
+					'top' => '15px',
+					'left' => '20px',
+					'right' => '20px',
+					'bottom' => '15px'
 				)
 			)
 		),
 		'textdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php'
 	),
 	'textarea' => array(
@@ -600,28 +504,10 @@ return array(
 			'required' => array(
 				'type' => 'boolean',
 				'default' => false
-			),
-			'margin' => array(
-				'type' => 'object',
-				'default' => array(
-					'top' => '20px',
-					'left' => '0px',
-					'right' => '0px',
-					'bottom' => '0px'
-				)
 			)
-		),
-		'usesContext' => array(
-			'quick-form/showLabel',
-			'quick-form/labelPosition',
-			'quick-form/labelWidth',
-			'quick-form/fieldWidth',
-			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',
 		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php'
 	)
 );

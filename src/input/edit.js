@@ -11,18 +11,10 @@ import {
 	TabPanel,
 	Dashicon,
 	SelectControl,
-	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import { useDebounce } from '@wordpress/compose';
-import './editor.scss';
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context,
-	clientId,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		id,
 		inputType,
@@ -34,38 +26,11 @@ export default function Edit( {
 		maximum,
 	} = attributes;
 
-	const {
-		'quick-form/showLabel': showLabel,
-		'quick-form/labelPosition': labelPosition,
-		'quick-form/labelWidth': labelWidth,
-		'quick-form/fieldWidth': fieldWidth,
-		'quick-form/fieldMargin': fieldMargin,
-	} = context;
-
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
-
-	const labelStyles = {
-		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-	const inputStyles = {
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-		width: fieldWidth,
-	};
-
-	const blockProps = useBlockProps( {
-		style: {
-			margin: fieldMargin
-				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
-				: '',
-		},
-	} );
 
 	function isHidden() {
 		return 'hidden' === inputType;
@@ -280,34 +245,38 @@ export default function Edit( {
 				</TabPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				{ showLabel && 'hidden' !== inputType && (
-					<RichText
-						tagName="label"
-						value={ fieldLabel }
-						onChange={ ( value ) =>
-							setAttributes( { fieldLabel: value } )
-						}
-						placeholder={ __( 'Field Label' ) }
-						style={ labelStyles }
-					/>
-				) }
-
-				<div className="qf-field qf-input-field">
-					{ 'hidden' === inputType && (
-						<p className="qf-hidden-field-placeholder">
-							This is a hidden field and will not be visible to
-							users.
-						</p>
+			<div
+				{ ...useBlockProps( {
+					className: `qf-block qf-input-block qf-input-${ inputType }`,
+				} ) }
+			>
+				<div className="wrapper">
+					{ 'hidden' !== inputType && (
+						<RichText
+							tagName="label"
+							value={ fieldLabel }
+							onChange={ ( value ) =>
+								setAttributes( { fieldLabel: value } )
+							}
+							placeholder={ __( 'Field Label' ) }
+						/>
 					) }
 
-					<input
-						type={ inputType }
-						placeholder={ placeholder }
-						value={ defaultValue }
-						style={ inputStyles }
-						onChange={ () => false }
-					/>
+					<div className="qf-field qf-input-field">
+						{ 'hidden' === inputType && (
+							<p className="qf-hidden-field-placeholder">
+								This is a hidden field and will not be visible
+								to users.
+							</p>
+						) }
+
+						<input
+							type={ inputType }
+							placeholder={ placeholder }
+							value={ defaultValue }
+							onChange={ () => false }
+						/>
+					</div>
 				</div>
 			</div>
 		</>

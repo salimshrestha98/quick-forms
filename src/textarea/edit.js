@@ -13,49 +13,16 @@ import {
 	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import './editor.scss';
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context,
-	clientId,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { id, fieldLabel, rowsCount, placeholder, defaultValue, required } =
 		attributes;
-
-	const {
-		'quick-form/showLabel': showLabel,
-		'quick-form/labelPosition': labelPosition,
-		'quick-form/labelWidth': labelWidth,
-		'quick-form/fieldWidth': fieldWidth,
-		'quick-form/fieldMargin': fieldMargin,
-	} = context;
 
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
-
-	const labelStyles = {
-		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-	const textareaStyles = {
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-		width: fieldWidth,
-	};
-
-	const blockProps = useBlockProps( {
-		style: {
-			margin: fieldMargin
-				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
-				: '',
-		},
-	} );
 
 	return (
 		<>
@@ -145,8 +112,12 @@ export default function Edit( {
 				</TabPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				{ showLabel && (
+			<div
+				{ ...useBlockProps( {
+					className: 'qf-block qf-textarea-block',
+				} ) }
+			>
+				<div className="wrapper">
 					<RichText
 						tagName="label"
 						value={ fieldLabel }
@@ -154,18 +125,16 @@ export default function Edit( {
 							setAttributes( { fieldLabel: value } )
 						}
 						placeholder={ __( 'Field Label' ) }
-						style={ labelStyles }
 					/>
-				) }
 
-				<div className="qf-field qf-textarea-field">
-					<textarea
-						placeholder={ placeholder }
-						value={ defaultValue }
-						style={ textareaStyles }
-						rows={ rowsCount }
-						onChange={ () => false }
-					></textarea>
+					<div className="qf-field qf-textarea-field">
+						<textarea
+							placeholder={ placeholder }
+							value={ defaultValue }
+							rows={ rowsCount }
+							onChange={ () => false }
+						></textarea>
+					</div>
 				</div>
 			</div>
 		</>

@@ -14,41 +14,14 @@ import {
 import { useEffect } from '@wordpress/element';
 import countryList from '../../country_list.json';
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context,
-	clientId,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { id, fieldLabel, defaultValue, required } = attributes;
-
-	const {
-		'quick-form/showLabel': showLabel,
-		'quick-form/labelPosition': labelPosition,
-		'quick-form/labelWidth': labelWidth,
-		'quick-form/fieldWidth': fieldWidth,
-		'quick-form/fieldMargin': fieldMargin,
-	} = context;
 
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
 		}
 	}, [] );
-
-	const labelStyles = {
-		width: showLabel && 'inline' === labelPosition ? labelWidth : 'auto',
-		display:
-			showLabel && 'above' === labelPosition ? 'block' : 'inline-block',
-	};
-
-	const blockProps = useBlockProps( {
-		style: {
-			margin: fieldMargin
-				? `${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${ fieldMargin.left }`
-				: '',
-		},
-	} );
 
 	return (
 		<>
@@ -113,8 +86,12 @@ export default function Edit( {
 				</TabPanel>
 			</InspectorControls>
 
-			<div { ...blockProps }>
-				{ showLabel && (
+			<div
+				{ ...useBlockProps( {
+					className: `qf-block qf-country-block`,
+				} ) }
+			>
+				<div className="wrapper">
 					<RichText
 						tagName="label"
 						value={ fieldLabel }
@@ -122,23 +99,19 @@ export default function Edit( {
 							setAttributes( { fieldLabel: value } )
 						}
 						placeholder={ __( 'Field Label' ) }
-						style={ labelStyles }
 					/>
-				) }
-				<div
-					className="qf-field qf-country-field"
-					style={ { maxWidth: fieldWidth } }
-				>
-					<select value={ defaultValue } onChange={ () => false }>
-						<option value="">Select Country</option>
-						{ Object.entries( countryList ).map(
-							( [ iso2, details ] ) => (
-								<option key={ iso2 } value={ iso2 }>
-									{ details.name } (+{ details.telCode })
-								</option>
-							)
-						) }
-					</select>
+					<div className="qf-field qf-country-field">
+						<select value={ defaultValue } onChange={ () => false }>
+							<option value="">Select Country</option>
+							{ Object.entries( countryList ).map(
+								( [ iso2, details ] ) => (
+									<option key={ iso2 } value={ iso2 }>
+										{ details.name } (+{ details.telCode })
+									</option>
+								)
+							) }
+						</select>
+					</div>
 				</div>
 			</div>
 		</>

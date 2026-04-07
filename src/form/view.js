@@ -1,6 +1,7 @@
 import domReady from '@wordpress/dom-ready';
 
 ( function ( window, document ) {
+	const l10n = window.l10n ?? {};
 	const QF = {
 		init() {
 			QF.bindEvents();
@@ -33,9 +34,9 @@ import domReady from '@wordpress/dom-ready';
 
 			formData.append( 'id', blockId );
 			formData.append( 'action', 'qf_form_submit' );
-			formData.append( 'nonce', l10n.ajax_nonce );
+			formData.append( 'nonce', l10n?.ajax_nonce );
 
-			fetch( l10n.ajax_url, {
+			fetch( l10n?.ajax_url, {
 				method: 'POST',
 				body: formData,
 				credentials: 'same-origin',
@@ -44,6 +45,9 @@ import domReady from '@wordpress/dom-ready';
 				.then( ( data ) => {
 					if ( data.success ) {
 						form.reset();
+						QF.handleSuccess( form );
+					} else {
+						QF.handleError( form, data );
 					}
 				} )
 				.catch( () => {} )
@@ -52,6 +56,29 @@ import domReady from '@wordpress/dom-ready';
 						submitBtn.disabled = false;
 					}
 				} );
+		},
+
+		handleSuccess( form ) {
+			if ( form.dataset?.hideFormAfterSubmit === 'true' ) {
+				form.style.display = 'none';
+			}
+
+			form.parentElement
+				.querySelector( '.qf-message-success' )
+				.classList.remove( 'hidden' );
+
+			if (
+				form.dataset?.redirectionUrl?.length &&
+				URL.canParse( form.dataset?.redirectionUrl )
+			) {
+				window.location = form.dataset.redirectionUrl;
+			}
+		},
+
+		handleError( form, response ) {
+			form.parentElement
+				.querySelector( '.qf-message-error' )
+				.classList.remove( 'hidden' );
 		},
 	};
 

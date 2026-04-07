@@ -137,4 +137,8 @@ class BlockHelper {
 
 		return null;
 	}
+
+	public static function required( bool $required ) {
+		return $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
+	}
 }

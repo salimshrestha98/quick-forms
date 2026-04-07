@@ -1,5 +1,10 @@
 <?php
-$blockProps    = get_block_wrapper_attributes();
+$blockProps    = get_block_wrapper_attributes(
+	array(
+		'class'   => 'qf-block qf-input-block',
+		'data-id' => esc_attr( $id ),
+	)
+);
 $inputType     = ! empty( $inputType ) ? $inputType : 'text';
 $isHiddenField = 'hidden' === $inputType;
 
@@ -11,17 +16,18 @@ $input_attributes .= $placeholder ? sprintf( ' placeholder="%s"', esc_attr( $pla
 $input_attributes .= $defaultValue ? sprintf( ' value="%s"', esc_attr( $defaultValue ) ) : '';
 $input_attributes .= $minimum ? sprintf( ' min="%s"', esc_attr( $minimum ) ) : '';
 $input_attributes .= $maximum ? sprintf( ' max="%s"', esc_attr( $maximum ) ) : '';
+$required_icon     = QuickForms\Helpers\BlockHelper::required( $required );
 ?>
 
-<div <?php echo $blockProps; ?> data-id='<?php echo esc_attr( $id ); ?>'>
-	<?php
-	if ( ( ! $isHiddenField ) && $showLabel ) {
-		$required_icon = $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
-
-		echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" );
-	}
-	?>
-	<div class="qf-field qf-input-field">
-		<input<?php echo $input_attributes; ?>/>
+<div <?php echo $blockProps; ?>>
+	<div class="wrapper">
+		<?php
+		if ( ( ! $isHiddenField ) ) {
+			echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" );
+		}
+		?>
+		<div class="qf-field qf-input-field">
+			<input<?php echo $input_attributes; ?>/>
+		</div>
 	</div>
 </div>

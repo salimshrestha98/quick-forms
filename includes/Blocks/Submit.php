@@ -20,21 +20,16 @@ final class Submit extends Block {
 
 		$styles = array(
 			' button' => array(
-				'margin'  => sprintf(
-					'%s %s %s %s',
-					$margin['top'],
-					$margin['right'],
-					$margin['bottom'],
-					$margin['left']
-				),
-				'padding' => sprintf(
+				'padding'    => sprintf(
 					'%s %s %s %s',
 					$padding['top'],
 					$padding['right'],
 					$padding['bottom'],
 					$padding['left']
 				),
-				'width'   => 'custom' === $buttonWidthType ? $buttonWidth : 'auto',
+				'width'      => 'custom' === $buttonWidthType ? $buttonWidth : 'auto',
+				'color'      => $textColor,
+				'background' => $bgColor,
 			),
 		);
 
