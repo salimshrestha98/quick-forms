@@ -1,0 +1,42 @@
+on:
+    push:
+        tags:
+            - '*'
+
+name: Create Release
+
+jobs:
+    build:
+        name: Create Release
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@master
+
+            - name: Get the version
+              id: get_version
+              run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+
+            - name: Set OpenSSL Legacy Provider
+              run: |
+                  echo "NODE_OPTIONS=--openssl-legacy-provider"
+                  echo "export NODE_OPTIONS=--openssl-legacy-provider"
+
+            - name: Build project
+              run: |
+                  npm install --force
+                  npm run build  --openssl-legacy-provider
+
+            - name: Install Composer dependencies
+              run: |
+                  composer install --no-dev --optimize-autoloader
+
+            - name: Zip Folder
+              run: |
+                  zip -r quick-forms-plugin.zip . -x ".git/*" ".github/*" "node_modules/*" ".editorconfig" ".gitignore" "DOCKER_ENV" "docker_tag" "Dockerfile-php-build" "gulpfile.js" "openapi.json" "output.log" "package-lock.json" "package.json" "README.md" "composer.json" "composer.lock" "webpack-free.config.js" "webpack-pro.config.js" "resources/*" "pro/resources/*" "blocks/*" ".distignore" ".travis.yml" "bin/*" "tests/*" "phpunit.xml.dist" "readme.md" "app/src/blocks/*" "app/src/admin/*" "src/blocks/*" "src/admin/*" "pro/src/blocks/*" "pro/src/admin/*" ".cursorrules" "CLAUDE.md" "docs/*" "docs" "webpack.config.js" ".eslintrc.js" ".prettierrc" "phpcs.xml" "pro/.phpcs.xml.dist"
+
+            - name: Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: |
+                    quick-forms-plugin.zip

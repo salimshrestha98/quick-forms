@@ -27,6 +27,37 @@ final class Submission_Handler {
 		$this->form_settings = BlockHelper::get_form_settings( $this->form_id );
 		$this->form_data     = array_intersect_key( $_POST, $this->form_settings['fields'] ?? array() );
 
+		if ( $this->form_settings['attrs']['honeypot'] ?? false ) {
+			// Check if honeypot field is filled.
+			if ( isset( $_POST['qfhpfld'] ) && ! empty( $_POST['qfhpfld'] ) ) {
+				wp_send_json_success(); // Fail silently.
+			}
+		}
+
+		if ( $this->form_settings['attrs']['recaptcha'] ?? false ) {
+			// reCaptcha validation.
+			$options = get_option( 'qf_settings' );
+			$secret  = $options['recaptcha_secret_key'] ?? '';
+
+			$response = $_POST['g-recaptcha-response'] ?? '';
+
+			$verify = wp_remote_post(
+				'https://www.google.com/recaptcha/api/siteverify',
+				array(
+					'body' => array(
+						'secret'   => $secret,
+						'response' => $response,
+					),
+				)
+			);
+
+			$body = json_decode( wp_remote_retrieve_body( $verify ), true );
+
+			if ( empty( $body['success'] ) ) {
+				return new \WP_Error( 'captcha_failed', 'Captcha verification failed.' );
+			}
+		}
+
 		$this->handle_uploads();
 		$this->save();
 

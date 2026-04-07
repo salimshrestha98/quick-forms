@@ -234,6 +234,10 @@ return array(
 				'type' => 'string',
 				'default' => '150px'
 			),
+			'honeypot' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
 			'margin' => array(
 				'type' => 'object',
 				'default' => array(
@@ -397,6 +401,36 @@ return array(
 			'quick-form/labelPosition',
 			'quick-form/labelWidth',
 			'quick-form/fieldWidth',
+			'quick-form/fieldMargin'
+		),
+		'inputdomain' => 'quick-forms',
+		'editorScript' => 'file:./index.js',
+		'render' => 'file:./render.php'
+	),
+	'recaptcha' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'quick-forms/recaptcha',
+		'version' => '0.1.0',
+		'title' => 'Recaptcha',
+		'category' => 'quick-forms',
+		'icon' => 'lock',
+		'description' => 'Recaptcha Field',
+		'parent' => array(
+			'quick-forms/form'
+		),
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'id' => array(
+				'type' => 'string'
+			)
+		),
+		'usesContext' => array(
 			'quick-form/fieldMargin'
 		),
 		'inputdomain' => 'quick-forms',

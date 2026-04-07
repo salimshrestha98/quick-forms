@@ -3,6 +3,7 @@ import {
 	InnerBlocks,
 	useBlockProps,
 	InspectorControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -16,6 +17,7 @@ import {
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import './editor.scss';
+import { useSelect } from '@wordpress/data';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -28,6 +30,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		showLabel,
 		labelPosition,
 		labelWidth,
+		honeypot,
 	} = attributes;
 	const { allowedBlocks } = [ 'create-block/text' ];
 
@@ -77,6 +80,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							name: 'styles',
 							title: <Dashicon icon="admin-customizer" />,
 							className: 'tab-styles',
+						},
+						{
+							name: 'advanced',
+							title: <Dashicon icon="admin-tools" />,
+							className: 'tab-advanced',
 						},
 					] }
 				>
@@ -196,6 +204,28 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 													padding: val,
 												} )
 											}
+										/>
+									</PanelBody>
+								</>
+							);
+						}
+
+						if ( tab.name === 'advanced' ) {
+							return (
+								<>
+									<PanelBody
+										title="Spam Settings"
+										initialOpen={ false }
+									>
+										<ToggleControl
+											label="Enable Honeypot"
+											checked={ honeypot }
+											help="Enable Honeypot for this form."
+											onChange={ () => {
+												setAttributes( {
+													honeypot: ! honeypot,
+												} );
+											} }
 										/>
 									</PanelBody>
 								</>

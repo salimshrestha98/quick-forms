@@ -7,7 +7,13 @@ final class Admin {
 
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'register_menus' ) );
-		add_action( 'save_post', array( $this, 'save_form_meta' ), 10, 3 );
+		add_action( 'save_post', array( $this, 'save_form' ), 10, 3 );
+		add_action(
+			'admin_init',
+			function () {
+				register_setting( 'qf_settings_group', 'qf_settings' );
+			}
+		);
 	}
 
 	/**
@@ -28,11 +34,21 @@ final class Admin {
 		// Submenu: Forms
 		add_submenu_page(
 			'quick-forms',
-			__( 'Forms', 'quick-forms' ),
-			__( 'Forms', 'quick-forms' ),
+			__( 'Form Submissions', 'quick-forms' ),
+			__( 'Submissions', 'quick-forms' ),
 			'manage_options',
 			'quick-forms-submissions',
 			array( $this, 'render_forms_page' )
+		);
+
+		// Submenu: Settings
+		add_submenu_page(
+			'quick-forms',
+			__( 'Quick Forms Settings', 'quick-forms' ),
+			__( 'Settings', 'quick-forms' ),
+			'manage_options',
+			'quick-forms-settings',
+			array( $this, 'render_settings_page' )
 		);
 
 		remove_submenu_page( 'quick-forms', 'quick-forms' );
@@ -61,10 +77,43 @@ final class Admin {
 		<?php
 	}
 
+	public function render_settings_page() {
+		$options = get_option( 'qf_settings' );
+		?>
+	<div class="wrap">
+		<h1>Quick Forms Settings</h1>
+
+		<form method="post" action="options.php">
+			<?php settings_fields( 'qf_settings_group' ); ?>
+
+			<table class="form-table">
+				<tr>
+					<th>reCAPTCHA Site Key</th>
+					<td>
+						<input type="text" name="qf_settings[recaptcha_site_key]" 
+							value="<?php echo esc_attr( $options['recaptcha_site_key'] ?? '' ); ?>" />
+					</td>
+				</tr>
+
+				<tr>
+					<th>reCAPTCHA Secret Key</th>
+					<td>
+						<input type="text" name="qf_settings[recaptcha_secret_key]" 
+							value="<?php echo esc_attr( $options['recaptcha_secret_key'] ?? '' ); ?>" />
+					</td>
+				</tr>
+			</table>
+
+			<?php submit_button(); ?>
+		</form>
+	</div>
+		<?php
+	}
+
 	/**
 	 * Save form data to table.
 	 */
-	public function save_form_meta( $post_id, $post ) {
+	public function save_form( $post_id, $post ) {
 		if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
 			return;
 		}

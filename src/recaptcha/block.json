@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "quick-forms/recaptcha",
+	"version": "0.1.0",
+	"title": "Recaptcha",
+	"category": "quick-forms",
+	"icon": "lock",
+	"description": "Recaptcha Field",
+	"parent": [
+		"quick-forms/form"
+	],
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"id": {
+			"type": "string"
+		}
+	},
+	"usesContext": [
+		"quick-form/fieldMargin"
+	],
+	"inputdomain": "quick-forms",
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

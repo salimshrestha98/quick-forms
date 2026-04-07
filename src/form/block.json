@@ -44,6 +44,10 @@
 			"type": "string",
 			"default": "150px"
 		},
+		"honeypot": {
+			"type": "boolean",
+			"default": true
+		},
 		"margin": {
 			"type": "object",
 			"default": {
