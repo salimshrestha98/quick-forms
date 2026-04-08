@@ -13,21 +13,23 @@ $form_attributes .= $hideFormAfterSubmit ? ' data-hide-form-after-submit="true"'
 ?>
 
 <div <?php echo $blockProps; ?>>
-	<form class="quick-form" <?php echo $form_attributes; ?>>
+	<div class="wrapper">
+		<form class="quick-form" <?php echo $form_attributes; ?>>
+	
+		<?php
+		if ( $honeypot ) {
+			echo '<input type="text" id="qfhpfld" name="qfhpfld" placeholder="Please enter your name here" value=""/>';
+		}
 
-	<?php
-	if ( $honeypot ) {
-		echo '<input type="text" id="qfhpfld" name="qfhpfld" placeholder="Please enter your name here" value=""/>';
-	}
-
-	echo $content;
-	?>
-	</form>
-
-	<div class="qf-form-message qf-message-success hidden">
-		<?php echo $messages['success']; ?>
-	</div>
-	<div class="qf-form-message qf-message-error hidden">
-		<?php echo $messages['error']; ?>
+		echo $content;
+		?>
+		</form>
+	
+		<div class="qf-form-message qf-message-success hidden">
+			<?php echo $messages['success']; ?>
+		</div>
+		<div class="qf-form-message qf-message-error hidden">
+			<?php echo $messages['error']; ?>
+		</div>
 	</div>
 </div>

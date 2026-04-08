@@ -1,55 +1,132 @@
 === Quick Forms ===
-Contributors:      The WordPress Contributors
-Tags:              block
-Tested up to:      6.8
-Stable tag:        0.1.0
-License:           GPL-2.0-or-later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Contributors: salimshrestha
+Tags: form, contact form, gutenberg, block, form builder
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 7.4
+Stable tag: 1.0.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+A native Gutenberg block-based contact form builder. Build contact forms directly inside the block editor — no shortcodes, no iframes.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Quick Forms is a lightweight, Gutenberg-native contact form builder built for WordPress 6.8+. Every form field is a proper block — drag, drop, and configure directly inside the editor. No shortcodes, no page builders required.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+**Why Quick Forms?**
+
+Most form plugins were built before the block editor existed. They bolt on Gutenberg support as an afterthought — a single shortcode block wrapping a separate form builder UI. Quick Forms is built block-first from day one.
+
+**Available Field Blocks**
+
+* Text, Email, Password, Number, Hidden input
+* Textarea
+* Checkbox
+* Radio buttons
+* Select dropdown
+* Country picker (with phone code)
+* File upload
+* reCAPTCHA v2
+
+**Form Features**
+
+* Honeypot spam protection (built-in, no config needed)
+* Google reCAPTCHA v2 support
+* Configurable success and error messages
+* Post-submission redirect URL
+* Hide form after successful submission
+* Server-side file upload validation (type + size)
+
+**Admin Features**
+
+* Submissions table with per-form filtering
+* Bulk delete submissions
+* Sortable columns (ID, date)
+* IP address and user agent logging per submission
+
+**Design & Styling**
+
+* Label position: above or inline
+* Global field width control
+* Field spacing (margin) control
+* Label width control (for inline mode)
+* Padding control on the form wrapper
+
+**Pro Version (Coming Soon)**
+
+The free version covers all core form-building needs. A Pro version is planned with:
+
+* Email notifications (admin + user confirmation)
+* Conditional logic (show/hide fields based on values)
+* Multi-step forms
+* CSV export of submissions
+* File attachment in notification emails
+* Webhooks / Zapier integration
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+1. Upload the `quick-forms` folder to `/wp-content/plugins/`.
+2. Activate the plugin from **Plugins → Installed Plugins**.
+3. Open any page or post in the block editor.
+4. Search for "Form" in the block inserter — add the **Form** block.
+5. Add field blocks inside the Form block (Input, Textarea, Select, etc.).
+6. Publish the page.
 
-e.g.
+**reCAPTCHA Setup (optional)**
 
-1. Upload the plugin files to the `/wp-content/plugins/quick-forms` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-
+1. Go to **Quick Forms → Settings**.
+2. Enter your Google reCAPTCHA v2 Site Key and Secret Key.
+3. Add the **reCAPTCHA** block inside your form.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Does this work with the classic editor? =
 
-An answer to that question.
+No. Quick Forms is built exclusively for the Gutenberg block editor (WordPress 6.8+). It has no shortcode or classic editor support by design.
 
-= What about foo bar? =
+= Where are form submissions stored? =
 
-Answer to foo bar dilemma.
+Submissions are stored in a custom database table (`wp_qf_submissions`) created on plugin activation. View them under **Quick Forms → Submissions** in the admin.
+
+= How do I filter submissions by form? =
+
+On the **Submissions** page, use the "Choose a form" dropdown at the top and click Filter.
+
+= Is the honeypot spam protection always active? =
+
+Honeypot is enabled by default on each form. You can disable it per-form from the Form block settings in the editor sidebar.
+
+= Can I have multiple forms on the same page? =
+
+Yes. Each Form block gets a unique ID automatically.
+
+= What file types are allowed for file upload fields? =
+
+Currently: JPEG, PNG, and PDF. Maximum file size is 2MB per upload.
+
+= Does Quick Forms collect personal data? =
+
+Yes — IP address and user agent are stored with each submission for spam/abuse tracking. You are responsible for disclosing this in your site's privacy policy. Privacy policy integration (export/erase hooks) is on the roadmap.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. The Form block with field blocks inside the block editor.
+2. Label position and field width controls in the block sidebar.
+3. Submissions table filtered by a specific form.
+4. Plugin settings page (reCAPTCHA keys).
 
 == Changelog ==
 
-= 0.1.0 =
-* Release
+= 1.0.0 =
+* Initial release.
+* Form, Input, Textarea, Checkbox, Radio, Select, Country, File Upload, reCAPTCHA, and Submit blocks.
+* Submissions stored in custom DB table with admin list table.
+* Honeypot spam protection.
+* reCAPTCHA v2 support.
+* Per-form success/error messages and redirect URL.
 
-== Arbitrary section ==
+== Upgrade Notice ==
 
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+= 1.0.0 =
+Initial release. No upgrade steps required.

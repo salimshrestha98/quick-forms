@@ -16,20 +16,9 @@ $qf-transition: 0.2s ease;
 // ========================
 @mixin qf-input-base {
 	padding: $qf-padding;
-	font-size: 14px;
 	border: 1px solid $qf-border;
 	border-radius: $qf-radius;
 	background: $qf-bg;
-	transition:
-		border-color $qf-transition,
-		box-shadow $qf-transition;
-	box-sizing: border-box;
-
-	&:focus {
-		outline: none;
-		border-color: $qf-border-focus;
-		box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
-	}
 }
 
 // ========================
@@ -51,9 +40,7 @@ $qf-transition: 0.2s ease;
 .qf-form label {
 	display: block;
 	margin-bottom: 6px;
-	font-size: 14px;
 	font-weight: 500;
-	color: $qf-text;
 }
 
 // Required mark
@@ -103,8 +90,6 @@ $qf-transition: 0.2s ease;
 	display: flex;
 	align-items: center;
 	gap: 6px;
-	font-size: 14px;
-	color: $qf-text;
 
 	input {
 		width: auto;
@@ -117,7 +102,6 @@ $qf-transition: 0.2s ease;
 // ========================
 .qf-file-upload-field {
 	input[type="file"] {
-		font-size: 14px;
 		border: none;
 		padding: 6px 0;
 	}
@@ -128,7 +112,6 @@ $qf-transition: 0.2s ease;
 // ========================
 .qf-submit-field {
 	button {
-		font-size: 1rem;
 		font-weight: 500;
 		border: none;
 		border-radius: $qf-radius;
