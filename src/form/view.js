@@ -20,7 +20,6 @@ import domReady from '@wordpress/dom-ready';
 		handleSubmit( event ) {
 			event.preventDefault();
 			const form = event.currentTarget;
-			const block = form.parentElement;
 
 			// Disable submit button while processing
 			const submitBtn = form.querySelector( 'button[type="submit"]' );
@@ -30,9 +29,7 @@ import domReady from '@wordpress/dom-ready';
 
 			// Collect form data
 			const formData = new FormData( form );
-			const blockId = block.dataset.id;
 
-			formData.append( 'id', blockId );
 			formData.append( 'action', 'qf_form_submit' );
 			formData.append( 'nonce', l10n?.ajax_nonce );
 

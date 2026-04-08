@@ -6,21 +6,15 @@ defined( 'ABSPATH' ) || exit;
 
 use QuickForms\Helpers\BlockHelper;
 
+/**
+ * Form Block class.
+ */
 final class Form extends Block {
-	public function __construct( $attributes, $content, $block ) {
-		$this->block      = $block;
-		$this->attributes = $attributes;
-		$this->content    = $content;
-
-		$this->set_defaults();
-	}
-
-	private function set_defaults() {
-		$this->defaults = array(
-			'showLabel' => true,
-		);
-	}
-
+	/**
+	 * Generate attribute dependent styles for form block.
+	 *
+	 * @return void
+	 */
 	public function generate_stylesheet() {
 		$attributes = $this->get_attributes();
 		extract( $attributes );

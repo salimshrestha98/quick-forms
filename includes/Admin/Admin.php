@@ -3,21 +3,21 @@ namespace QuickForms\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Admin class.
+ */
 final class Admin {
-
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'register_menus' ) );
 		add_action( 'save_post', array( $this, 'save_form' ), 10, 3 );
-		add_action(
-			'admin_init',
-			function () {
-				register_setting( 'qf_settings_group', 'qf_settings' );
-			}
-		);
+		add_action( 'admin_menu', array( $this, 'register_menus' ) );
+		add_action( 'admin_init', array( $this, 'register_setting' ) );
 	}
 
 	/**
-	 * Register main menu and submenus
+	 * Register main menu and submenus.
 	 */
 	public function register_menus() {
 		// Main menu
@@ -80,38 +80,51 @@ final class Admin {
 	public function render_settings_page() {
 		$options = get_option( 'qf_settings' );
 		?>
-	<div class="wrap">
-		<h1>Quick Forms Settings</h1>
+		<div class="wrap">
+			<h1>Quick Forms Settings</h1>
 
-		<form method="post" action="options.php">
-			<?php settings_fields( 'qf_settings_group' ); ?>
+			<form method="post" action="options.php">
+				<?php settings_fields( 'qf_settings_group' ); ?>
 
-			<table class="form-table">
-				<tr>
-					<th>reCAPTCHA Site Key</th>
-					<td>
-						<input type="text" name="qf_settings[recaptcha_site_key]" 
-							value="<?php echo esc_attr( $options['recaptcha_site_key'] ?? '' ); ?>" />
-					</td>
-				</tr>
+				<table class="form-table">
+					<tr>
+						<th><?php echo esc_html__( 'reCAPTCHA Site Key', 'quick-forms' ); ?></th>
+						<td>
+							<input type="text" name="qf_settings[recaptcha_site_key]" 
+								value="<?php echo esc_attr( $options['recaptcha_site_key'] ?? '' ); ?>" />
+						</td>
+					</tr>
 
-				<tr>
-					<th>reCAPTCHA Secret Key</th>
-					<td>
-						<input type="text" name="qf_settings[recaptcha_secret_key]" 
-							value="<?php echo esc_attr( $options['recaptcha_secret_key'] ?? '' ); ?>" />
-					</td>
-				</tr>
-			</table>
+					<tr>
+						<th><?php echo esc_html__( 'reCAPTCHA Secret Key', 'quick-forms' ); ?> </th>
+						<td>
+							<input type="text" name="qf_settings[recaptcha_secret_key]" 
+								value="<?php echo esc_attr( $options['recaptcha_secret_key'] ?? '' ); ?>" />
+						</td>
+					</tr>
+				</table>
 
-			<?php submit_button(); ?>
-		</form>
-	</div>
+				<?php submit_button(); ?>
+			</form>
+		</div>
 		<?php
 	}
 
 	/**
-	 * Save form data to table.
+	 * Register quick forms setting group.
+	 *
+	 * @return void
+	 */
+	public function register_setting() {
+		register_setting( 'qf_settings_group', 'qf_settings' );
+	}
+
+	/**
+	 * Parse post data and extract and save form settings.
+	 *
+	 * @param [int] $post_id
+	 * @param [mixed] $post
+	 * @return void
 	 */
 	public function save_form( $post_id, $post ) {
 		if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
@@ -129,10 +142,20 @@ final class Admin {
 		$forms = $this->get_qf_block_attributes( $blocks );
 
 		foreach ( $forms as $form_id => $form_data ) {
+			$form_data['post_id'] = $post_id;
+
 			update_option( 'qf_form_' . $form_id, $form_data );
 		}
 	}
 
+	/**
+	 * Extract form and field attributes recursively.
+	 *
+	 * @param array $blocks
+	 * @param array $results
+	 * @param [int] $form_id
+	 * @return array
+	 */
 	private function get_qf_block_attributes( $blocks, &$results = array(), $form_id = null ) {
 		foreach ( $blocks as $block ) {
 			if ( str_starts_with( $block['blockName'] ?? '', 'quick-forms/' ) ) {

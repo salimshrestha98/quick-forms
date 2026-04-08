@@ -43,7 +43,6 @@ Most form plugins were built before the block editor existed. They bolt on Guten
 * Submissions table with per-form filtering
 * Bulk delete submissions
 * Sortable columns (ID, date)
-* IP address and user agent logging per submission
 
 **Design & Styling**
 
@@ -104,10 +103,6 @@ Yes. Each Form block gets a unique ID automatically.
 = What file types are allowed for file upload fields? =
 
 Currently: JPEG, PNG, and PDF. Maximum file size is 2MB per upload.
-
-= Does Quick Forms collect personal data? =
-
-Yes — IP address and user agent are stored with each submission for spam/abuse tracking. You are responsible for disclosing this in your site's privacy policy. Privacy policy integration (export/erase hooks) is on the roadmap.
 
 == Screenshots ==
 

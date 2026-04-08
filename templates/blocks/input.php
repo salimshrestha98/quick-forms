@@ -1,10 +1,4 @@
 <?php
-$blockProps    = get_block_wrapper_attributes(
-	array(
-		'class'   => 'qf-block qf-input-block',
-		'data-id' => esc_attr( $id ),
-	)
-);
 $inputType     = ! empty( $inputType ) ? $inputType : 'text';
 $isHiddenField = 'hidden' === $inputType;
 
@@ -16,10 +10,9 @@ $input_attributes .= $placeholder ? sprintf( ' placeholder="%s"', esc_attr( $pla
 $input_attributes .= $defaultValue ? sprintf( ' value="%s"', esc_attr( $defaultValue ) ) : '';
 $input_attributes .= $minimum ? sprintf( ' min="%s"', esc_attr( $minimum ) ) : '';
 $input_attributes .= $maximum ? sprintf( ' max="%s"', esc_attr( $maximum ) ) : '';
-$required_icon     = QuickForms\Helpers\BlockHelper::required( $required );
 ?>
 
-<div <?php echo $blockProps; ?>>
+<div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
 		<?php
 		if ( ( ! $isHiddenField ) ) {
@@ -27,7 +20,7 @@ $required_icon     = QuickForms\Helpers\BlockHelper::required( $required );
 		}
 		?>
 		<div class="qf-field qf-input-field">
-			<input<?php echo $input_attributes; ?>/>
+			<input <?php echo $input_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>/>
 		</div>
 	</div>
 </div>

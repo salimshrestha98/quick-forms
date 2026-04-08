@@ -1,22 +1,13 @@
 <?php
-
-$blockProps    = get_block_wrapper_attributes(
-	array(
-		'class'   => 'qf-block qf-select-block',
-		'data-id' => esc_attr( $id ),
-	)
-);
-$options_list  = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
-$required_icon = QuickForms\Helpers\BlockHelper::required( $required );
-
+$options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 ?>
 
-<div <?php echo $blockProps; ?>>
+<div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
 		<label for="<?php echo esc_attr( $id ); ?>">
 			<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>
 		</label>
-	
+
 		<div class="qf-field qf-select-field">
 			<?php if ( ! empty( $options_list ) ) : ?>
 				<select

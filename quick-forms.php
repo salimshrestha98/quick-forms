@@ -16,61 +16,25 @@
  * @package QuickForms
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
 require_once 'vendor/autoload.php';
-require_once 'includes/QuickForms.php';
 
-// Plugin Version
-if ( ! defined( 'QF_VERSION' ) ) {
-	define( 'QF_VERSION', '1.0.0' );
-}
+// Define plugin constants.
+defined( 'QF_VERSION' ) || define( 'QF_VERSION', '1.0.0' );
+defined( 'QF_FILE' ) || define( 'QF_FILE', __FILE__ );
+defined( 'QF_BASENAME' ) || define( 'QF_BASENAME', plugin_basename( QF_FILE ) );
+defined( 'QF_PATH' ) || define( 'QF_PATH', plugin_dir_path( QF_FILE ) );
+defined( 'QF_INCLUDES_PATH' ) || define( 'QF_INCLUDES_PATH', QF_PATH . 'includes/' );
+defined( 'QF_BUILD_PATH' ) || define( 'QF_BUILD_PATH', QF_PATH . 'build/' );
+defined( 'QF_TEMPLATES_PATH' ) || define( 'QF_TEMPLATES_PATH', QF_PATH . 'templates/' );
+defined( 'QF_URL' ) || define( 'QF_URL', plugin_dir_url( QF_FILE ) );
+defined( 'QF_ASSETS_URL' ) || define( 'QF_ASSETS_URL', QF_URL . 'assets/' );
+defined( 'QF_BUILD_URL' ) || define( 'QF_BUILD_URL', QF_URL . 'build/' );
 
-// Plugin File
-if ( ! defined( 'QF_FILE' ) ) {
-	define( 'QF_FILE', __FILE__ );
-}
-
-// Plugin Basename
-if ( ! defined( 'QF_BASENAME' ) ) {
-	define( 'QF_BASENAME', plugin_basename( QF_FILE ) );
-}
-
-// Plugin Directory Path
-if ( ! defined( 'QF_PATH' ) ) {
-	define( 'QF_PATH', plugin_dir_path( QF_FILE ) );
-}
-
-// Plugin Directory URL
-if ( ! defined( 'QF_URL' ) ) {
-	define( 'QF_URL', plugin_dir_url( QF_FILE ) );
-}
-
-// Assets URL
-if ( ! defined( 'QF_ASSETS_URL' ) ) {
-	define( 'QF_ASSETS_URL', QF_URL . 'assets/' );
-}
-
-// Includes Path
-if ( ! defined( 'QF_INCLUDES_PATH' ) ) {
-	define( 'QF_INCLUDES_PATH', QF_PATH . 'includes/' );
-}
-
-// Build Path (for block/editor assets)
-if ( ! defined( 'QF_BUILD_PATH' ) ) {
-	define( 'QF_BUILD_PATH', QF_PATH . 'build/' );
-}
-
-// Templates Path
-if ( ! defined( 'QF_TEMPLATES_PATH' ) ) {
-	define( 'QF_TEMPLATES_PATH', QF_PATH . 'templates/' );
-}
-
-// Build URL
-if ( ! defined( 'QF_BUILD_URL' ) ) {
-	define( 'QF_BUILD_URL', QF_URL . 'build/' );
-}
-
+// Register activation tasks.
 register_activation_hook( __FILE__, array( QuickForms\Activator::class, 'activate' ) );
+
+if ( ! isset( $_GLOBALS['quick-forms'] ) ) {
+	$_GLOBALS['quick-forms'] = new QuickForms\QuickForms();
+}

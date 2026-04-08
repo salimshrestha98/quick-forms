@@ -37,26 +37,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { allowedBlocks } = [ 'create-block/text' ];
 
 	const TEMPLATE = [
-		[
-			'core/heading',
-			{
-				level: 2,
-				content: 'Quick Contact Form',
-				textAlign: 'center',
-				style: {
-					spacing: {
-						margin: {
-							bottom: '40px',
-						},
-					},
-				},
-			},
-		],
 		[ 'quick-forms/input', { inputType: 'text', fieldLabel: 'Your Name' } ],
 		[
 			'quick-forms/input',
 			{ inputType: 'email', fieldLabel: 'Your Email' },
 		],
+		[ 'quick-forms/textarea', { fieldLabel: 'Your Message' } ],
 		[ 'quick-forms/submit', { lock: { move: false, remove: true } } ],
 	];
 
@@ -67,9 +53,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	}, [] );
 
 	const css = generateStyles( attributes, clientId );
-	// useDynamicStyles( { css, clientId } );
-
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps( {
+		className: `qf-block qf-form-block`,
+	} );
 
 	return (
 		<>

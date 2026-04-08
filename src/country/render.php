@@ -1,4 +1,4 @@
 <?php
 
-$block = new QuickForms\Blocks\Country( $attributes, $content, $block );
-$block->render();
+$blk = new QuickForms\Blocks\Block( $block, $content );
+$blk->render();

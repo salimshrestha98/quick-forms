@@ -7,54 +7,62 @@ defined( 'ABSPATH' ) || exit;
 use QuickForms\Database\Submission;
 use QuickForms\Helpers\BlockHelper;
 
+/**
+ * Submission Handler class.
+ *
+ * Handles all form submission related tasks.
+ */
 final class Submission_Handler {
+	/**
+	 * Form Id.
+	 */
 	private $form_id;
 
+	/**
+	 * Form Settings.
+	 */
 	private $form_settings;
 
+	/**
+	 * Form Data.
+	 */
 	private $form_data;
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct() {
 		add_action( 'wp_ajax_qf_form_submit', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_nopriv_qf_form_submit', array( $this, 'handle' ) );
 	}
 
+	/**
+	 * Handle form submission.
+	 */
 	public function handle() {
 		if ( ! wp_verify_nonce( $_POST['nonce'], 'qf_form_submit' ) ) {
 			die( 'Nonce error.' );
 		}
 
-		$this->form_id       = sanitize_text_field( $_POST['id'] ?? '' );
+		$this->form_id       = sanitize_text_field( $_POST['form-id'] ?? '' );
 		$this->form_settings = BlockHelper::get_form_settings( $this->form_id );
 		$this->form_data     = array_intersect_key( $_POST, $this->form_settings['fields'] ?? array() );
 
+		// Honeypot validation.
 		if ( $this->form_settings['attrs']['honeypot'] ?? false ) {
-			// Check if honeypot field is filled.
 			if ( isset( $_POST['qfhpfld'] ) && ! empty( $_POST['qfhpfld'] ) ) {
-				wp_send_json_success(); // Fail silently.
+				wp_send_json_error( 'Some error occured.' );
+				exit;
 			}
 		}
 
+		// Recaptcha validation.
 		if ( $this->form_settings['attrs']['recaptcha'] ?? false ) {
-			// reCaptcha validation.
-			$options = get_option( 'qf_settings' );
-			$secret  = $options['recaptcha_secret_key'] ?? '';
+			$recaptcha_valid = $this->validate_recaptcha();
 
-			$response = $_POST['g-recaptcha-response'] ?? '';
-
-			$verify = wp_remote_post(
-				'https://www.google.com/recaptcha/api/siteverify',
-				array(
-					'body' => array(
-						'secret'   => $secret,
-						'response' => $response,
-					),
-				)
-			);
-
-			$body = json_decode( wp_remote_retrieve_body( $verify ), true );
-
-			if ( empty( $body['success'] ) ) {
-				return new \WP_Error( 'captcha_failed', 'Captcha verification failed.' );
+			if ( ! $recaptcha_valid ) {
+				wp_send_json_error( __( 'Invalid captcha.', 'quick-forms' ) );
+				exit;
 			}
 		}
 
@@ -64,6 +72,9 @@ final class Submission_Handler {
 		wp_send_json_success();
 	}
 
+	/**
+	 * Handle file uploads.
+	 */
 	private function handle_uploads() {
 		$form_settings      = $this->form_settings;
 		$file_upload_fields = array();
@@ -77,15 +88,15 @@ final class Submission_Handler {
 		}
 
 		foreach ( $file_upload_fields as $field_key => $field ) {
-			if ( ! empty( $_FILES[ $field_key ] ) && isset( $_FILES[ $field_key ]['name'] ) ) {
+			if ( ! empty( $_FILES[ $field_key ] ) && isset( $_FILES[ $field_key ]['name'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				require_once ABSPATH . 'wp-admin/includes/file.php';
 
-				$file = $_FILES[ $field_key ];
-				if ( $file['error'] !== UPLOAD_ERR_OK ) {
+				$file = $_FILES[ $field_key ]; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				if ( UPLOAD_ERR_OK !== $file['error'] ) {
 					return new \WP_Error( 'upload_error', 'File upload failed.' );
 				}
 
-				$max_size = 2 * 1024 * 1024; // 2MB
+				$max_size = 2 * 1024 * 1024;
 
 				if ( $file['size'] > $max_size ) {
 					return new \WP_Error( 'file_size_error', 'File exceeds maximum size of 2MB.' );
@@ -128,6 +139,33 @@ final class Submission_Handler {
 		}
 	}
 
+	/**
+	 * Validate reCaptcha if enabled.
+	 */
+	private function validate_recaptcha() {
+		$options = get_option( 'qf_settings' );
+		$secret  = $options['recaptcha_secret_key'] ?? '';
+
+		$response = $_POST['g-recaptcha-response'] ?? ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+		$verify = wp_remote_post(
+			'https://www.google.com/recaptcha/api/siteverify',
+			array(
+				'body' => array(
+					'secret'   => $secret,
+					'response' => $response,
+				),
+			)
+		);
+
+		$body = json_decode( wp_remote_retrieve_body( $verify ), true );
+
+		return empty( $body['success'] ) ? true : false;
+	}
+
+	/**
+	 * Save form into database.
+	 */
 	private function save() {
 		$submission_db = new Submission();
 		$submission_db->save( $this->form_id, $this->form_data );

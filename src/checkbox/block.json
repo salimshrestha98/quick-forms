@@ -18,6 +18,10 @@
 		"id": {
 			"type": "string"
 		},
+		"fieldLabel": {
+			"type": "string",
+			"default": "Checkbox"
+		},
 		"placeholder": {
 			"type": "string",
 			"default": "I agree to all terms and conditions."

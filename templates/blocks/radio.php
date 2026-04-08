@@ -1,17 +1,8 @@
 <?php
-
-$blockProps   = get_block_wrapper_attributes(
-	array(
-		'class'   => 'qf-block qf-radio-block',
-		'data-id' => esc_attr( $id ),
-	)
-);
 $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
-$required_icon     = QuickForms\Helpers\BlockHelper::required( $required );
-
 ?>
 
-<div <?php echo $blockProps; ?>>
+<div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
 		<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>
 		<div class="qf-field qf-radio-field">
@@ -25,7 +16,7 @@ $required_icon     = QuickForms\Helpers\BlockHelper::required( $required );
 							<?php checked( $key, $defaultValue ); ?>
 							<?php echo $required ? 'required' : ''; ?>
 						/>
-						<?php echo trim( $label ); ?>
+						<?php echo esc_html( $label ); ?>
 					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>

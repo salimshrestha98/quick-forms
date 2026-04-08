@@ -4,12 +4,20 @@ namespace QuickForms;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Activator Class.
+ */
 final class Activator {
-
+	/**
+	 * Main entry point to run activation tasks.
+	 */
 	public static function activate() {
 		self::create_submissions_table();
 	}
 
+	/**
+	 * Create submissions table to store form submissions data.
+	 */
 	public static function create_submissions_table() {
 		global $wpdb;
 
@@ -21,8 +29,6 @@ final class Activator {
 			form_id VARCHAR(128) NOT NULL,
 			data LONGTEXT NOT NULL,
 			submitted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-			ip_address VARCHAR(45) DEFAULT NULL,
-			user_agent TEXT DEFAULT NULL,
 			PRIMARY KEY  (id),
 			KEY form_id (form_id),
 			KEY submitted_at (submitted_at)
@@ -33,5 +39,3 @@ final class Activator {
 		dbDelta( $sql );
 	}
 }
-
-return new Activator();

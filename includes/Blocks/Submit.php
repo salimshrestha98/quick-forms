@@ -6,14 +6,15 @@ defined( 'ABSPATH' ) || exit;
 
 use QuickForms\Helpers\BlockHelper;
 
+/**
+ * Submit block class.
+ */
 final class Submit extends Block {
-
-	public function __construct( $attributes, $content, $block ) {
-		$this->attributes = $attributes;
-		$this->content    = $content;
-		$this->block      = $block;
-	}
-
+	/**
+	 * Generate attribute dependent styles for form block.
+	 *
+	 * @return void
+	 */
 	public function generate_stylesheet() {
 		$attributes = $this->get_attributes();
 		extract( $attributes );

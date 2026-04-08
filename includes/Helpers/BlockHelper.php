@@ -3,8 +3,18 @@ namespace QuickForms\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Block Helper class.
+ */
 class BlockHelper {
-	public static function generate_css( $styles_map, $wrapper_id = '' ) {
+	/**
+	 * Generate CSS from the styles map and store in global style variable.
+	 *
+	 * @param array $styles_map
+	 * @param string $wrapper_id
+	 * @return void
+	 */
+	public static function generate_css( array $styles_map, string $wrapper_id = '' ): void {
 		global $qf_styles;
 
 		$css = '';
@@ -25,7 +35,13 @@ class BlockHelper {
 		$qf_styles .= $css;
 	}
 
-	public static function get_block_default_attributes( $block_name ) {
+	/**
+	 * Return the default attributes fetching from the block.json file.
+	 *
+	 * @param string $block_name
+	 * @return array
+	 */
+	public static function get_block_default_attributes( string $block_name ): array {
 		$block_name = str_replace( 'quick-forms/', '', $block_name );
 		$block_path = QF_BUILD_PATH . $block_name;
 
@@ -57,25 +73,41 @@ class BlockHelper {
 		return $defaults;
 	}
 
-	public static function get_form_settings( $form_id ) {
+	/**
+	 * Return form settings for specific form id.
+	 *
+	 * @param string $form_id
+	 * @return array
+	 */
+	public static function get_form_settings( string $form_id ): array {
 		if ( ! $form_id ) {
 			return array();
 		}
 
 		$form = get_option( 'qf_form_' . $form_id );
 
-		$form = self::parse_block( $form );
+		if ( ! $form ) {
+			return array();
+		}
 
-		if ( isset( $form['fields'] ) ) {
-			foreach ( $form['fields'] as $field_id => $field ) {
-				$form['fields'][ $field_id ] = self::parse_block( $field );
+		$settings = self::parse_block( $form );
+
+		if ( isset( $settings['fields'] ) ) {
+			foreach ( $settings['fields'] as $field_id => $field ) {
+				$settings['fields'][ $field_id ] = self::parse_block( $field );
 			}
 		}
 
-		return $form;
+		return $settings;
 	}
 
-	public static function parse_block( $block ) {
+	/**
+	 * Parse blocks by adding default values for missing attributes.
+	 *
+	 * @param array $block
+	 * @return array
+	 */
+	public static function parse_block( array $block ): array {
 		$block_name = $block['blockName'];
 		$defaults   = self::get_block_default_attributes( $block_name );
 
@@ -86,8 +118,11 @@ class BlockHelper {
 
 	/**
 	 * Parse options for radio block from pipe format.
+	 *
+	 * @param string $options Options in pipe separated string format
+	 * @return array
 	 */
-	public static function parse_radio_options( $options ) {
+	public static function parse_radio_options( string $options ): array {
 		if ( empty( $options ) ) {
 			return array();
 		}
@@ -123,8 +158,11 @@ class BlockHelper {
 
 	/**
 	 * Return country details for a country from country_list.json
+	 *
+	 * @param array $country_code
+	 * @return array
 	 */
-	public static function get_country( $country_code ) {
+	public static function get_country( string $country_code ): array {
 		$country_file = QF_PATH . 'country_list.json';
 		$country_list = array();
 
@@ -135,10 +173,16 @@ class BlockHelper {
 			return $country_list[ $country_code ] ?? array();
 		}
 
-		return null;
+		return array();
 	}
 
-	public static function required( bool $required ) {
+	/**
+	 * Return the html for required icon.
+	 *
+	 * @param boolean $required
+	 * @return string
+	 */
+	public static function required( bool $required ): string {
 		return $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
 	}
 }

@@ -10,7 +10,8 @@ import {
 import { useEffect } from '@wordpress/element';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
-	const { id, placeholder, required, checkedByDefault } = attributes;
+	const { id, fieldLabel, placeholder, required, checkedByDefault } =
+		attributes;
 
 	useEffect( () => {
 		if ( ! id ) {
@@ -42,6 +43,17 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							return (
 								<>
 									<PanelBody title="General Settings">
+										<TextControl
+											__next40pxDefaultSize
+											label="Field Label"
+											value={ fieldLabel }
+											onChange={ ( value ) =>
+												setAttributes( {
+													fieldLabel: value,
+												} )
+											}
+										/>
+
 										<TextControl
 											__next40pxDefaultSize
 											label="Placeholder Text"

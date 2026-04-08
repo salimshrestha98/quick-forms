@@ -1,4 +1,4 @@
 <?php
 
-$block = new QuickForms\Blocks\Form( $attributes, $content, $block );
-$block->render();
+$blk = new QuickForms\Blocks\Form( $block, $content );
+$blk->render();

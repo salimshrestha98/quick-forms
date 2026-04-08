@@ -1,8 +1,8 @@
 {
 	"name": "quick-forms",
-	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"version": "1.0.0",
+	"description": "A native Gutenberg block-based form builder. Build forms directly inside the block editor — no shortcodes, no iframes.",
+	"author": "salimshrestha98",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {

@@ -23,6 +23,10 @@ return array(
 			'id' => array(
 				'type' => 'string'
 			),
+			'fieldLabel' => array(
+				'type' => 'string',
+				'default' => 'Checkbox'
+			),
 			'placeholder' => array(
 				'type' => 'string',
 				'default' => 'I agree to all terms and conditions.'

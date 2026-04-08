@@ -2,43 +2,96 @@
 
 namespace QuickForms\Blocks;
 
-use stdClass;
-
 defined( 'ABSPATH' ) || exit;
 
-abstract class Block {
-	public $block;
-	public $attributes = array();
-	public $content    = '';
-	public $defaults   = array();
+use QuickForms\Helpers\BlockHelper;
 
-	private function get_template_path() {
+/**
+ * Base Block Class.
+ */
+class Block {
+	/**
+	 * Block
+	 *
+	 * @var \WP_Block
+	 */
+	public $block;
+
+	/**
+	 * Block attributes
+	 *
+	 * @var array
+	 */
+	public $attributes = array();
+
+	/**
+	 * Block content
+	 *
+	 * @var string
+	 */
+	public $content = '';
+
+	/**
+	 * Constructor.
+	 *
+	 * @param \WP_Block $block
+	 * @param string $content
+	 */
+	public function __construct( \WP_Block $block, string $content ) {
+		$this->block      = $block;
+		$this->content    = $content;
+		$this->attributes = $this->block->attributes;
+	}
+
+	/**
+	 * Returns template path of current block.
+	 *
+	 * @return string
+	 */
+	public function get_template_path(): string {
 		$block_name = str_replace( 'quick-forms/', '', $this->block->name );
 
 		return QF_TEMPLATES_PATH . 'blocks/' . $block_name . '.php';
 	}
 
-	public function get_attributes() {
-		$context = array_combine(
+	/**
+	 * Return parsed block attributes.
+	 *
+	 * @return array
+	 */
+	public function get_attributes(): array {
+		$defaults = BlockHelper::get_block_default_attributes( $this->block->name );
+		$context  = array_combine(
 			array_map( fn( $key ) => str_replace( 'quick-form/', '', $key ), array_keys( $this->block->context ) ),
 			$this->block->context
 		);
 
-		return array_merge( wp_parse_args( $this->attributes, $this->defaults ), $context );
+		return array_merge( wp_parse_args( $this->attributes, $defaults ), $context );
 	}
 
-	private function set_defaults() {}
+	protected function generate_stylesheet() {}
 
-	public function generate_stylesheet() {}
-
-	public function render() {
+	/**
+	 * Render block template.
+	 *
+	 * @return void
+	 */
+	public function render(): void {
 		$attributes = $this->get_attributes();
 		$content    = $this->content;
 
 		extract( $attributes );
 
-		include $this->get_template_path();
+		$block_name    = str_replace( 'quick-forms/', '', $this->block->name );
+		$blockProps    = get_block_wrapper_attributes(
+			array(
+				'class'   => "qf-block qf-{$block_name}-block",
+				'data-id' => esc_attr( $id ),
+			)
+		);
+		$required_icon = BlockHelper::required( $required ?? false );
 
 		$this->generate_stylesheet();
+		include $this->get_template_path();
 	}
 }

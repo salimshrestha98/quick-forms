@@ -1,15 +1,4 @@
-<?php
-
-$blockProps = get_block_wrapper_attributes(
-	array(
-		'class'   => 'qf-block qf-checkbox-block',
-		'data-id' => esc_attr( $id ),
-	)
-);
-
-?>
-
-<div <?php echo $blockProps; ?>>
+<div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
 		<div class="qf-field qf-checkbox-field">
 			<input type="checkbox" name=
