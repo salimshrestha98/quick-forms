@@ -40,11 +40,13 @@ final class Submission_Handler {
 	 * Handle form submission.
 	 */
 	public function handle() {
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'qf_form_submit' ) ) {
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'qf_form_submit' ) ) {
 			die( 'Nonce error.' );
 		}
 
-		$this->form_id       = sanitize_text_field( $_POST['form-id'] ?? '' );
+		$this->form_id       = sanitize_text_field( wp_unslash( $_POST['form-id'] ?? '' ) );
 		$this->form_settings = BlockHelper::get_form_settings( $this->form_id );
 		$this->form_data     = array_intersect_key( $_POST, $this->form_settings['fields'] ?? array() );
 
@@ -91,7 +93,7 @@ final class Submission_Handler {
 			if ( ! empty( $_FILES[ $field_key ] ) && isset( $_FILES[ $field_key ]['name'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				require_once ABSPATH . 'wp-admin/includes/file.php';
 
-				$file = $_FILES[ $field_key ]; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$file = $_FILES[ $field_key ]; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				if ( UPLOAD_ERR_OK !== $file['error'] ) {
 					return new \WP_Error( 'upload_error', 'File upload failed.' );
 				}
@@ -143,10 +145,10 @@ final class Submission_Handler {
 	 * Validate reCaptcha if enabled.
 	 */
 	private function validate_recaptcha() {
-		$options = get_option( 'qf_settings' );
+		$options = get_option( 'quick_forms_settings' );
 		$secret  = $options['recaptcha_secret_key'] ?? '';
 
-		$response = $_POST['g-recaptcha-response'] ?? ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$response = sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$verify = wp_remote_post(
 			'https://www.google.com/recaptcha/api/siteverify',

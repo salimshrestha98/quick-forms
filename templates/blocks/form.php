@@ -1,5 +1,7 @@
 <?php
-$options = get_option( 'qf_settings' );
+defined( 'ABSPATH' ) || exit;
+
+$options = get_option( 'quick_forms_settings' );
 
 $form_attributes  = '';
 $form_attributes .= $redirectionUrl ? sprintf( ' data-redirection-url="%s"', esc_attr( $redirectionUrl ) ) : '';

@@ -1,3 +1,7 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
+
 <div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
 		<div class="qf-field qf-submit-field">

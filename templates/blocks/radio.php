@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 ?>
 

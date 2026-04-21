@@ -58,7 +58,7 @@ class Submissions_Table extends WP_List_Table {
 	private function get_available_forms() {
 		global $wpdb;
 
-		$result = $wpdb->get_col( "SELECT form_id FROM {$this->table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$result = $wpdb->get_col( "SELECT form_id FROM {$this->table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		$this->form_ids = array_unique( $result );
 	}
@@ -70,11 +70,9 @@ class Submissions_Table extends WP_List_Table {
 	 * @return string $form_id
 	 */
 	private function get_form_filter() {
-		if ( isset( $_GET['form_filter'] ) && $_GET['form_filter'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			return sanitize_text_field( $_GET['form_filter'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		}
+		$form_id = sanitize_text_field( wp_unslash( $_GET['form_filter'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		return $this->form_ids[0] ?? '';
+		return ! empty( $form_id ) ? $form_id : $this->form_ids[0] ?? '';
 	}
 
 	/**
@@ -184,7 +182,7 @@ class Submissions_Table extends WP_List_Table {
 		check_admin_referer( 'bulk-submissions' );
 
 		if ( ! current_user_can( 'delete_posts' ) ) {
-			wp_die( esc_html__( 'You do not have permission to do this.' ) );
+			wp_die( esc_html__( 'You do not have permission to do this.', 'quick-forms' ) );
 		}
 
 		if ( $this->current_action() === 'delete' ) {
@@ -256,7 +254,7 @@ class Submissions_Table extends WP_List_Table {
 		$per_page     = 10;
 		$current_page = $this->get_pagenum();
 
-		$search      = isset( $_REQUEST['s'] ) ? sanitize_text_field( $_REQUEST['s'] ) : '';
+		$search      = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
 		$form_filter = $this->get_form_filter();
 
 		$where = 'WHERE 1=1';
@@ -278,16 +276,16 @@ class Submissions_Table extends WP_List_Table {
 			);
 		}
 
-		$order_by = ( isset( $_GET['orderby'] ) && in_array( $_GET['orderby'], array( 'id', 'submitted_at' ), true ) ) ? sanitize_text_field( $_GET['orderby'] ) : 'id';
-		$order    = ( isset( $_GET['order'] ) && in_array( $_GET['order'], array( 'asc', 'desc' ), true ) ) ? strtoupper( sanitize_text_field( $_GET['order'] ) ) : 'DESC';
+		$order_by = ( isset( $_GET['orderby'] ) && in_array( $_GET['orderby'], array( 'id', 'submitted_at' ), true ) ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : 'id';
+		$order    = ( isset( $_GET['order'] ) && in_array( $_GET['order'], array( 'asc', 'desc' ), true ) ) ? strtoupper( sanitize_text_field( wp_unslash( $_GET['order'] ) ) ) : 'DESC';
 
 		$offset = ( $current_page - 1 ) * $per_page;
 
-		$total_items = $wpdb->get_var(
+		$total_items = $wpdb->get_var( // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter
 			"SELECT COUNT(*) FROM {$this->table} $where"
 		);
 
-		$items = $wpdb->get_results(
+		$items = $wpdb->get_results( // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter
 			"SELECT * FROM {$this->table}
 			 $where
 			 ORDER BY $order_by $order
@@ -327,7 +325,7 @@ class Submissions_Table extends WP_List_Table {
 
 		foreach ( $this->items as $key => $form ) {
 			$data                = maybe_unserialize( $form['data'] );
-			$this->items[ $key ] = array_merge( $form, $data );
+			$this->items[ $key ] = array_replace( $form, $data ); // array_merge() is not used because it reindexes array keys
 		}
 	}
 }

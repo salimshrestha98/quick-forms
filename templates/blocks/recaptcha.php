@@ -1,5 +1,7 @@
 <?php
-$options  = get_option( 'qf_settings' );
+defined( 'ABSPATH' ) || exit;
+
+$options  = get_option( 'quick_forms_settings' );
 $site_key = $options['recaptcha_site_key'] ?? '';
 ?>
 

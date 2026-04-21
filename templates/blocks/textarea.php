@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 $textarea_attributes  = '';
 $textarea_attributes .= sprintf( ' id="%s"', esc_attr( $id ) );
 $textarea_attributes .= sprintf( ' name="%s"', esc_attr( $id ) );

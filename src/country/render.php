@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
-$blk = new QuickForms\Blocks\Block( $block, $content );
-$blk->render();
+$quick_forms_block = new QuickForms\Blocks\Block( $block, $content );
+$quick_forms_block->render();

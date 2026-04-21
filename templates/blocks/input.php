@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 $inputType     = ! empty( $inputType ) ? $inputType : 'text';
 $isHiddenField = 'hidden' === $inputType;
 

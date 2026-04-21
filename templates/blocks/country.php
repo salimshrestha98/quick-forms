@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 $country_file = QF_PATH . 'country_list.json';
 $country_list = array();
 

@@ -15,7 +15,7 @@ class BlockHelper {
 	 * @return void
 	 */
 	public static function generate_css( array $styles_map, string $wrapper_id = '' ): void {
-		global $qf_styles;
+		global $quick_forms_styles;
 
 		$css = '';
 
@@ -32,7 +32,7 @@ class BlockHelper {
 			$css .= sprintf( '%s{%s}', $wrapper_id . $element, $temp );
 		}
 
-		$qf_styles .= $css;
+		$quick_forms_styles .= $css;
 	}
 
 	/**

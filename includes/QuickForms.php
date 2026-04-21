@@ -53,9 +53,9 @@ class QuickForms {
 	 * Enqueue form styles in frontend in footer.
 	 */
 	public function add_css() {
-		global $qf_styles;
+		global $quick_forms_styles;
 
-		$css = wp_strip_all_tags( $qf_styles );
+		$css = wp_strip_all_tags( $quick_forms_styles );
 		$css = str_replace( '<', '', $css );
 
 		echo "<style id='quick-forms-styles'>" . $css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

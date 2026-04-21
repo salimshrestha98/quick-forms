@@ -1,3 +1,6 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
 <div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
 		<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>

@@ -78,19 +78,19 @@ final class Admin {
 	}
 
 	public function render_settings_page() {
-		$options = get_option( 'qf_settings' );
+		$options = get_option( 'quick_forms_settings' );
 		?>
 		<div class="wrap">
 			<h1>Quick Forms Settings</h1>
 
 			<form method="post" action="options.php">
-				<?php settings_fields( 'qf_settings_group' ); ?>
+				<?php settings_fields( 'quick_forms_settings_group' ); ?>
 
 				<table class="form-table">
 					<tr>
 						<th><?php echo esc_html__( 'reCAPTCHA Site Key', 'quick-forms' ); ?></th>
 						<td>
-							<input type="text" name="qf_settings[recaptcha_site_key]" 
+							<input type="text" name="quick_forms_settings[recaptcha_site_key]" 
 								value="<?php echo esc_attr( $options['recaptcha_site_key'] ?? '' ); ?>" />
 						</td>
 					</tr>
@@ -98,7 +98,7 @@ final class Admin {
 					<tr>
 						<th><?php echo esc_html__( 'reCAPTCHA Secret Key', 'quick-forms' ); ?> </th>
 						<td>
-							<input type="text" name="qf_settings[recaptcha_secret_key]" 
+							<input type="text" name="quick_forms_settings[recaptcha_secret_key]" 
 								value="<?php echo esc_attr( $options['recaptcha_secret_key'] ?? '' ); ?>" />
 						</td>
 					</tr>
@@ -116,7 +116,15 @@ final class Admin {
 	 * @return void
 	 */
 	public function register_setting() {
-		register_setting( 'qf_settings_group', 'qf_settings' );
+		register_setting(
+			'quick_forms_settings_group',
+			'quick_forms_settings',
+			array(
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+				'default'           => '',
+			)
+		);
 	}
 
 	/**
