@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name:       Quick Forms
- * Plugin URI:        https://salim.com.np/quick-forms
+ * Plugin URI:        https://labs.salim.com.np/quick-forms
  * Description:       A native Gutenberg block-based form builder. Build forms directly inside the block editor — no shortcodes, no iframes.
  * Version:           1.0.0
- * Requires at least: 6.0
+ * Requires at least: 6.8
  * Requires PHP:      7.4
- * Author:            salimshrestha
- * Author URI:        https://profiles.wordpress.org/salimshrestha
+ * Author:            salimlabs
+ * Author URI:        https://profiles.wordpress.org/salimlabs
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       quick-forms
@@ -34,6 +34,6 @@ defined( 'QF_BUILD_URL' ) || define( 'QF_BUILD_URL', QF_URL . 'build/' );
 // Register activation tasks.
 register_activation_hook( __FILE__, array( QuickForms\Activator::class, 'activate' ) );
 
-if ( ! isset( $_GLOBALS['quick-forms'] ) ) {
-	$_GLOBALS['quick-forms'] = new QuickForms\QuickForms();
+if ( ! isset( $GLOBALS['quick-forms-instance'] ) ) {
+	$GLOBALS['quick-forms-instance'] = new QuickForms\QuickForms();
 }

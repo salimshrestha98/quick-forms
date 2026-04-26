@@ -133,25 +133,25 @@ class Submissions_Table extends WP_List_Table {
 		if ( 'quick-forms/country' === $field_name ) {
 			$country = BlockHelper::get_country( $value );
 
-			return $country['name'] ?? $value;
+			return esc_html( $country['name'] ?? $value );
 		} elseif ( 'quick-forms/file-upload' === $field_name && is_array( $value ) ) {
 			return sprintf(
 				'<a href=%s target="_blank">%s</a>',
-				$value['url'],
-				$value['name']
+				esc_url( $value['url'] ),
+				esc_html( $value['name'] )
 			);
 		} elseif ( 'quick-forms/radio' === $field_name || 'quick-forms/select' === $field_name ) {
 			$options = BlockHelper::parse_radio_options( $field['attrs']['options'] ?? '' );
-			return $options[ $value ] ?? $value;
+			return esc_html( $options[ $value ] ?? $value );
 		} elseif ( 'quick-forms/textarea' === $field_name && strlen( $value ) > 60 ) {
-			return substr( $value, 0, 60 ) . '...';
+			return esc_html( substr( $value, 0, 60 ) ) . '...';
 		}
 
 		if ( is_iterable( $value ) ) {
 			return __( '[Non string value]', 'quick-forms' );
 		}
 
-		return $value;
+		return esc_html( $value );
 	}
 
 	/**

@@ -45,8 +45,6 @@ final class Submission {
 				'%s',
 				'%s',
 				'%s',
-				'%s',
-				'%s',
 			)
 		);
 	}

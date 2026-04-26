@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || exit;
 			echo esc_attr( $id );
 			?>
 			<?php echo $required ? 'required' : ''; ?>
+			<?php echo $checkedByDefault ? 'checked' : ''; ?>
 			/>
 			<span><?php echo esc_html( $placeholder ); ?></span>
 		</div>

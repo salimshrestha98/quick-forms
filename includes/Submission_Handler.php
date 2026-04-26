@@ -48,7 +48,8 @@ final class Submission_Handler {
 
 		$this->form_id       = sanitize_text_field( wp_unslash( $_POST['form-id'] ?? '' ) );
 		$this->form_settings = BlockHelper::get_form_settings( $this->form_id );
-		$this->form_data     = array_intersect_key( $_POST, $this->form_settings['fields'] ?? array() );
+		$form_data           = array_intersect_key( $_POST, $this->form_settings['fields'] ?? array() );
+		$this->form_data     = array_map( 'sanitize_text_field', $form_data );
 
 		// Honeypot validation.
 		if ( $this->form_settings['attrs']['honeypot'] ?? false ) {
@@ -68,7 +69,13 @@ final class Submission_Handler {
 			}
 		}
 
-		$this->handle_uploads();
+		$upload_status = $this->handle_uploads();
+
+		if ( is_wp_error( $upload_status ) ) {
+			wp_send_json_error( 'Upload error: ' . $upload_status->get_error_message() );
+			exit;
+		}
+
 		$this->save();
 
 		wp_send_json_success();
@@ -162,7 +169,7 @@ final class Submission_Handler {
 
 		$body = json_decode( wp_remote_retrieve_body( $verify ), true );
 
-		return empty( $body['success'] ) ? true : false;
+		return empty( $body['success'] ) ? false : true;
 	}
 
 	/**
