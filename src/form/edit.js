@@ -30,14 +30,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		showLabel,
 		labelPosition,
 		labelWidth,
-		hideFormAfterSubmit,
-		redirectionUrl,
-		honeypot,
 		messages,
-		enableMail,
-		mailTo,
-		mailSubject,
-		mailBody,
 	} = attributes;
 	const { allowedBlocks } = [ 'create-block/text' ];
 
@@ -51,8 +44,6 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		[ 'quick-forms/submit', { lock: { move: false, remove: true } } ],
 	];
 
-	const [ isOpen, setOpen ] = useState( false );
-
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
@@ -64,7 +55,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		className: `qf-block qf-form-block`,
 	} );
 
-	const [ activeTab, setActiveTab ] = useState( 'styles' );
+	const [ activeTab, setActiveTab ] = useState( 'settings' );
 
 	return (
 		<>
@@ -98,12 +89,22 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							return (
 								<>
 									<PanelBody
-										title="General Settings"
+										title={ __(
+											'General Settings',
+											'quick-forms'
+										) }
 										initialOpen={ false }
 									>
 										<TextControl
 											__next40pxDefaultSize
-											label="Form Name"
+											label={ __(
+												'Form Name',
+												'quick-forms'
+											) }
+											placeholder={ __(
+												'Form Name',
+												'quick-forms'
+											) }
 											value={ formName }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -113,7 +114,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 									</PanelBody>
 									<PanelBody
-										title="Field Settings"
+										title={ __(
+											'Field Settings',
+											'quick-forms'
+										) }
 										initialOpen={ false }
 									>
 										<ToggleControl

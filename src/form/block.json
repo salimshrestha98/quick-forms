@@ -64,17 +64,9 @@
 				"error": "The form submission has failed. Please check the errors."
 			}
 		},
-		"mailTo": {
-			"type": "string",
-			"default": ""
-		},
-		"mailSubject": {
-			"type": "string",
-			"default": "Form Submission"
-		},
-		"mailBody": {
-			"type": "string",
-			"default": "A new form has been submitted on the website."
+		"emails": {
+			"type": "array",
+			"default": []
 		},
 		"margin": {
 			"type": "object",

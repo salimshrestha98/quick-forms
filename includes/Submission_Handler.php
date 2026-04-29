@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use QuickForms\Database\Submission;
 use QuickForms\Helpers\BlockHelper;
+use QuickForms\Helpers\EmailHelper;
 
 /**
  * Submission Handler class.
@@ -197,7 +198,7 @@ final class Submission_Handler {
 	 * @return void
 	 */
 	public function send_email() {
-		if ( $this->form_settings['attrs']['enableMail'] ?? false ) {
+		if ( ! empty( $this->form_settings['attrs']['emails'] ) ) {
 			add_filter(
 				'wp_mail_content_type',
 				function () {
@@ -205,12 +206,15 @@ final class Submission_Handler {
 				}
 			);
 
-			$to      = $this->form_settings['attrs']['mailTo'] ?? '';
-			$subject = $this->form_settings['attrs']['mailSubject'] ?? '';
-			$body    = $this->form_settings['attrs']['mailBody'] ?? '';
+			foreach ( $this->form_settings['attrs']['emails'] as $email ) {
+				$to      = EmailHelper::maybe_parse_smart_tags( $email['mailTo'] ?? '', $this->form_data );
+				$subject = EmailHelper::maybe_parse_smart_tags( $email['mailSubject'] ?? '', $this->form_data );
+				$body    = EmailHelper::maybe_parse_smart_tags( $email['mailBody'] ?? '', $this->form_data );
 
-			wp_mail( $to, $subject, $body );
-
+				if ( EmailHelper::is_valid_email( $to ) && ! empty( $subject ) && ! empty( $body ) ) {
+					wp_mail( $to, $subject, $body );
+				}
+			}
 			remove_filter( 'wp_mail_content_type', 'set_html_mail_content_type' );
 		}
 	}

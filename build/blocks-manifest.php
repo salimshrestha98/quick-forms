@@ -155,7 +155,8 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'multiple' => false
 		),
 		'attributes' => array(
 			'id' => array(
@@ -207,6 +208,12 @@ return array(
 				'default' => array(
 					'success' => 'The form has been submitted successfully!',
 					'error' => 'The form submission has failed. Please check the errors.'
+				)
+			),
+			'emails' => array(
+				'type' => 'array',
+				'default' => array(
+					
 				)
 			),
 			'margin' => array(

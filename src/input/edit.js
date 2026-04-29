@@ -13,6 +13,7 @@ import {
 	SelectControl,
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
+import DisabledInputControl from '../components/DisabledInputControl';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -93,6 +94,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							return (
 								<>
 									<PanelBody title="General Settings">
+										<DisabledInputControl
+											label="Field ID"
+											value={ id }
+										/>
+
 										<SelectControl
 											label="Input Type"
 											value={ inputType }

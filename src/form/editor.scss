@@ -31,6 +31,7 @@
 }
 
 .qf-form-advanced-settings-modal {
+	max-height: 80vh;
 	width: 90vw;
 	max-width: 1200px;
 
@@ -42,7 +43,7 @@
 
 	.qf-fasm {
 		display: flex;
-		height: 75vh;
+		height: 80vh;
 		background: #fff;
 
 		&__sidebar {
@@ -83,7 +84,7 @@
 			overflow-y: auto;
 
 			.components-base-control {
-				margin-bottom: 30px;
+				margin-bottom: 20px;
 			}
 
 			.block-editor-rich-text__editable {
@@ -107,5 +108,84 @@
 				}
 			}
 		}
+
+		&__email-wrapper {
+			margin-top: 30px;
+		}
+
+		.qf-email-list {
+			margin-top: 16px;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+
+			.qf-email-item {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				padding: 12px 14px;
+				border: 1px solid #e0e0e0;
+				border-radius: 8px;
+				background: #fff;
+
+				transition: all 0.15s ease-in-out;
+
+				&:hover {
+					border-color: #c3c4c7;
+					box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+					transform: translateY(-1px);
+				}
+
+				.qf-email-info {
+					.qf-email-label {
+						font-weight: 600;
+						font-size: 13px;
+						color: #1e1e1e;
+					}
+				}
+
+				.qf-email-actions {
+					display: flex;
+					gap: 8px;
+				}
+			}
+		}
+	}
+}
+
+.qf-copy-id-field {
+	.qf-copy-id-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		padding: 6px 8px;
+		border: 1px solid #dcdcde;
+		border-radius: 4px;
+		background: #f6f7f7;
+	}
+
+	.qf-copy-id-value {
+		flex: 1;
+		font-family: monospace;
+		font-size: 12px;
+		color: #1e1e1e;
+		word-break: break-all;
+		user-select: all;
+	}
+
+	.qf-copy-id-button {
+		height: 28px;
+		min-width: 28px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.qf-copy-feedback {
+		font-size: 11px;
+		color: #1a7f37;
+		margin-left: 6px;
 	}
 }

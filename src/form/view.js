@@ -72,7 +72,7 @@ import domReady from '@wordpress/dom-ready';
 			}
 		},
 
-		handleError( form, response ) {
+		handleError( form ) {
 			form.parentElement
 				.querySelector( '.qf-message-error' )
 				.classList.remove( 'hidden' );
