@@ -15,8 +15,9 @@ import {
 	__experimentalUnitControl as UnitControl,
 	BoxControl,
 } from '@wordpress/components';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import './editor.scss';
+import AdvancedSettingsModal from './components/AdvancedSettingsModal';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -33,6 +34,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		redirectionUrl,
 		honeypot,
 		messages,
+		enableMail,
+		mailTo,
+		mailSubject,
+		mailBody,
 	} = attributes;
 	const { allowedBlocks } = [ 'create-block/text' ];
 
@@ -46,6 +51,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		[ 'quick-forms/submit', { lock: { move: false, remove: true } } ],
 	];
 
+	const [ isOpen, setOpen ] = useState( false );
+
 	useEffect( () => {
 		if ( ! id ) {
 			setAttributes( { id: clientId.slice( 0, 8 ) } );
@@ -57,12 +64,15 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		className: `qf-block qf-form-block`,
 	} );
 
+	const [ activeTab, setActiveTab ] = useState( 'styles' );
+
 	return (
 		<>
 			<InspectorControls>
 				<TabPanel
 					className="qf-tab-panel"
 					activeClass="active-tab"
+					key={ activeTab }
 					tabs={ [
 						{
 							name: 'settings',
@@ -80,6 +90,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							className: 'tab-advanced',
 						},
 					] }
+					onSelect={ ( tabName ) => setActiveTab( tabName ) }
+					initialTabName={ activeTab }
 				>
 					{ ( tab ) => {
 						if ( tab.name === 'settings' ) {
@@ -225,84 +237,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 						if ( tab.name === 'advanced' ) {
 							return (
-								<>
-									<PanelBody
-										title="Form Settings"
-										initialOpen={ false }
-									>
-										<ToggleControl
-											help="Hide the form after the form is submitted successfully."
-											label="Hide Form after Submission"
-											checked={ hideFormAfterSubmit }
-											onChange={ () => {
-												setAttributes( {
-													hideFormAfterSubmit:
-														! hideFormAfterSubmit,
-												} );
-											} }
-										/>
-										<TextControl
-											__next40pxDefaultSize
-											help="Redirect the user to certain page after the form is submitted successfully."
-											label="Redirection URL"
-											value={ redirectionUrl }
-											placeholder="https://example.com/"
-											onChange={ ( value ) =>
-												setAttributes( {
-													redirectionUrl: value,
-												} )
-											}
-										/>
-									</PanelBody>
-									<PanelBody
-										title="Spam Settings"
-										initialOpen={ false }
-									>
-										<ToggleControl
-											label="Enable Honeypot"
-											checked={ honeypot }
-											help="Enable Honeypot for this form."
-											onChange={ () => {
-												setAttributes( {
-													honeypot: ! honeypot,
-												} );
-											} }
-										/>
-									</PanelBody>
-									<PanelBody
-										title="Messages"
-										initialOpen={ false }
-									>
-										<TextControl
-											__next40pxDefaultSize
-											help="Message to show when form submits successfully."
-											label="Success Message"
-											value={ messages.success }
-											onChange={ ( value ) =>
-												setAttributes( {
-													messages: {
-														...messages,
-														success: value,
-													},
-												} )
-											}
-										/>
-										<TextControl
-											__next40pxDefaultSize
-											label="Error Message"
-											help="Message to show when form submission fails."
-											value={ messages.error }
-											onChange={ ( value ) =>
-												setAttributes( {
-													messages: {
-														...messages,
-														error: value,
-													},
-												} )
-											}
-										/>
-									</PanelBody>
-								</>
+								<AdvancedSettingsModal
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									setActiveTab={ setActiveTab }
+								/>
 							);
 						}
 					} }

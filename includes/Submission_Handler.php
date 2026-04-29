@@ -34,6 +34,10 @@ final class Submission_Handler {
 	public function __construct() {
 		add_action( 'wp_ajax_qf_form_submit', array( $this, 'handle' ) );
 		add_action( 'wp_ajax_nopriv_qf_form_submit', array( $this, 'handle' ) );
+		add_action( 'quick_forms_before_save_form', array( $this, 'handle_honeypot' ) );
+		add_action( 'quick_forms_before_save_form', array( $this, 'handle_recaptcha' ) );
+		add_action( 'quick_forms_before_save_form', array( $this, 'handle_uploads' ) );
+		add_action( 'quick_forms_before_save_form', array( $this, 'send_email' ) );
 	}
 
 	/**
@@ -51,16 +55,34 @@ final class Submission_Handler {
 		$form_data           = array_intersect_key( $_POST, $this->form_settings['fields'] ?? array() );
 		$this->form_data     = array_map( 'sanitize_text_field', $form_data );
 
-		// Honeypot validation.
+		do_action( 'quick_forms_before_save_form' );
+
+		$this->save();
+
+		wp_send_json_success();
+	}
+
+	public function handle_honeypot() {
 		if ( $this->form_settings['attrs']['honeypot'] ?? false ) {
 			if ( isset( $_POST['qfhpfld'] ) && ! empty( $_POST['qfhpfld'] ) ) {
 				wp_send_json_error( 'Some error occured.' );
 				exit;
 			}
 		}
+	}
 
-		// Recaptcha validation.
-		if ( $this->form_settings['attrs']['recaptcha'] ?? false ) {
+	/**
+	 * Handle reCaptcha.
+	 */
+	public function handle_recaptcha() {
+		$recaptcha_field = array_find(
+			$this->form_settings['fields'],
+			function ( $field ) {
+				return 'quick-forms/recaptcha' === $field['blockName'];
+			}
+		);
+
+		if ( ! empty( $recaptcha_field ) ) {
 			$recaptcha_valid = $this->validate_recaptcha();
 
 			if ( ! $recaptcha_valid ) {
@@ -68,23 +90,12 @@ final class Submission_Handler {
 				exit;
 			}
 		}
-
-		$upload_status = $this->handle_uploads();
-
-		if ( is_wp_error( $upload_status ) ) {
-			wp_send_json_error( 'Upload error: ' . $upload_status->get_error_message() );
-			exit;
-		}
-
-		$this->save();
-
-		wp_send_json_success();
 	}
 
 	/**
 	 * Handle file uploads.
 	 */
-	private function handle_uploads() {
+	public function handle_uploads() {
 		$form_settings      = $this->form_settings;
 		$file_upload_fields = array();
 
@@ -102,13 +113,13 @@ final class Submission_Handler {
 
 				$file = $_FILES[ $field_key ]; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				if ( UPLOAD_ERR_OK !== $file['error'] ) {
-					return new \WP_Error( 'upload_error', 'File upload failed.' );
+					wp_send_json_error( 'File upload failed.' );
 				}
 
 				$max_size = 2 * 1024 * 1024;
 
 				if ( $file['size'] > $max_size ) {
-					return new \WP_Error( 'file_size_error', 'File exceeds maximum size of 2MB.' );
+					wp_send_json_error( 'File exceeds maximum size of 2MB.' );
 				}
 
 				$allowed_mimes = array(
@@ -120,7 +131,7 @@ final class Submission_Handler {
 				$filetype = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'], $allowed_mimes );
 
 				if ( ! $filetype['ext'] || ! $filetype['type'] ) {
-					return new \WP_Error( 'file_type_error', 'Invalid file type.' );
+					wp_send_json_error( 'Invalid file type.' );
 				}
 
 				$file['name'] = sanitize_file_name( $file['name'] );
@@ -133,7 +144,7 @@ final class Submission_Handler {
 				$uploaded = wp_handle_upload( $file, $upload_overrides );
 
 				if ( isset( $uploaded['error'] ) ) {
-					return new \WP_Error( 'upload_error', $uploaded['error'] );
+					wp_send_json_error( $uploaded['error'] );
 				}
 
 				$file_url  = $uploaded['url'];
@@ -178,5 +189,29 @@ final class Submission_Handler {
 	private function save() {
 		$submission_db = new Submission();
 		$submission_db->save( $this->form_id, $this->form_data );
+	}
+
+	/**
+	 * Send email after success if set up in settings.
+	 *
+	 * @return void
+	 */
+	public function send_email() {
+		if ( $this->form_settings['attrs']['enableMail'] ?? false ) {
+			add_filter(
+				'wp_mail_content_type',
+				function () {
+					return 'text/html';
+				}
+			);
+
+			$to      = $this->form_settings['attrs']['mailTo'] ?? '';
+			$subject = $this->form_settings['attrs']['mailSubject'] ?? '';
+			$body    = $this->form_settings['attrs']['mailBody'] ?? '';
+
+			wp_mail( $to, $subject, $body );
+
+			remove_filter( 'wp_mail_content_type', 'set_html_mail_content_type' );
+		}
 	}
 }

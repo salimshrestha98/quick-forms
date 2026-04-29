@@ -9,7 +9,8 @@
 	"description": "Quick Form wrapper block",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"multiple": false
 	},
 	"attributes": {
 		"id": {
@@ -62,6 +63,18 @@
 				"success": "The form has been submitted successfully!",
 				"error": "The form submission has failed. Please check the errors."
 			}
+		},
+		"mailTo": {
+			"type": "string",
+			"default": ""
+		},
+		"mailSubject": {
+			"type": "string",
+			"default": "Form Submission"
+		},
+		"mailBody": {
+			"type": "string",
+			"default": "A new form has been submitted on the website."
 		},
 		"margin": {
 			"type": "object",
