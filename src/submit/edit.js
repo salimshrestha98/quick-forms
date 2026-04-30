@@ -1,20 +1,15 @@
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	RichText,
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
-	TabPanel,
-	Dashicon,
 	SelectControl,
 	BoxControl,
 	ColorPicker,
 	__experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
-import { useEffect } from '@wordpress/element';
+import { useBlockId } from '../hooks/useBlockId';
+import BlockInspectorTabs from '../components/BlockInspectorTabs';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -27,11 +22,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		padding,
 	} = attributes;
 
-	useEffect( () => {
-		if ( ! id ) {
-			setAttributes( { id: clientId.slice( 0, 8 ) } );
-		}
-	}, [] );
+	useBlockId( id, clientId, setAttributes );
 
 	const buttonStyles = {
 		padding: `${ padding.top } ${ padding.right } ${ padding.bottom } ${ padding.left }`,
@@ -51,147 +42,99 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 	return (
 		<>
-			<InspectorControls>
-				<TabPanel
-					className="qf-tab-panel"
-					activeClass="active-tab"
-					tabs={ [
-						{
-							name: 'settings',
-							title: <Dashicon icon="admin-generic" />,
-							className: 'tab-settings',
-						},
-						{
-							name: 'styles',
-							title: <Dashicon icon="admin-customizer" />,
-							className: 'tab-styles',
-						},
-					] }
-				>
-					{ ( tab ) => {
-						if ( tab.name === 'settings' ) {
-							return (
-								<>
-									<PanelBody
-										title={ __(
-											'Field Settings',
-											'quick-forms'
-										) }
-									>
-										<TextControl
-											__next40pxDefaultSize
-											label={ __(
-												'Button Text',
-												'quick-forms'
-											) }
-											value={ buttonText }
-											onChange={ ( value ) =>
-												setAttributes( {
-													buttonText: value,
-												} )
-											}
-										/>
+			<BlockInspectorTabs
+				settingsTab={
+					<>
+						<PanelBody
+							title={ __( 'Field Settings', 'quick-forms' ) }
+						>
+							<TextControl
+								__next40pxDefaultSize
+								label={ __( 'Button Text', 'quick-forms' ) }
+								value={ buttonText }
+								onChange={ ( value ) =>
+									setAttributes( {
+										buttonText: value,
+									} )
+								}
+							/>
 
-										<SelectControl
-											label={ __(
-												'Button Width',
-												'quick-forms'
-											) }
-											value={ buttonWidthType }
-											options={ [
-												{
-													label: __(
-														'Auto',
-														'quick-forms'
-													),
-													value: 'auto',
-												},
-												{
-													label: __(
-														'Custom',
-														'quick-forms'
-													),
-													value: 'custom',
-												},
-											] }
-											onChange={ ( value ) =>
-												setAttributes( {
-													buttonWidthType: value,
-												} )
-											}
-											__next40pxDefaultSize
-										/>
+							<SelectControl
+								label={ __( 'Button Width', 'quick-forms' ) }
+								value={ buttonWidthType }
+								options={ [
+									{
+										label: __( 'Auto', 'quick-forms' ),
+										value: 'auto',
+									},
+									{
+										label: __( 'Custom', 'quick-forms' ),
+										value: 'custom',
+									},
+								] }
+								onChange={ ( value ) =>
+									setAttributes( {
+										buttonWidthType: value,
+									} )
+								}
+								__next40pxDefaultSize
+							/>
 
-										{ 'custom' === buttonWidthType && (
-											<UnitControl
-												__next40pxDefaultSize
-												onChange={ ( value ) =>
-													setAttributes( {
-														buttonWidth: value,
-													} )
-												}
-												value={ buttonWidth }
-											/>
-										) }
-									</PanelBody>
-								</>
-							);
-						}
-
-						if ( tab.name === 'styles' ) {
-							return (
-								<>
-									<PanelBody
-										title={ __(
-											'Color Settings',
-											'quick-forms'
-										) }
-										initialOpen={ false }
-									>
-										<ColorPicker
-											color={ textColor }
-											onChange={ ( value ) =>
-												setAttributes( {
-													textColor: value,
-												} )
-											}
-										/>
-										<ColorPicker
-											color={ bgColor }
-											onChange={ ( value ) =>
-												setAttributes( {
-													bgColor: value,
-												} )
-											}
-										/>
-									</PanelBody>
-									<PanelBody
-										title={ __(
-											'Spacing Settings',
-											'quick-forms'
-										) }
-										initialOpen={ false }
-									>
-										<BoxControl
-											__next40pxDefaultSize
-											label={ __(
-												'Padding',
-												'quick-forms'
-											) }
-											values={ padding }
-											onChange={ ( val ) =>
-												setAttributes( {
-													padding: val,
-												} )
-											}
-										/>
-									</PanelBody>
-								</>
-							);
-						}
-					} }
-				</TabPanel>
-			</InspectorControls>
+							{ 'custom' === buttonWidthType && (
+								<UnitControl
+									__next40pxDefaultSize
+									onChange={ ( value ) =>
+										setAttributes( {
+											buttonWidth: value,
+										} )
+									}
+									value={ buttonWidth }
+								/>
+							) }
+						</PanelBody>
+					</>
+				}
+				stylesTab={
+					<>
+						<PanelBody
+							title={ __( 'Color Settings', 'quick-forms' ) }
+							initialOpen={ false }
+						>
+							<ColorPicker
+								color={ textColor }
+								onChange={ ( value ) =>
+									setAttributes( {
+										textColor: value,
+									} )
+								}
+							/>
+							<ColorPicker
+								color={ bgColor }
+								onChange={ ( value ) =>
+									setAttributes( {
+										bgColor: value,
+									} )
+								}
+							/>
+						</PanelBody>
+						<PanelBody
+							title={ __( 'Spacing Settings', 'quick-forms' ) }
+							initialOpen={ false }
+						>
+							<BoxControl
+								__next40pxDefaultSize
+								label={ __( 'Padding', 'quick-forms' ) }
+								values={ padding }
+								onChange={ ( val ) =>
+									setAttributes( {
+										padding: val,
+									} )
+								}
+							/>
+						</PanelBody>
+					</>
+				}
+			/>
 
 			<div
 				{ ...useBlockProps( {

@@ -1,20 +1,15 @@
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	RichText,
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToggleControl,
 	TextControl,
-	TabPanel,
-	Dashicon,
 	SelectControl,
 } from '@wordpress/components';
-import { useEffect } from '@wordpress/element';
 import DisabledInputControl from '../components/DisabledInputControl';
 import { INPUT_TYPE_HELP } from './constants';
+import { useBlockId } from '../hooks/useBlockId';
+import BlockInspectorTabs from '../components/BlockInspectorTabs';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -28,11 +23,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		maximum,
 	} = attributes;
 
-	useEffect( () => {
-		if ( ! id ) {
-			setAttributes( { id: clientId.slice( 0, 8 ) } );
-		}
-	}, [] );
+	useBlockId( id, clientId, setAttributes );
 
 	function isHidden() {
 		return 'hidden' === inputType;
@@ -46,261 +37,174 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 	return (
 		<>
-			<InspectorControls>
-				<TabPanel
-					className="qf-tab-panel"
-					activeClass="active-tab"
-					tabs={ [
-						{
-							name: 'settings',
-							title: <Dashicon icon="admin-generic" />,
-							className: 'tab-settings',
-						},
-						{
-							name: 'styles',
-							title: <Dashicon icon="admin-customizer" />,
-							className: 'tab-styles',
-						},
-					] }
-				>
-					{ ( tab ) => {
-						if ( tab.name === 'settings' ) {
-							return (
-								<>
-									<PanelBody
-										title={ __(
-											'General Settings',
+			<BlockInspectorTabs
+				settingsTab={
+					<>
+						<PanelBody
+							title={ __( 'General Settings', 'quick-forms' ) }
+						>
+							<DisabledInputControl
+								label={ __( 'Field ID', 'quick-forms' ) }
+								value={ id }
+							/>
+
+							<SelectControl
+								label={ __( 'Input Type', 'quick-forms' ) }
+								value={ inputType }
+								options={ [
+									{
+										label: __( 'Text', 'quick-forms' ),
+										value: 'text',
+									},
+									{
+										label: __( 'Email', 'quick-forms' ),
+										value: 'email',
+									},
+									{
+										label: __( 'Number', 'quick-forms' ),
+										value: 'number',
+									},
+									{
+										label: __( 'URL', 'quick-forms' ),
+										value: 'url',
+									},
+									{
+										label: __(
+											'Phone Number',
 											'quick-forms'
-										) }
-									>
-										<DisabledInputControl
-											label={ __(
-												'Field ID',
-												'quick-forms'
-											) }
-											value={ id }
-										/>
+										),
+										value: 'tel',
+									},
+									{
+										label: __( 'Password', 'quick-forms' ),
+										value: 'password',
+									},
+									{
+										label: __( 'Hidden', 'quick-forms' ),
+										value: 'hidden',
+									},
+									{
+										label: __( 'Search', 'quick-forms' ),
+										value: 'search',
+									},
+									{
+										label: __( 'Color', 'quick-forms' ),
+										value: 'color',
+									},
+									{
+										label: __( 'Range', 'quick-forms' ),
+										value: 'range',
+									},
+									{
+										label: __( 'Date', 'quick-forms' ),
+										value: 'date',
+									},
+									{
+										label: __( 'Time', 'quick-forms' ),
+										value: 'time',
+									},
+									{
+										label: __(
+											'DateTime Local',
+											'quick-forms'
+										),
+										value: 'datetime-local',
+									},
+									{
+										label: __( 'Month', 'quick-forms' ),
+										value: 'month',
+									},
+									{
+										label: __( 'Week', 'quick-forms' ),
+										value: 'week',
+									},
+								] }
+								help={ INPUT_TYPE_HELP[ inputType ] || '' }
+								onChange={ ( value ) =>
+									setAttributes( {
+										inputType: value,
+									} )
+								}
+								__next40pxDefaultSize
+							/>
+							<TextControl
+								__next40pxDefaultSize
+								label={ __( 'Field Label', 'quick-forms' ) }
+								value={ fieldLabel }
+								onChange={ ( value ) =>
+									setAttributes( {
+										fieldLabel: value,
+									} )
+								}
+							/>
 
-										<SelectControl
-											label={ __(
-												'Input Type',
-												'quick-forms'
-											) }
-											value={ inputType }
-											options={ [
-												{
-													label: __(
-														'Text',
-														'quick-forms'
-													),
-													value: 'text',
-												},
-												{
-													label: __(
-														'Email',
-														'quick-forms'
-													),
-													value: 'email',
-												},
-												{
-													label: __(
-														'Number',
-														'quick-forms'
-													),
-													value: 'number',
-												},
-												{
-													label: __(
-														'URL',
-														'quick-forms'
-													),
-													value: 'url',
-												},
-												{
-													label: __(
-														'Phone Number',
-														'quick-forms'
-													),
-													value: 'tel',
-												},
-												{
-													label: __(
-														'Password',
-														'quick-forms'
-													),
-													value: 'password',
-												},
-												{
-													label: __(
-														'Hidden',
-														'quick-forms'
-													),
-													value: 'hidden',
-												},
-												{
-													label: __(
-														'Search',
-														'quick-forms'
-													),
-													value: 'search',
-												},
-												{
-													label: __(
-														'Color',
-														'quick-forms'
-													),
-													value: 'color',
-												},
-												{
-													label: __(
-														'Range',
-														'quick-forms'
-													),
-													value: 'range',
-												},
-												{
-													label: __(
-														'Date',
-														'quick-forms'
-													),
-													value: 'date',
-												},
-												{
-													label: __(
-														'Time',
-														'quick-forms'
-													),
-													value: 'time',
-												},
-												{
-													label: __(
-														'DateTime Local',
-														'quick-forms'
-													),
-													value: 'datetime-local',
-												},
-												{
-													label: __(
-														'Month',
-														'quick-forms'
-													),
-													value: 'month',
-												},
-												{
-													label: __(
-														'Week',
-														'quick-forms'
-													),
-													value: 'week',
-												},
-											] }
-											help={
-												INPUT_TYPE_HELP[ inputType ] ||
-												''
-											}
-											onChange={ ( value ) =>
-												setAttributes( {
-													inputType: value,
-												} )
-											}
-											__next40pxDefaultSize
-										/>
-										<TextControl
-											__next40pxDefaultSize
-											label={ __(
-												'Field Label',
-												'quick-forms'
-											) }
-											value={ fieldLabel }
-											onChange={ ( value ) =>
-												setAttributes( {
-													fieldLabel: value,
-												} )
-											}
-										/>
+							{ ! isHidden() && (
+								<TextControl
+									__next40pxDefaultSize
+									label={ __(
+										'Placeholder Text',
+										'quick-forms'
+									) }
+									value={ placeholder }
+									onChange={ ( value ) =>
+										setAttributes( {
+											placeholder: value,
+										} )
+									}
+								/>
+							) }
 
-										{ ! isHidden() && (
-											<TextControl
-												__next40pxDefaultSize
-												label={ __(
-													'Placeholder Text',
-													'quick-forms'
-												) }
-												value={ placeholder }
-												onChange={ ( value ) =>
-													setAttributes( {
-														placeholder: value,
-													} )
-												}
-											/>
-										) }
+							<TextControl
+								__next40pxDefaultSize
+								label={ __( 'Default Value', 'quick-forms' ) }
+								value={ defaultValue }
+								onChange={ ( value ) =>
+									setAttributes( {
+										defaultValue: value,
+									} )
+								}
+							/>
 
-										<TextControl
-											__next40pxDefaultSize
-											label={ __(
-												'Default Value',
-												'quick-forms'
-											) }
-											value={ defaultValue }
-											onChange={ ( value ) =>
-												setAttributes( {
-													defaultValue: value,
-												} )
-											}
-										/>
+							{ ! isHidden() && (
+								<ToggleControl
+									label={ __( 'Required', 'quick-forms' ) }
+									checked={ required }
+									onChange={ () => {
+										setAttributes( {
+											required: ! required,
+										} );
+									} }
+								/>
+							) }
 
-										{ ! isHidden() && (
-											<ToggleControl
-												label={ __(
-													'Required',
-													'quick-forms'
-												) }
-												checked={ required }
-												onChange={ () => {
-													setAttributes( {
-														required: ! required,
-													} );
-												} }
-											/>
-										) }
-
-										{ needMinMax() && (
-											<>
-												<TextControl
-													__next40pxDefaultSize
-													label={ __(
-														'Minimum',
-														'quick-forms'
-													) }
-													value={ minimum }
-													onChange={ ( value ) =>
-														setAttributes( {
-															minimum: value,
-														} )
-													}
-												/>
-												<TextControl
-													__next40pxDefaultSize
-													label={ __(
-														'Maximum',
-														'quick-forms'
-													) }
-													value={ maximum }
-													onChange={ ( value ) =>
-														setAttributes( {
-															maximum: value,
-														} )
-													}
-												/>
-											</>
-										) }
-									</PanelBody>
+							{ needMinMax() && (
+								<>
+									<TextControl
+										__next40pxDefaultSize
+										label={ __( 'Minimum', 'quick-forms' ) }
+										value={ minimum }
+										onChange={ ( value ) =>
+											setAttributes( {
+												minimum: value,
+											} )
+										}
+									/>
+									<TextControl
+										__next40pxDefaultSize
+										label={ __( 'Maximum', 'quick-forms' ) }
+										value={ maximum }
+										onChange={ ( value ) =>
+											setAttributes( {
+												maximum: value,
+											} )
+										}
+									/>
 								</>
-							);
-						}
-					} }
-				</TabPanel>
-			</InspectorControls>
+							) }
+						</PanelBody>
+					</>
+				}
+			/>
 
 			<div
 				{ ...useBlockProps( {

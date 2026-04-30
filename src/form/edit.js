@@ -1,23 +1,17 @@
 import { __ } from '@wordpress/i18n';
-import {
-	InnerBlocks,
-	useBlockProps,
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { generateStyles } from '../hooks/styleGenerator';
 import {
 	PanelBody,
 	ToggleControl,
 	RadioControl,
-	TabPanel,
-	Dashicon,
 	TextControl,
 	__experimentalUnitControl as UnitControl,
 	BoxControl,
 } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
 import './editor.scss';
-import AdvancedSettingsModal from './components/AdvancedSettingsModal';
+import BlockInspectorTabs from '../components/BlockInspectorTabs';
+import { useBlockId } from '../hooks/useBlockId';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -43,243 +37,162 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		[ 'quick-forms/submit', { lock: { move: false, remove: true } } ],
 	];
 
-	useEffect( () => {
-		if ( ! id ) {
-			setAttributes( { id: clientId.slice( 0, 8 ) } );
-		}
-	}, [] );
+	useBlockId( id, clientId, setAttributes );
 
 	const css = generateStyles( attributes, clientId );
 	const blockProps = useBlockProps( {
 		className: `qf-block qf-form-block`,
 	} );
 
-	const [ activeTab, setActiveTab ] = useState( 'settings' );
-
 	return (
 		<>
-			<InspectorControls>
-				<TabPanel
-					className="qf-tab-panel"
-					activeClass="active-tab"
-					key={ activeTab }
-					tabs={ [
-						{
-							name: 'settings',
-							title: <Dashicon icon="admin-generic" />,
-							className: 'tab-settings',
-						},
-						{
-							name: 'styles',
-							title: <Dashicon icon="admin-customizer" />,
-							className: 'tab-styles',
-						},
-						{
-							name: 'advanced',
-							title: <Dashicon icon="admin-tools" />,
-							className: 'tab-advanced',
-						},
-					] }
-					onSelect={ ( tabName ) => setActiveTab( tabName ) }
-					initialTabName={ activeTab }
-				>
-					{ ( tab ) => {
-						if ( tab.name === 'settings' ) {
-							return (
-								<>
-									<PanelBody
-										title={ __(
-											'General Settings',
-											'quick-forms'
-										) }
-										initialOpen={ false }
-									>
-										<TextControl
-											__next40pxDefaultSize
-											label={ __(
-												'Form Name',
-												'quick-forms'
-											) }
-											placeholder={ __(
-												'Form Name',
-												'quick-forms'
-											) }
-											value={ formName }
-											onChange={ ( value ) =>
-												setAttributes( {
-													formName: value,
-												} )
-											}
-										/>
-									</PanelBody>
-									<PanelBody
-										title={ __(
-											'Field Settings',
-											'quick-forms'
-										) }
-										initialOpen={ false }
-									>
-										<ToggleControl
-											label={ __(
-												'Show Label',
-												'quick-forms'
-											) }
-											checked={ showLabel }
-											onChange={ ( val ) => {
-												setAttributes( {
-													showLabel: val,
-												} );
-											} }
-										/>
+			<BlockInspectorTabs
+				settingsTab={
+					<>
+						<PanelBody
+							title={ __( 'General Settings', 'quick-forms' ) }
+							initialOpen={ false }
+						>
+							<TextControl
+								__next40pxDefaultSize
+								label={ __( 'Form Name', 'quick-forms' ) }
+								placeholder={ __( 'Form Name', 'quick-forms' ) }
+								value={ formName }
+								onChange={ ( value ) =>
+									setAttributes( {
+										formName: value,
+									} )
+								}
+							/>
+						</PanelBody>
+						<PanelBody
+							title={ __( 'Field Settings', 'quick-forms' ) }
+							initialOpen={ false }
+						>
+							<ToggleControl
+								label={ __( 'Show Label', 'quick-forms' ) }
+								checked={ showLabel }
+								onChange={ ( val ) => {
+									setAttributes( {
+										showLabel: val,
+									} );
+								} }
+							/>
 
-										{ showLabel && (
-											<RadioControl
-												label={ __(
-													'Label Position',
-													'quick-forms'
-												) }
-												selected={ labelPosition }
-												options={ [
-													{
-														label: __(
-															'Inline',
-															'quick-forms'
-														),
-														value: 'inline',
-													},
-													{
-														label: __(
-															'Above',
-															'quick-forms'
-														),
-														value: 'above',
-													},
-												] }
-												onChange={ ( value ) =>
-													setAttributes( {
-														labelPosition: value,
-													} )
-												}
-											/>
-										) }
-
-										{ showLabel &&
-											'inline' === labelPosition && (
-												<UnitControl
-													__next40pxDefaultSize
-													label={ __(
-														'Label Width',
-														'quick-forms'
-													) }
-													onChange={ ( value ) =>
-														setAttributes( {
-															labelWidth: value,
-														} )
-													}
-													value={ labelWidth }
-												/>
-											) }
-										<UnitControl
-											__next40pxDefaultSize
-											label={ __(
-												'Field Width',
+							{ showLabel && (
+								<RadioControl
+									label={ __(
+										'Label Position',
+										'quick-forms'
+									) }
+									selected={ labelPosition }
+									options={ [
+										{
+											label: __(
+												'Inline',
 												'quick-forms'
-											) }
-											onChange={ ( value ) =>
-												setAttributes( {
-													fieldWidth: value,
-												} )
-											}
-											value={ fieldWidth }
-										/>
-										<BoxControl
-											__next40pxDefaultSize
-											label={ __(
-												'Field Margin',
-												'quick-forms'
-											) }
-											resetValues={ {
-												top: '20px',
-												right: '0px',
-												bottom: '0px',
-												left: '0px',
-											} }
-											values={ fieldMargin }
-											onChange={ ( val ) =>
-												setAttributes( {
-													fieldMargin: val,
-												} )
-											}
-										/>
-									</PanelBody>
-								</>
-							);
-						}
-						if ( tab.name === 'styles' ) {
-							return (
-								<>
-									<PanelBody
-										title={ __(
-											'Spacing Settings',
-											'quick-forms'
-										) }
-										initialOpen={ false }
-									>
-										<BoxControl
-											__next40pxDefaultSize
-											__nextHasNoMarginBottom
-											label={ __(
-												'Margin',
-												'quick-forms'
-											) }
-											values={ margin }
-											onChange={ ( val ) =>
-												setAttributes( { margin: val } )
-											}
-											resetValues={ {
-												top: '20px',
-												right: '0px',
-												bottom: '0px',
-												left: '0px',
-											} }
-										/>
-										<BoxControl
-											__next40pxDefaultSize
-											__nextHasNoMarginBottom
-											label={ __(
-												'Padding',
-												'quick-forms'
-											) }
-											values={ padding }
-											onChange={ ( val ) =>
-												setAttributes( {
-													padding: val,
-												} )
-											}
-											resetValues={ {
-												top: '20px',
-												right: '20px',
-												bottom: '20px',
-												left: '20px',
-											} }
-										/>
-									</PanelBody>
-								</>
-							);
-						}
-
-						if ( tab.name === 'advanced' ) {
-							return (
-								<AdvancedSettingsModal
-									attributes={ attributes }
-									setAttributes={ setAttributes }
-									setActiveTab={ setActiveTab }
+											),
+											value: 'inline',
+										},
+										{
+											label: __( 'Above', 'quick-forms' ),
+											value: 'above',
+										},
+									] }
+									onChange={ ( value ) =>
+										setAttributes( {
+											labelPosition: value,
+										} )
+									}
 								/>
-							);
-						}
-					} }
-				</TabPanel>
-			</InspectorControls>
+							) }
+
+							{ showLabel && 'inline' === labelPosition && (
+								<UnitControl
+									__next40pxDefaultSize
+									label={ __( 'Label Width', 'quick-forms' ) }
+									onChange={ ( value ) =>
+										setAttributes( {
+											labelWidth: value,
+										} )
+									}
+									value={ labelWidth }
+								/>
+							) }
+							<UnitControl
+								__next40pxDefaultSize
+								label={ __( 'Field Width', 'quick-forms' ) }
+								onChange={ ( value ) =>
+									setAttributes( {
+										fieldWidth: value,
+									} )
+								}
+								value={ fieldWidth }
+							/>
+							<BoxControl
+								__next40pxDefaultSize
+								label={ __( 'Field Margin', 'quick-forms' ) }
+								resetValues={ {
+									top: '20px',
+									right: '0px',
+									bottom: '0px',
+									left: '0px',
+								} }
+								values={ fieldMargin }
+								onChange={ ( val ) =>
+									setAttributes( {
+										fieldMargin: val,
+									} )
+								}
+							/>
+						</PanelBody>
+					</>
+				}
+				stylesTab={
+					<>
+						<PanelBody
+							title={ __( 'Spacing Settings', 'quick-forms' ) }
+							initialOpen={ false }
+						>
+							<BoxControl
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
+								label={ __( 'Margin', 'quick-forms' ) }
+								values={ margin }
+								onChange={ ( val ) =>
+									setAttributes( { margin: val } )
+								}
+								resetValues={ {
+									top: '20px',
+									right: '0px',
+									bottom: '0px',
+									left: '0px',
+								} }
+							/>
+							<BoxControl
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
+								label={ __( 'Padding', 'quick-forms' ) }
+								values={ padding }
+								onChange={ ( val ) =>
+									setAttributes( {
+										padding: val,
+									} )
+								}
+								resetValues={ {
+									top: '20px',
+									right: '20px',
+									bottom: '20px',
+									left: '20px',
+								} }
+							/>
+						</PanelBody>
+					</>
+				}
+				hasAdvanced={ true }
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+			/>
 			<div { ...blockProps }>
 				<style>{ css }</style>
 				<div className="wrapper">

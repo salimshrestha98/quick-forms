@@ -1,15 +1,11 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useBlockId } from '../hooks/useBlockId';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { id } = attributes;
 
-	useEffect( () => {
-		if ( ! id ) {
-			setAttributes( { id: clientId.slice( 0, 8 ) } );
-		}
-	}, [] );
+	useBlockId( id, clientId, setAttributes );
 
 	return (
 		<>

@@ -13,17 +13,17 @@ export function generateStyles( attributes, clientId ) {
 
 	css += `
         #block-${ clientId } {
-			margin: ${ margin.top } ${ margin.right } ${ margin.left } ${ margin.bottom };
+			margin: ${ margin.top } ${ margin.right } ${ margin.bottom } ${ margin.left };
 		}
 		#block-${ clientId } > .wrapper {
-			padding: ${ padding.top } ${ padding.right } ${ padding.left } ${
-				padding.bottom
+			padding: ${ padding.top } ${ padding.right } ${ padding.bottom } ${
+				padding.left
 			};
 		
 		}
         #block-${ clientId } .qf-block {
-			margin: ${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.left } ${
-				fieldMargin.bottom
+			margin: ${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${
+				fieldMargin.left
 			};
 			}
 		#block-${ clientId } .qf-block .wrapper {

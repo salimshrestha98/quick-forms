@@ -139,6 +139,10 @@ final class Admin {
 			return;
 		}
 
+		if ( ! in_array( $post->post_type, array( 'page', 'post' ), true ) ) {
+			return;
+		}
+
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
 		}

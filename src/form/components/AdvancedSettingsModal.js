@@ -7,10 +7,19 @@ import MessageSettings from './MessageSettings';
 import SubmissionSettings from './SubmissionSettings';
 
 const SETTINGS = {
-	'anti-spam': __( 'Anti-Spam', 'quick-forms' ),
-	messages: __( 'Messages', 'quick-forms' ),
-	email: __( 'Email', 'quick-forms' ),
-	submission: __( 'Submission', 'quick-forms' ),
+	'anti-spam': {
+		label: __( 'Anti-Spam', 'quick-forms' ),
+		Component: AntiSpamSettings,
+	},
+	messages: {
+		label: __( 'Messages', 'quick-forms' ),
+		Component: MessageSettings,
+	},
+	email: { label: __( 'Email', 'quick-forms' ), Component: EmailSettings },
+	submission: {
+		label: __( 'Submission', 'quick-forms' ),
+		Component: SubmissionSettings,
+	},
 };
 
 export default function AdvancedSettingsModal( {
@@ -20,44 +29,7 @@ export default function AdvancedSettingsModal( {
 } ) {
 	const [ activeSetting, setActiveSetting ] = useState( 'anti-spam' );
 
-	const renderContent = () => {
-		switch ( activeSetting ) {
-			case 'anti-spam':
-				return (
-					<AntiSpamSettings
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-					/>
-				);
-
-			case 'messages':
-				return (
-					<MessageSettings
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-					/>
-				);
-
-			case 'email':
-				return (
-					<EmailSettings
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-					/>
-				);
-
-			case 'submission':
-				return (
-					<SubmissionSettings
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-					/>
-				);
-
-			default:
-				return null;
-		}
-	};
+	const { Component } = SETTINGS[ activeSetting ];
 
 	return (
 		<Modal
@@ -68,7 +40,7 @@ export default function AdvancedSettingsModal( {
 			<div className="qf-fasm">
 				{ /* Sidebar */ }
 				<div className="qf-fasm__sidebar">
-					{ Object.entries( SETTINGS ).map( ( [ key, label ] ) => (
+					{ Object.entries( SETTINGS ).map( ( [ key, setting ] ) => (
 						<Button
 							key={ key }
 							className={ `qf-fasm__tab ${
@@ -76,13 +48,18 @@ export default function AdvancedSettingsModal( {
 							}` }
 							onClick={ () => setActiveSetting( key ) }
 						>
-							{ label }
+							{ setting.label }
 						</Button>
 					) ) }
 				</div>
 
 				{ /* Main content */ }
-				<div className="qf-fasm__main">{ renderContent() }</div>
+				<div className="qf-fasm__main">
+					<Component
+						attributes={ attributes }
+						setAttributes={ setAttributes }
+					/>
+				</div>
 			</div>
 		</Modal>
 	);
