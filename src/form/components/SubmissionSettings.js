@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { TextControl, ToggleControl } from '@wordpress/components';
 
 export default function SubmissionSettings( { attributes, setAttributes } ) {
@@ -5,8 +6,11 @@ export default function SubmissionSettings( { attributes, setAttributes } ) {
 	return (
 		<div>
 			<ToggleControl
-				help="Hide the form after the form is submitted successfully."
-				label="Hide Form after Submission"
+				help={ __(
+					'Hide the form after the form is submitted successfully.',
+					'quick-forms'
+				) }
+				label={ __( 'Hide Form after Submission', 'quick-forms' ) }
 				checked={ hideFormAfterSubmit }
 				onChange={ () => {
 					setAttributes( {
@@ -16,8 +20,11 @@ export default function SubmissionSettings( { attributes, setAttributes } ) {
 			/>
 			<TextControl
 				__next40pxDefaultSize
-				help="Redirect the user to certain page after the form is submitted successfully."
-				label="Redirection URL"
+				help={ __(
+					'Redirect the user to certain page after the form is submitted successfully.',
+					'quick-forms'
+				) }
+				label={ __( 'Redirection URL', 'quick-forms' ) }
 				value={ redirectionUrl }
 				placeholder="https://example.com/"
 				onChange={ ( value ) =>

@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 
 export default function AntiSpamSettings( { attributes, setAttributes } ) {
@@ -5,9 +6,9 @@ export default function AntiSpamSettings( { attributes, setAttributes } ) {
 	return (
 		<div>
 			<ToggleControl
-				label="Enable Honeypot"
+				label={ __( 'Enable Honeypot', 'quick-forms' ) }
 				checked={ honeypot }
-				help="Enable Honeypot for this form."
+				help={ __( 'Enable Honeypot for this form.', 'quick-forms' ) }
 				onChange={ () => {
 					setAttributes( {
 						honeypot: ! honeypot,

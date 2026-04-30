@@ -72,10 +72,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						if ( tab.name === 'settings' ) {
 							return (
 								<>
-									<PanelBody title="Field Settings">
+									<PanelBody
+										title={ __(
+											'Field Settings',
+											'quick-forms'
+										) }
+									>
 										<TextControl
 											__next40pxDefaultSize
-											label="Button Text"
+											label={ __(
+												'Button Text',
+												'quick-forms'
+											) }
 											value={ buttonText }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -85,15 +93,24 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 
 										<SelectControl
-											label="Button Width"
+											label={ __(
+												'Button Width',
+												'quick-forms'
+											) }
 											value={ buttonWidthType }
 											options={ [
 												{
-													label: 'Auto',
+													label: __(
+														'Auto',
+														'quick-forms'
+													),
 													value: 'auto',
 												},
 												{
-													label: 'Custom',
+													label: __(
+														'Custom',
+														'quick-forms'
+													),
 													value: 'custom',
 												},
 											] }
@@ -125,7 +142,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							return (
 								<>
 									<PanelBody
-										title="Color Settings"
+										title={ __(
+											'Color Settings',
+											'quick-forms'
+										) }
 										initialOpen={ false }
 									>
 										<ColorPicker
@@ -146,12 +166,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 									</PanelBody>
 									<PanelBody
-										title="Spacing Settings"
+										title={ __(
+											'Spacing Settings',
+											'quick-forms'
+										) }
 										initialOpen={ false }
 									>
 										<BoxControl
 											__next40pxDefaultSize
-											label="Padding"
+											label={ __(
+												'Padding',
+												'quick-forms'
+											) }
 											values={ padding }
 											onChange={ ( val ) =>
 												setAttributes( {
@@ -181,7 +207,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 								onChange={ ( value ) =>
 									setAttributes( { buttonText: value } )
 								}
-								placeholder={ __( 'Enter Button Text Here' ) }
+								placeholder={ __(
+									'Enter Button Text Here',
+									'quick-forms'
+								) }
 							/>
 						</button>
 					</div>

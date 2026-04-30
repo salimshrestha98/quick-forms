@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { BaseControl, Button, TextControl } from '@wordpress/components';
 import { RichText } from '@wordpress/block-editor';
 import { useState } from '@wordpress/element';
@@ -30,12 +31,32 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 	}
 
 	function handleDeleteEmail( index ) {
+		// eslint-disable-next-line no-alert
+		const proceed = window.confirm(
+			__( 'Are you sure you want to delete this email?', 'quick-forms' )
+		);
+
+		if ( ! proceed ) {
+			return;
+		}
+
 		const updated = emails.filter( ( _, i ) => i !== index );
 		setAttributes( { emails: updated } );
 	}
 
 	function saveEmail() {
 		const updatedEmails = [ ...emails ];
+
+		if ( Object.values( emailData ).includes( '' ) ) {
+			// eslint-disable-next-line no-alert
+			window.alert(
+				__(
+					'One or more of the email fields are empty. Please fill all the fields.',
+					'quick-forms'
+				)
+			);
+			return;
+		}
 
 		if ( editIndex !== null ) {
 			updatedEmails[ editIndex ] = emailData;
@@ -53,7 +74,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 	return (
 		<div>
 			<Button variant="secondary" onClick={ handleAddNewEmail }>
-				Add Email
+				{ __( 'Add Email', 'quick-forms' ) }
 			</Button>
 
 			{ emails.length > 0 && (
@@ -74,7 +95,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 									variant="secondary"
 									onClick={ () => handleEditEmail( index ) }
 								>
-									Edit
+									{ __( 'Edit', 'quick-forms' ) }
 								</Button>
 
 								<Button
@@ -82,7 +103,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 									variant="secondary"
 									onClick={ () => handleDeleteEmail( index ) }
 								>
-									Delete
+									{ __( 'Delete', 'quick-forms' ) }
 								</Button>
 							</div>
 						</div>
@@ -93,7 +114,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 			{ open && (
 				<div className="qf-fasm__email-wrapper">
 					<TextControl
-						label="Label"
+						label={ __( 'Label', 'quick-forms' ) }
 						required
 						value={ emailData.label }
 						onChange={ ( value ) =>
@@ -103,7 +124,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 
 					<TextControl
 						type="email"
-						label="To"
+						label={ __( 'To', 'quick-forms' ) }
 						required
 						value={ emailData.mailTo }
 						onChange={ ( value ) =>
@@ -112,7 +133,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 					/>
 
 					<TextControl
-						label="Subject"
+						label={ __( 'Subject', 'quick-forms' ) }
 						required
 						value={ emailData.mailSubject }
 						onChange={ ( value ) =>
@@ -120,7 +141,10 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 						}
 					/>
 
-					<BaseControl id="mailBody" label="Body">
+					<BaseControl
+						id="mailBody"
+						label={ __( 'Body', 'quick-forms' ) }
+					>
 						<RichText
 							tagName="div"
 							value={ emailData.mailBody }
@@ -130,12 +154,17 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 									mailBody: value,
 								} )
 							}
-							placeholder="Write your email..."
+							placeholder={ __(
+								'Write your email…',
+								'quick-forms'
+							) }
 						/>
 					</BaseControl>
 
 					<Button variant="primary" onClick={ saveEmail }>
-						{ editIndex !== null ? 'Update' : 'Save' }
+						{ editIndex !== null
+							? __( 'Update', 'quick-forms' )
+							: __( 'Save', 'quick-forms' ) }
 					</Button>
 				</div>
 			) }

@@ -38,7 +38,7 @@ class EmailHelper {
 
 				if ( isset( $values[ $key ] ) ) {
 					return is_scalar( $values[ $key ] )
-						? (string) $values[ $key ]
+						? (string) sanitize_text_field( $values[ $key ] )
 						: '';
 				}
 

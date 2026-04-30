@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { TextControl } from '@wordpress/components';
 
 export default function MessageSettings( { attributes, setAttributes } ) {
@@ -6,8 +7,11 @@ export default function MessageSettings( { attributes, setAttributes } ) {
 		<div>
 			<TextControl
 				__next40pxDefaultSize
-				help="Message to show when form submits successfully."
-				label="Success Message"
+				help={ __(
+					'Message to show when form submits successfully.',
+					'quick-forms'
+				) }
+				label={ __( 'Success Message', 'quick-forms' ) }
 				value={ messages.success }
 				onChange={ ( value ) =>
 					setAttributes( {
@@ -20,8 +24,11 @@ export default function MessageSettings( { attributes, setAttributes } ) {
 			/>
 			<TextControl
 				__next40pxDefaultSize
-				label="Error Message"
-				help="Message to show when form submission fails."
+				label={ __( 'Error Message', 'quick-forms' ) }
+				help={ __(
+					'Message to show when form submission fails.',
+					'quick-forms'
+				) }
 				value={ messages.error }
 				onChange={ ( value ) =>
 					setAttributes( {

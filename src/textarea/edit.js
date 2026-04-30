@@ -47,10 +47,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						if ( tab.name === 'settings' ) {
 							return (
 								<>
-									<PanelBody title="General Settings">
+									<PanelBody
+										title={ __(
+											'General Settings',
+											'quick-forms'
+										) }
+									>
 										<TextControl
 											__next40pxDefaultSize
-											label="Field Label"
+											label={ __(
+												'Field Label',
+												'quick-forms'
+											) }
 											value={ fieldLabel }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -64,7 +72,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											isShiftStepEnabled={ true }
 											shiftStep={ 1 }
 											min={ 1 }
-											label="Number of Rows"
+											label={ __(
+												'Number of Rows',
+												'quick-forms'
+											) }
 											value={ rowsCount }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -75,7 +86,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 										<TextControl
 											__next40pxDefaultSize
-											label="Placeholder Text"
+											label={ __(
+												'Placeholder Text',
+												'quick-forms'
+											) }
 											value={ placeholder }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -86,7 +100,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 										<TextControl
 											__next40pxDefaultSize
-											label="Default Vaue"
+											label={ __(
+												'Default Vaue',
+												'quick-forms'
+											) }
 											value={ defaultValue }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -96,7 +113,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 
 										<ToggleControl
-											label="Required"
+											label={ __(
+												'Required',
+												'quick-forms'
+											) }
 											checked={ required }
 											onChange={ () => {
 												setAttributes( {
@@ -124,7 +144,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( value ) =>
 							setAttributes( { fieldLabel: value } )
 						}
-						placeholder={ __( 'Field Label' ) }
+						placeholder={ __( 'Field Label', 'quick-forms' ) }
 					/>
 
 					<div className="qf-field qf-textarea-field">

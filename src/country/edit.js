@@ -46,10 +46,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						if ( tab.name === 'settings' ) {
 							return (
 								<>
-									<PanelBody title="General Settings">
+									<PanelBody
+										title={ __(
+											'General Settings',
+											'quick-forms'
+										) }
+									>
 										<TextControl
 											__next40pxDefaultSize
-											label="Field Label"
+											label={ __(
+												'Field Label',
+												'quick-forms'
+											) }
 											value={ fieldLabel }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -60,7 +68,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 										<TextControl
 											__next40pxDefaultSize
-											label="Default Vaue"
+											label={ __(
+												'Default Vaue',
+												'quick-forms'
+											) }
 											value={ defaultValue }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -70,7 +81,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 
 										<ToggleControl
-											label="Required"
+											label={ __(
+												'Required',
+												'quick-forms'
+											) }
 											checked={ required }
 											onChange={ () => {
 												setAttributes( {
@@ -98,11 +112,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( value ) =>
 							setAttributes( { fieldLabel: value } )
 						}
-						placeholder={ __( 'Field Label' ) }
+						placeholder={ __( 'Field Label', 'quick-forms' ) }
 					/>
 					<div className="qf-field qf-country-field">
 						<select value={ defaultValue } onChange={ () => false }>
-							<option value="">Select Country</option>
+							<option value="">
+								{ __( 'Select Country', 'quick-forms' ) }
+							</option>
 							{ Object.entries( countryList ).map(
 								( [ iso2, details ] ) => (
 									<option key={ iso2 } value={ iso2 }>

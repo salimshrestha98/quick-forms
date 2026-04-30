@@ -218,7 +218,7 @@ class Submissions_Table extends WP_List_Table {
 		<?php
 		foreach ( $this->form_ids as $form_id ) {
 			$form_settings = BlockHelper::get_form_settings( $form_id );
-			$form_name     = $form_settings['attrs']['formName'] ?? 'Contact Form';
+			$form_name     = $form_settings['attrs']['formName'] ?? __( 'Contact Form', 'quick-forms' );
 
 			printf(
 				"<option value='%s' %s>%s</option>",
@@ -229,13 +229,13 @@ class Submissions_Table extends WP_List_Table {
 		}
 		?>
 			</select>
-		<?php submit_button( 'Filter', '', 'filter_action', false ); ?>
+		<?php submit_button( __( 'Filter', 'quick-forms' ), '', 'filter_action', false ); ?>
 
 	</div>
 	<div class="alignleft actions" style="margin-left: 10px">
 		<a class="button button-primary" href="<?php echo esc_url( $form_post_url ); ?>" target="_blank" style="display:flex;align-items:center;gap:5px;">
 			<span class="dashicons dashicons-edit"></span>
-			Edit Form
+			<?php esc_html_e( 'Edit Form', 'quick-forms' ); ?>
 		</a>
 	</div>
 		<?php

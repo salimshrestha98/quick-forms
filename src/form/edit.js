@@ -32,7 +32,6 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		labelWidth,
 		messages,
 	} = attributes;
-	const { allowedBlocks } = [ 'create-block/text' ];
 
 	const TEMPLATE = [
 		[ 'quick-forms/input', { inputType: 'text', fieldLabel: 'Your Name' } ],
@@ -121,7 +120,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										initialOpen={ false }
 									>
 										<ToggleControl
-											label="Show Label"
+											label={ __(
+												'Show Label',
+												'quick-forms'
+											) }
 											checked={ showLabel }
 											onChange={ ( val ) => {
 												setAttributes( {
@@ -132,15 +134,24 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 										{ showLabel && (
 											<RadioControl
-												label="Label Position"
+												label={ __(
+													'Label Position',
+													'quick-forms'
+												) }
 												selected={ labelPosition }
 												options={ [
 													{
-														label: 'Inline',
+														label: __(
+															'Inline',
+															'quick-forms'
+														),
 														value: 'inline',
 													},
 													{
-														label: 'Above',
+														label: __(
+															'Above',
+															'quick-forms'
+														),
 														value: 'above',
 													},
 												] }
@@ -156,7 +167,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											'inline' === labelPosition && (
 												<UnitControl
 													__next40pxDefaultSize
-													label="Label Width"
+													label={ __(
+														'Label Width',
+														'quick-forms'
+													) }
 													onChange={ ( value ) =>
 														setAttributes( {
 															labelWidth: value,
@@ -167,7 +181,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											) }
 										<UnitControl
 											__next40pxDefaultSize
-											label="Field Width"
+											label={ __(
+												'Field Width',
+												'quick-forms'
+											) }
 											onChange={ ( value ) =>
 												setAttributes( {
 													fieldWidth: value,
@@ -177,7 +194,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 										<BoxControl
 											__next40pxDefaultSize
-											label="Field Margin"
+											label={ __(
+												'Field Margin',
+												'quick-forms'
+											) }
 											resetValues={ {
 												top: '20px',
 												right: '0px',
@@ -199,13 +219,19 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							return (
 								<>
 									<PanelBody
-										title="Spacing Settings"
+										title={ __(
+											'Spacing Settings',
+											'quick-forms'
+										) }
 										initialOpen={ false }
 									>
 										<BoxControl
 											__next40pxDefaultSize
 											__nextHasNoMarginBottom
-											label="Margin"
+											label={ __(
+												'Margin',
+												'quick-forms'
+											) }
 											values={ margin }
 											onChange={ ( val ) =>
 												setAttributes( { margin: val } )
@@ -220,7 +246,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										<BoxControl
 											__next40pxDefaultSize
 											__nextHasNoMarginBottom
-											label="Padding"
+											label={ __(
+												'Padding',
+												'quick-forms'
+											) }
 											values={ padding }
 											onChange={ ( val ) =>
 												setAttributes( {
@@ -255,10 +284,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				<style>{ css }</style>
 				<div className="wrapper">
 					<form className="quick-form">
-						<InnerBlocks
-							template={ TEMPLATE }
-							allowedBlocks={ allowedBlocks }
-						/>
+						<InnerBlocks template={ TEMPLATE } />
 					</form>
 					<div className="qf-form-message qf-message-success">
 						{ messages.success }

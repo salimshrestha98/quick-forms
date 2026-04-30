@@ -14,6 +14,7 @@ import {
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import DisabledInputControl from '../components/DisabledInputControl';
+import { INPUT_TYPE_HELP } from './constants';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -43,33 +44,6 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		return fieldTypesWithMinMax.includes( inputType );
 	}
 
-	function getInputTypeHelp() {
-		const helpMap = {
-			text: 'Single-line text input, used for names, titles, etc.',
-			email: 'Email input; validates email addresses automatically.',
-			number: 'Number input; allows only numeric values.',
-			url: 'URL input; expects a valid web address.',
-			tel: 'Telephone input; for phone numbers, may trigger numeric keypad on mobile.',
-			password: 'Password input; hides characters for secure entry.',
-			hidden: 'Hidden field; not visible to users, used to store data silently.',
-			search: 'Search input; styled for search queries, may trigger search-related behavior.',
-			color: 'Color picker; allows selection of a color value.',
-			range: 'Slider input for numeric ranges; allows selection between min and max.',
-			date: 'Date picker; selects a date (year, month, day).',
-			time: 'Time picker; selects a time (hours, minutes, seconds optional).',
-			'datetime-local':
-				'Select date and time in local format (no timezone).',
-			month: 'Select a month and year.',
-			week: 'Select a week and year (ISO-8601 format).',
-		};
-
-		if ( ! ( inputType in helpMap ) ) {
-			return '';
-		}
-
-		return helpMap[ inputType ];
-	}
-
 	return (
 		<>
 			<InspectorControls>
@@ -93,78 +67,137 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						if ( tab.name === 'settings' ) {
 							return (
 								<>
-									<PanelBody title="General Settings">
+									<PanelBody
+										title={ __(
+											'General Settings',
+											'quick-forms'
+										) }
+									>
 										<DisabledInputControl
-											label="Field ID"
+											label={ __(
+												'Field ID',
+												'quick-forms'
+											) }
 											value={ id }
 										/>
 
 										<SelectControl
-											label="Input Type"
+											label={ __(
+												'Input Type',
+												'quick-forms'
+											) }
 											value={ inputType }
 											options={ [
 												{
-													label: 'Text',
+													label: __(
+														'Text',
+														'quick-forms'
+													),
 													value: 'text',
 												},
 												{
-													label: 'Email',
+													label: __(
+														'Email',
+														'quick-forms'
+													),
 													value: 'email',
 												},
 												{
-													label: 'Number',
+													label: __(
+														'Number',
+														'quick-forms'
+													),
 													value: 'number',
 												},
 												{
-													label: 'URL',
+													label: __(
+														'URL',
+														'quick-forms'
+													),
 													value: 'url',
 												},
 												{
-													label: 'Phone Number',
+													label: __(
+														'Phone Number',
+														'quick-forms'
+													),
 													value: 'tel',
 												},
 												{
-													label: 'Password',
+													label: __(
+														'Password',
+														'quick-forms'
+													),
 													value: 'password',
 												},
 												{
-													label: 'Hidden',
+													label: __(
+														'Hidden',
+														'quick-forms'
+													),
 													value: 'hidden',
 												},
 												{
-													label: 'Search',
+													label: __(
+														'Search',
+														'quick-forms'
+													),
 													value: 'search',
 												},
 												{
-													label: 'Color',
+													label: __(
+														'Color',
+														'quick-forms'
+													),
 													value: 'color',
 												},
 												{
-													label: 'Range',
+													label: __(
+														'Range',
+														'quick-forms'
+													),
 													value: 'range',
 												},
 												{
-													label: 'Date',
+													label: __(
+														'Date',
+														'quick-forms'
+													),
 													value: 'date',
 												},
 												{
-													label: 'Time',
+													label: __(
+														'Time',
+														'quick-forms'
+													),
 													value: 'time',
 												},
 												{
-													label: 'DateTime Local',
+													label: __(
+														'DateTime Local',
+														'quick-forms'
+													),
 													value: 'datetime-local',
 												},
 												{
-													label: 'Month',
+													label: __(
+														'Month',
+														'quick-forms'
+													),
 													value: 'month',
 												},
 												{
-													label: 'Week',
+													label: __(
+														'Week',
+														'quick-forms'
+													),
 													value: 'week',
 												},
 											] }
-											help={ getInputTypeHelp() }
+											help={
+												INPUT_TYPE_HELP[ inputType ] ||
+												''
+											}
 											onChange={ ( value ) =>
 												setAttributes( {
 													inputType: value,
@@ -174,7 +207,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 										<TextControl
 											__next40pxDefaultSize
-											label="Field Label"
+											label={ __(
+												'Field Label',
+												'quick-forms'
+											) }
 											value={ fieldLabel }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -186,7 +222,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										{ ! isHidden() && (
 											<TextControl
 												__next40pxDefaultSize
-												label="Placeholder Text"
+												label={ __(
+													'Placeholder Text',
+													'quick-forms'
+												) }
 												value={ placeholder }
 												onChange={ ( value ) =>
 													setAttributes( {
@@ -198,7 +237,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 										<TextControl
 											__next40pxDefaultSize
-											label="Default Vaue"
+											label={ __(
+												'Default Value',
+												'quick-forms'
+											) }
 											value={ defaultValue }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -209,7 +251,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 										{ ! isHidden() && (
 											<ToggleControl
-												label="Required"
+												label={ __(
+													'Required',
+													'quick-forms'
+												) }
 												checked={ required }
 												onChange={ () => {
 													setAttributes( {
@@ -223,7 +268,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											<>
 												<TextControl
 													__next40pxDefaultSize
-													label="Minimum"
+													label={ __(
+														'Minimum',
+														'quick-forms'
+													) }
 													value={ minimum }
 													onChange={ ( value ) =>
 														setAttributes( {
@@ -233,7 +281,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 												/>
 												<TextControl
 													__next40pxDefaultSize
-													label="Maximum"
+													label={ __(
+														'Maximum',
+														'quick-forms'
+													) }
 													value={ maximum }
 													onChange={ ( value ) =>
 														setAttributes( {

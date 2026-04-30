@@ -57,9 +57,17 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						if ( tab.name === 'settings' ) {
 							return (
 								<>
-									<PanelBody title="General Settings">
+									<PanelBody
+										title={ __(
+											'General Settings',
+											'quick-forms'
+										) }
+									>
 										<TextControl
-											label="Field Label"
+											label={ __(
+												'Field Label',
+												'quick-forms'
+											) }
 											value={ fieldLabel }
 											onChange={ ( val ) =>
 												setAttributes( {
@@ -68,8 +76,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											}
 										/>
 										<TextControl
-											label="Allowed File Types (accept)"
-											help="e.g. .jpg,.png,.pdf"
+											label={ __(
+												'Allowed File Types (accept)',
+												'quick-forms'
+											) }
+											help={ __(
+												'e.g. .jpg,.png,.pdf',
+												'quick-forms'
+											) }
 											value={ accept }
 											onChange={ ( val ) =>
 												setAttributes( { accept: val } )
@@ -77,7 +91,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 
 										<ToggleControl
-											label="Allow Multiple Files"
+											label={ __(
+												'Allow Multiple Files',
+												'quick-forms'
+											) }
 											checked={ multiple }
 											onChange={ ( val ) =>
 												setAttributes( {
@@ -87,7 +104,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 										<TextControl
 											__next40pxDefaultSize
-											label="Placeholder Text"
+											label={ __(
+												'Placeholder Text',
+												'quick-forms'
+											) }
 											value={ placeholder }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -97,7 +117,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 
 										<ToggleControl
-											label="Checked by Default"
+											label={ __(
+												'Checked by Default',
+												'quick-forms'
+											) }
 											checked={ checkedByDefault }
 											onChange={ () => {
 												setAttributes( {
@@ -108,7 +131,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										/>
 
 										<ToggleControl
-											label="Required"
+											label={ __(
+												'Required',
+												'quick-forms'
+											) }
 											checked={ required }
 											onChange={ () => {
 												setAttributes( {
@@ -132,12 +158,15 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( value ) =>
 							setAttributes( { fieldLabel: value } )
 						}
-						placeholder={ __( 'Field Label' ) }
+						placeholder={ __( 'Field Label', 'quick-forms' ) }
 					/>
 					<div className="qf-field qf-file-upload-field">
 						<input type="file" disabled />
 						<p style={ { fontSize: '12px', opacity: 0.6 } }>
-							File upload field preview (disabled in editor)
+							{ __(
+								'File upload field preview (disabled in editor)',
+								'quick-forms'
+							) }
 						</p>
 						<span className="qf-file-upload-placeholder">
 							{ placeholder }

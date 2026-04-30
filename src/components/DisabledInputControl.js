@@ -17,6 +17,7 @@ export default function DisabledInputControl( { label = '', value = '' } ) {
 				setCopied( false );
 			}, 1200 );
 		} catch ( err ) {
+			// eslint-disable-next-line no-console
 			console.log( err );
 		}
 	};

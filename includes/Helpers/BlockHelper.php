@@ -183,6 +183,6 @@ class BlockHelper {
 	 * @return string
 	 */
 	public static function required( bool $required ): string {
-		return $required ? "<span class='qf-required' title='Required Field'>*</span>" : '';
+		return $required ? "<span class='qf-required' title='" . esc_attr__( 'Required Field', 'quick-forms' ) . "'>*</span>" : '';
 	}
 }

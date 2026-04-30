@@ -35,10 +35,6 @@ final class Submission_Handler {
 	public function __construct() {
 		add_action( 'wp_ajax_qf_form_submit', array( $this, 'handle' ) );
 		add_action( 'wp_ajax_nopriv_qf_form_submit', array( $this, 'handle' ) );
-		add_action( 'quick_forms_before_save_form', array( $this, 'handle_honeypot' ) );
-		add_action( 'quick_forms_before_save_form', array( $this, 'handle_recaptcha' ) );
-		add_action( 'quick_forms_before_save_form', array( $this, 'handle_uploads' ) );
-		add_action( 'quick_forms_before_save_form', array( $this, 'send_email' ) );
 	}
 
 	/**
@@ -56,17 +52,19 @@ final class Submission_Handler {
 		$form_data           = array_intersect_key( $_POST, $this->form_settings['fields'] ?? array() );
 		$this->form_data     = array_map( 'sanitize_text_field', $form_data );
 
-		do_action( 'quick_forms_before_save_form' );
-
+		$this->handle_honeypot();
+		$this->handle_recaptcha();
+		$this->handle_uploads();
 		$this->save();
+		$this->send_email();
 
 		wp_send_json_success();
 	}
 
-	public function handle_honeypot() {
+	private function handle_honeypot() {
 		if ( $this->form_settings['attrs']['honeypot'] ?? false ) {
-			if ( isset( $_POST['qfhpfld'] ) && ! empty( $_POST['qfhpfld'] ) ) {
-				wp_send_json_error( 'Some error occured.' );
+			if ( isset( $_POST['qfhpfld'] ) && ! empty( $_POST['qfhpfld'] ) ) {  // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				wp_send_json_error( __( 'Some error occured.', 'quick-forms' ) );
 				exit;
 			}
 		}
@@ -75,7 +73,7 @@ final class Submission_Handler {
 	/**
 	 * Handle reCaptcha.
 	 */
-	public function handle_recaptcha() {
+	private function handle_recaptcha() {
 		$recaptcha_field = array_find(
 			$this->form_settings['fields'],
 			function ( $field ) {
@@ -96,7 +94,7 @@ final class Submission_Handler {
 	/**
 	 * Handle file uploads.
 	 */
-	public function handle_uploads() {
+	private function handle_uploads() {
 		$form_settings      = $this->form_settings;
 		$file_upload_fields = array();
 
@@ -114,13 +112,13 @@ final class Submission_Handler {
 
 				$file = $_FILES[ $field_key ]; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				if ( UPLOAD_ERR_OK !== $file['error'] ) {
-					wp_send_json_error( 'File upload failed.' );
+					wp_send_json_error( __( 'File upload failed.', 'quick-forms' ) );
 				}
 
 				$max_size = 2 * 1024 * 1024;
 
 				if ( $file['size'] > $max_size ) {
-					wp_send_json_error( 'File exceeds maximum size of 2MB.' );
+					wp_send_json_error( __( 'File exceeds maximum size of 2MB.', 'quick-forms' ) );
 				}
 
 				$allowed_mimes = array(
@@ -132,7 +130,7 @@ final class Submission_Handler {
 				$filetype = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'], $allowed_mimes );
 
 				if ( ! $filetype['ext'] || ! $filetype['type'] ) {
-					wp_send_json_error( 'Invalid file type.' );
+					wp_send_json_error( __( 'Invalid file type.', 'quick-forms' ) );
 				}
 
 				$file['name'] = sanitize_file_name( $file['name'] );
@@ -197,25 +195,18 @@ final class Submission_Handler {
 	 *
 	 * @return void
 	 */
-	public function send_email() {
+	private function send_email() {
 		if ( ! empty( $this->form_settings['attrs']['emails'] ) ) {
-			add_filter(
-				'wp_mail_content_type',
-				function () {
-					return 'text/html';
-				}
-			);
-
 			foreach ( $this->form_settings['attrs']['emails'] as $email ) {
 				$to      = EmailHelper::maybe_parse_smart_tags( $email['mailTo'] ?? '', $this->form_data );
 				$subject = EmailHelper::maybe_parse_smart_tags( $email['mailSubject'] ?? '', $this->form_data );
 				$body    = EmailHelper::maybe_parse_smart_tags( $email['mailBody'] ?? '', $this->form_data );
 
 				if ( EmailHelper::is_valid_email( $to ) && ! empty( $subject ) && ! empty( $body ) ) {
-					wp_mail( $to, $subject, $body );
+					$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+					wp_mail( $to, $subject, $body, $headers );
 				}
 			}
-			remove_filter( 'wp_mail_content_type', 'set_html_mail_content_type' );
 		}
 	}
 }

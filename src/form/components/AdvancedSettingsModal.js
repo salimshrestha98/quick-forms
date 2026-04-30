@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { Modal, Button } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import EmailSettings from './EmailSettings';
@@ -6,10 +7,10 @@ import MessageSettings from './MessageSettings';
 import SubmissionSettings from './SubmissionSettings';
 
 const SETTINGS = {
-	'anti-spam': 'Anti-Spam',
-	messages: 'Messages',
-	email: 'Email',
-	submission: 'Submission',
+	'anti-spam': __( 'Anti-Spam', 'quick-forms' ),
+	messages: __( 'Messages', 'quick-forms' ),
+	email: __( 'Email', 'quick-forms' ),
+	submission: __( 'Submission', 'quick-forms' ),
 };
 
 export default function AdvancedSettingsModal( {
@@ -60,7 +61,7 @@ export default function AdvancedSettingsModal( {
 
 	return (
 		<Modal
-			title="Form Advanced Settings"
+			title={ __( 'Form Advanced Settings', 'quick-forms' ) }
 			onRequestClose={ () => setActiveTab( 'settings' ) }
 			className="qf-form-advanced-settings-modal"
 		>

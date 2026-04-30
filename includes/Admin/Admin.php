@@ -65,7 +65,7 @@ final class Admin {
 		?>
 
 		<div class="wrap">
-			<h1>Form Submissions</h1>
+			<h1><?php esc_html_e( 'Form Submissions', 'quick-forms' ); ?></h1>
 
 			<form method="get">
 				<input type="hidden" name="page" value="quick-forms-submissions" />
@@ -81,7 +81,7 @@ final class Admin {
 		$options = get_option( 'quick_forms_settings' );
 		?>
 		<div class="wrap">
-			<h1>Quick Forms Settings</h1>
+			<h1><?php esc_html_e( 'Quick Forms Settings', 'quick-forms' ); ?></h1>
 
 			<form method="post" action="options.php">
 				<?php settings_fields( 'quick_forms_settings_group' ); ?>

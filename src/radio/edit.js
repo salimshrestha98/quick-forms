@@ -24,13 +24,7 @@ export default function Edit( {
 	const { id, fieldLabel, options, optionsLayout, defaultValue, required } =
 		attributes;
 
-	const {
-		'quick-form/showLabel': showLabel,
-		'quick-form/labelPosition': labelPosition,
-		'quick-form/labelWidth': labelWidth,
-		'quick-form/fieldWidth': fieldWidth,
-		'quick-form/fieldMargin': fieldMargin,
-	} = context;
+	const { 'quick-form/fieldWidth': fieldWidth } = context;
 
 	useEffect( () => {
 		if ( ! id ) {
@@ -97,10 +91,18 @@ option-2 | Option 2`, // Do not change this.
 						if ( tab.name === 'settings' ) {
 							return (
 								<>
-									<PanelBody title="General Settings">
+									<PanelBody
+										title={ __(
+											'General Settings',
+											'quick-forms'
+										) }
+									>
 										<TextControl
 											__next40pxDefaultSize
-											label="Field Label"
+											label={ __(
+												'Field Label',
+												'quick-forms'
+											) }
 											value={ fieldLabel }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -110,9 +112,14 @@ option-2 | Option 2`, // Do not change this.
 										/>
 
 										<TextareaControl
-											label="Radio Options"
-											help={ `Enter the options for radio field in the pipe format:
-											option-key | Option Label` }
+											label={ __(
+												'Radio Options',
+												'quick-forms'
+											) }
+											help={ __(
+												'Enter the options for radio field in the pipe format: option-key | Option Label',
+												'quick-forms'
+											) }
 											value={ options }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -122,15 +129,24 @@ option-2 | Option 2`, // Do not change this.
 										/>
 
 										<SelectControl
-											label="Options Layout"
+											label={ __(
+												'Options Layout',
+												'quick-forms'
+											) }
 											value={ optionsLayout }
 											options={ [
 												{
-													label: 'Horizontal',
+													label: __(
+														'Horizontal',
+														'quick-forms'
+													),
 													value: 'inline',
 												},
 												{
-													label: 'Vertical',
+													label: __(
+														'Vertical',
+														'quick-forms'
+													),
 													value: 'block',
 												},
 											] }
@@ -144,7 +160,10 @@ option-2 | Option 2`, // Do not change this.
 
 										<TextControl
 											__next40pxDefaultSize
-											label="Default Vaue"
+											label={ __(
+												'Default Vaue',
+												'quick-forms'
+											) }
 											value={ defaultValue }
 											onChange={ ( value ) =>
 												setAttributes( {
@@ -154,7 +173,10 @@ option-2 | Option 2`, // Do not change this.
 										/>
 
 										<ToggleControl
-											label="Required"
+											label={ __(
+												'Required',
+												'quick-forms'
+											) }
 											checked={ required }
 											onChange={ () => {
 												setAttributes( {
@@ -180,7 +202,7 @@ option-2 | Option 2`, // Do not change this.
 						onChange={ ( value ) =>
 							setAttributes( { fieldLabel: value } )
 						}
-						placeholder={ __( 'Field Label' ) }
+						placeholder={ __( 'Field Label', 'quick-forms' ) }
 					/>
 					<div
 						className="qf-field qf-radio-field"
