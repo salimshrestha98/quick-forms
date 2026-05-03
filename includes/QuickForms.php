@@ -5,7 +5,6 @@ namespace QuickForms;
 defined( 'ABSPATH' ) || exit;
 
 use QuickForms\Admin\Admin;
-use QuickForms\Submission_Handler;
 
 /**
  * QuickForms class
@@ -25,6 +24,7 @@ class QuickForms {
 	 */
 	private function init() {
 		new Admin();
+		new Form_Validator();
 		new Submission_Handler();
 	}
 

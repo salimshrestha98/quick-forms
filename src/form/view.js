@@ -27,6 +27,11 @@ import domReady from '@wordpress/dom-ready';
 				submitBtn.disabled = true;
 			}
 
+			// Hide previous success/error messages.
+			form.parentElement
+				.querySelectorAll( '.qf-message-success, .qf-message-error' )
+				.forEach( ( el ) => el.classList.add( 'hidden' ) );
+
 			// Collect form data
 			const formData = new FormData( form );
 
@@ -39,12 +44,12 @@ import domReady from '@wordpress/dom-ready';
 				credentials: 'same-origin',
 			} )
 				.then( ( response ) => response.json() )
-				.then( ( data ) => {
-					if ( data.success ) {
+				.then( ( res ) => {
+					if ( res.success ) {
 						form.reset();
 						QF.handleSuccess( form );
 					} else {
-						QF.handleError( form, data );
+						QF.handleError( form, res?.data?.errors );
 					}
 				} )
 				.catch( () => {} )
@@ -72,10 +77,28 @@ import domReady from '@wordpress/dom-ready';
 			}
 		},
 
-		handleError( form ) {
-			form.parentElement
-				.querySelector( '.qf-message-error' )
-				.classList.remove( 'hidden' );
+		/**
+		 * Handle if form submission fails in backend.
+		 * @param {HTMLFormElement} form   The submitted form element.
+		 * @param {Object}          errors Key-value map of field IDs to error messages.
+		 */
+		handleError( form, errors ) {
+			const errorWrapper =
+				form.parentElement.querySelector( '.qf-message-error' );
+
+			errorWrapper.querySelector( '.error-list' )?.remove();
+
+			const errorList = document.createElement( 'ul' );
+			errorList.classList.add( 'error-list' );
+
+			Object.values( errors ).forEach( ( error ) => {
+				const li = document.createElement( 'li' );
+				li.textContent = error;
+				errorList.append( li );
+			} );
+
+			errorWrapper.append( errorList );
+			errorWrapper.classList.remove( 'hidden' );
 		},
 	};
 

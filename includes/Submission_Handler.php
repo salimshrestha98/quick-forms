@@ -54,6 +54,12 @@ final class Submission_Handler {
 
 		$this->handle_honeypot();
 		$this->handle_recaptcha();
+
+		/**
+		 * Perform actions before the form is saved.
+		 */
+		do_action( 'qf_before_save_form', $this->form_data, $this->form_settings );
+
 		$this->handle_uploads();
 		$this->save();
 		$this->send_email();
