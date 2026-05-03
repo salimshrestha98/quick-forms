@@ -6,6 +6,7 @@ $textarea_attributes .= sprintf( ' id="%s"', esc_attr( $id ) );
 $textarea_attributes .= sprintf( ' name="%s"', esc_attr( $id ) );
 $textarea_attributes .= sprintf( ' rows="%d"', esc_attr( $rowsCount ) );
 $textarea_attributes .= $placeholder ? sprintf( ' placeholder="%s"', esc_attr( $placeholder ) ) : '';
+$textarea_attributes .= $maxLength ? sprintf( ' maxlength="%d"', esc_attr( $maxLength ) ) : '';
 $textarea_attributes .= $required ? 'required' : '';
 ?>
 

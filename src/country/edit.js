@@ -39,7 +39,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									} )
 								}
 							/>
-
+						</PanelBody>
+						<PanelBody
+							title={ __( 'Validation', 'quick-forms' ) }
+							initialOpen={ false }
+						>
 							<ToggleControl
 								label={ __( 'Required', 'quick-forms' ) }
 								checked={ required }

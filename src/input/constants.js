@@ -23,10 +23,6 @@ export const INPUT_TYPE_HELP = {
 		'Hidden field; not visible to users, used to store data silently.',
 		'quick-forms'
 	),
-	search: __(
-		'Search input; styled for search queries, may trigger search-related behavior.',
-		'quick-forms'
-	),
 	color: __(
 		'Color picker; allows selection of a color value.',
 		'quick-forms'
@@ -43,10 +39,4 @@ export const INPUT_TYPE_HELP = {
 		'Time picker; selects a time (hours, minutes, seconds optional).',
 		'quick-forms'
 	),
-	'datetime-local': __(
-		'Select date and time in local format (no timezone).',
-		'quick-forms'
-	),
-	month: __( 'Select a month and year.', 'quick-forms' ),
-	week: __( 'Select a week and year (ISO-8601 format).', 'quick-forms' ),
 };

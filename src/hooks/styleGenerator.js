@@ -39,6 +39,9 @@ export function generateStyles( attributes, clientId ) {
 		#block-${ clientId } input[type="password"],
 		#block-${ clientId } input[type="number"],
 		#block-${ clientId } input[type="range"],
+		#block-${ clientId } input[type="tel"],
+		#block-${ clientId } input[type="url"],
+		#block-${ clientId } .qf-hidden-field-placeholder,
 		#block-${ clientId } textarea {
 			width: ${ fieldWidth };
 			max-width: ${ fieldWidth };

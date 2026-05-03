@@ -1,7 +1,9 @@
 .qf-hidden-field-placeholder {
 	border: 1px solid #ddd;
-	color: #ddd;
-	padding: 20px 10px;
+	border-radius: 6px;
+	color: #ccc;
+	background: #f0f0f0;
+	padding: 10px 10px;
 }
 
 .qf-tab-panel {
@@ -13,6 +15,10 @@
 
 	.active-tab {
 		border-bottom: 4px solid grey;
+	}
+
+	.components-toggle-control .components-flex {
+		flex-direction: row-reverse;
 	}
 }
 

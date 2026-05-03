@@ -5,6 +5,7 @@ import {
 	ToggleControl,
 	TextControl,
 	SelectControl,
+	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
 import DisabledInputControl from '../components/DisabledInputControl';
 import { INPUT_TYPE_HELP } from './constants';
@@ -19,8 +20,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		placeholder,
 		defaultValue,
 		required,
-		minimum,
-		maximum,
+		minValue,
+		maxValue,
+		maxLength,
 	} = attributes;
 
 	useBlockId( id, clientId, setAttributes );
@@ -69,13 +71,6 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										value: 'url',
 									},
 									{
-										label: __(
-											'Phone Number',
-											'quick-forms'
-										),
-										value: 'tel',
-									},
-									{
 										label: __( 'Password', 'quick-forms' ),
 										value: 'password',
 									},
@@ -84,8 +79,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										value: 'hidden',
 									},
 									{
-										label: __( 'Search', 'quick-forms' ),
-										value: 'search',
+										label: __(
+											'Phone Number',
+											'quick-forms'
+										),
+										value: 'tel',
 									},
 									{
 										label: __( 'Color', 'quick-forms' ),
@@ -102,21 +100,6 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									{
 										label: __( 'Time', 'quick-forms' ),
 										value: 'time',
-									},
-									{
-										label: __(
-											'DateTime Local',
-											'quick-forms'
-										),
-										value: 'datetime-local',
-									},
-									{
-										label: __( 'Month', 'quick-forms' ),
-										value: 'month',
-									},
-									{
-										label: __( 'Week', 'quick-forms' ),
-										value: 'week',
 									},
 								] }
 								help={ INPUT_TYPE_HELP[ inputType ] || '' }
@@ -164,7 +147,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									} )
 								}
 							/>
-
+						</PanelBody>
+						<PanelBody
+							title={ __( 'Validation', 'quick-forms' ) }
+							initialOpen={ false }
+						>
 							{ ! isHidden() && (
 								<ToggleControl
 									label={ __( 'Required', 'quick-forms' ) }
@@ -179,27 +166,54 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 							{ needMinMax() && (
 								<>
-									<TextControl
+									<NumberControl
 										__next40pxDefaultSize
-										label={ __( 'Minimum', 'quick-forms' ) }
-										value={ minimum }
+										label={ __(
+											'Minimum Value',
+											'quick-forms'
+										) }
+										value={ minValue }
 										onChange={ ( value ) =>
 											setAttributes( {
-												minimum: value,
+												minValue: value,
 											} )
 										}
 									/>
-									<TextControl
+									<NumberControl
 										__next40pxDefaultSize
-										label={ __( 'Maximum', 'quick-forms' ) }
-										value={ maximum }
+										label={ __(
+											'Maximum Value',
+											'quick-forms'
+										) }
+										value={ maxValue }
 										onChange={ ( value ) =>
 											setAttributes( {
-												maximum: value,
+												maxValue: value,
 											} )
 										}
 									/>
 								</>
+							) }
+							{ [
+								'text',
+								'email',
+								'url',
+								'password',
+								'tel',
+							].includes( inputType ) && (
+								<NumberControl
+									__next40pxDefaultSize
+									label={ __(
+										'Maximum Characters',
+										'quick-forms'
+									) }
+									value={ maxLength }
+									onChange={ ( value ) =>
+										setAttributes( {
+											maxLength: value,
+										} )
+									}
+								/>
 							) }
 						</PanelBody>
 					</>

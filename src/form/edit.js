@@ -196,9 +196,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			<div { ...blockProps }>
 				<style>{ css }</style>
 				<div className="wrapper">
-					<form className="quick-form">
+					<div className="quick-form">
 						<InnerBlocks template={ TEMPLATE } />
-					</form>
+					</div>
 					<div className="qf-form-message qf-message-success">
 						{ messages.success }
 					</div>

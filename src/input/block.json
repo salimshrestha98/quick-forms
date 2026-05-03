@@ -38,13 +38,17 @@
 			"type": "boolean",
 			"default": false
 		},
-		"minimum": {
-			"type": "string",
-			"default": ""
+		"minValue": {
+			"type": "number",
+			"default": 0
 		},
-		"maximum": {
-			"type": "string",
-			"default": ""
+		"maxValue": {
+			"type": "number",
+			"default": 100
+		},
+		"maxLength": {
+			"type": "number",
+			"default": 100
 		}
 	},
 	"inputdomain": "quick-forms",

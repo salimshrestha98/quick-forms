@@ -10,8 +10,9 @@ $input_attributes .= sprintf( ' id="%s"', esc_attr( $id ) );
 $input_attributes .= sprintf( ' name="%s"', esc_attr( $id ) );
 $input_attributes .= $placeholder ? sprintf( ' placeholder="%s"', esc_attr( $placeholder ) ) : '';
 $input_attributes .= $defaultValue ? sprintf( ' value="%s"', esc_attr( $defaultValue ) ) : '';
-$input_attributes .= $minimum ? sprintf( ' min="%s"', esc_attr( $minimum ) ) : '';
-$input_attributes .= $maximum ? sprintf( ' max="%s"', esc_attr( $maximum ) ) : '';
+$input_attributes .= $minValue ? sprintf( ' min="%s"', esc_attr( $minValue ) ) : '';
+$input_attributes .= $maxValue ? sprintf( ' max="%s"', esc_attr( $maxValue ) ) : '';
+$input_attributes .= $maxLength ? sprintf( ' maxlength="%s"', esc_attr( $maxLength ) ) : '';
 ?>
 
 <div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>

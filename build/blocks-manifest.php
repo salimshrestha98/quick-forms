@@ -284,13 +284,17 @@ return array(
 				'type' => 'boolean',
 				'default' => false
 			),
-			'minimum' => array(
-				'type' => 'string',
-				'default' => ''
+			'minValue' => array(
+				'type' => 'number',
+				'default' => 0
 			),
-			'maximum' => array(
-				'type' => 'string',
-				'default' => ''
+			'maxValue' => array(
+				'type' => 'number',
+				'default' => 100
+			),
+			'maxLength' => array(
+				'type' => 'number',
+				'default' => 100
 			)
 		),
 		'inputdomain' => 'quick-forms',
@@ -515,6 +519,10 @@ return array(
 			'required' => array(
 				'type' => 'boolean',
 				'default' => false
+			),
+			'maxLength' => array(
+				'type' => 'number',
+				'default' => 500
 			)
 		),
 		'inputdomain' => 'quick-forms',

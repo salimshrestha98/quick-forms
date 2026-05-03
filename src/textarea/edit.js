@@ -10,8 +10,15 @@ import { useBlockId } from '../hooks/useBlockId';
 import BlockInspectorTabs from '../components/BlockInspectorTabs';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
-	const { id, fieldLabel, rowsCount, placeholder, defaultValue, required } =
-		attributes;
+	const {
+		id,
+		fieldLabel,
+		rowsCount,
+		placeholder,
+		defaultValue,
+		required,
+		maxLength,
+	} = attributes;
 
 	useBlockId( id, clientId, setAttributes );
 
@@ -72,7 +79,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									} )
 								}
 							/>
-
+						</PanelBody>
+						<PanelBody
+							title={ __( 'Validation', 'quick-forms' ) }
+							initialOpen={ false }
+						>
 							<ToggleControl
 								label={ __( 'Required', 'quick-forms' ) }
 								checked={ required }
@@ -81,6 +92,19 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										required: ! required,
 									} );
 								} }
+							/>
+							<NumberControl
+								__next40pxDefaultSize
+								label={ __(
+									'Maximum Characters',
+									'quick-forms'
+								) }
+								value={ maxLength }
+								onChange={ ( value ) =>
+									setAttributes( {
+										maxLength: value,
+									} )
+								}
 							/>
 						</PanelBody>
 					</>

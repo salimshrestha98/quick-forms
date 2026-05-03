@@ -37,6 +37,10 @@
 		"required": {
 			"type": "boolean",
 			"default": false
+		},
+		"maxLength": {
+			"type": "number",
+			"default": 500
 		}
 	},
 	"inputdomain": "quick-forms",

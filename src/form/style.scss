@@ -57,12 +57,19 @@ $qf-transition: 0.2s ease;
 	input[type="email"],
 	input[type="tel"],
 	input[type="password"],
+	input[type="url"],
+	input[type="date"],
+	input[type="time"],
 	input[type="number"],
-	input[type="search"],
 	input[type="range"],
 	select,
 	textarea {
 		@include qf-input-base;
+	}
+
+	input[type="color"] {
+		height: 36px;
+		width: 36px;
 	}
 
 	textarea {
