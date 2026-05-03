@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl, TextControl } from '@wordpress/components';
-import countryList from '../../country_list.json';
+import countryList from '../../../country_list.json';
 import { useBlockId } from '../hooks/useBlockId';
 import BlockInspectorTabs from '../components/BlockInspectorTabs';
 

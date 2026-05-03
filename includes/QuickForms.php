@@ -32,7 +32,7 @@ class QuickForms {
 	 * Register gutenberg blocks.
 	 */
 	public function register_blocks() {
-		wp_register_block_types_from_metadata_collection( QF_BUILD_PATH, QF_BUILD_PATH . '/blocks-manifest.php' );
+		wp_register_block_types_from_metadata_collection( QF_BUILD_PATH . 'blocks', QF_BUILD_PATH . 'blocks-manifest.php' );
 	}
 
 	/**
