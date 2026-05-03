@@ -14,6 +14,7 @@ final class Admin {
 		add_action( 'save_post', array( $this, 'save_form' ), 10, 3 );
 		add_action( 'admin_menu', array( $this, 'register_menus' ) );
 		add_action( 'admin_init', array( $this, 'register_setting' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -80,29 +81,52 @@ final class Admin {
 	public function render_settings_page() {
 		$options = get_option( 'quick_forms_settings' );
 		?>
-		<div class="wrap">
-			<h1><?php esc_html_e( 'Quick Forms Settings', 'quick-forms' ); ?></h1>
+		<div class="qf-admin qf-settings">
+			<h1 class="qf-settings__title">
+				<?php esc_html_e( 'Quick Forms Settings', 'quick-forms' ); ?>
+			</h1>
 
-			<form method="post" action="options.php">
+			<form class="qf-settings__form" method="post" action="options.php">
 				<?php settings_fields( 'quick_forms_settings_group' ); ?>
 
-				<table class="form-table">
-					<tr>
-						<th><?php echo esc_html__( 'reCAPTCHA Site Key', 'quick-forms' ); ?></th>
-						<td>
-							<input type="text" name="quick_forms_settings[recaptcha_site_key]" 
-								value="<?php echo esc_attr( $options['recaptcha_site_key'] ?? '' ); ?>" />
-						</td>
-					</tr>
+				<div class="qf-settings__layout">
 
-					<tr>
-						<th><?php echo esc_html__( 'reCAPTCHA Secret Key', 'quick-forms' ); ?> </th>
-						<td>
-							<input type="text" name="quick_forms_settings[recaptcha_secret_key]" 
-								value="<?php echo esc_attr( $options['recaptcha_secret_key'] ?? '' ); ?>" />
-						</td>
-					</tr>
-				</table>
+					<!-- Sidebar -->
+					<div class="qf-settings__nav" role="tablist">
+						<button type="button" class="qf-settings__tab is-active" data-tab="recaptcha">
+							<?php esc_html_e( 'reCAPTCHA', 'quick-forms' ); ?>
+						</button>
+					</div>
+
+					<!-- Panels -->
+					<div class="qf-settings__panels">
+
+						<div class="qf-settings__panel is-active" data-panel="recaptcha">
+							<div class="qf-field">
+								<label class="qf-field__label">
+									<?php esc_html_e( 'reCAPTCHA Site Key', 'quick-forms' ); ?>
+								</label>
+								<div class="qf-field__control">
+									<input type="text"
+										name="quick_forms_settings[recaptcha_site_key]"
+										value="<?php echo esc_attr( $options['recaptcha_site_key'] ?? '' ); ?>">
+								</div>
+							</div>
+
+							<div class="qf-field">
+								<label class="qf-field__label">
+									<?php esc_html_e( 'reCAPTCHA Secret Key', 'quick-forms' ); ?>
+								</label>
+								<div class="qf-field__control">
+									<input type="text"
+										name="quick_forms_settings[recaptcha_secret_key]"
+										value="<?php echo esc_attr( $options['recaptcha_secret_key'] ?? '' ); ?>">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
 
 				<?php submit_button(); ?>
 			</form>
@@ -120,11 +144,15 @@ final class Admin {
 			'quick_forms_settings_group',
 			'quick_forms_settings',
 			array(
-				'type'              => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-				'default'           => '',
+				'type'              => 'array',
+				'sanitize_callback' => array( $this, 'sanitize_settings' ),
+				'default'           => array(),
 			)
 		);
+	}
+
+	public function sanitize_settings( array $settings ): array {
+		return array_map( 'sanitize_text_field', $settings );
 	}
 
 	/**
@@ -197,5 +225,24 @@ final class Admin {
 		}
 
 		return $results;
+	}
+
+	public function enqueue_scripts() {
+		wp_enqueue_script(
+			'quick_forms_admin',
+			QF_BUILD_URL . 'admin/admin.js',
+			array(),
+			QF_VERSION,
+			array(
+				'in_footer' => true,
+			)
+		);
+
+		wp_enqueue_style(
+			'quick_forms_admin',
+			QF_BUILD_URL . 'admin/admin.css',
+			array(),
+			QF_VERSION,
+		);
 	}
 }

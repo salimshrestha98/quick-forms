@@ -6,13 +6,13 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build --blocks-manifest",
+		"build": "wp-scripts build --blocks-manifest && node esbuild.js",
+		"start": "concurrently \"wp-scripts start --blocks-manifest\" \"node esbuild.js --watch\"",
 		"format": "wp-scripts format",
 		"lint": "eslint .",
 		"lint-fix": "eslint . --fix",
 		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start --blocks-manifest"
+		"plugin-zip": "wp-scripts plugin-zip"
 	},
 	"dependencies": {
 		"@wordpress/block-editor": "latest",
@@ -22,6 +22,10 @@
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^24.5.0",
 		"@wordpress/scripts": "^31.8.0",
-		"eslint": "^8.57.1"
+		"concurrently": "^9.2.1",
+		"esbuild": "^0.28.0",
+		"esbuild-sass-plugin": "^3.7.0",
+		"eslint": "^8.57.1",
+		"sass": "^1.99.0"
 	}
 }
