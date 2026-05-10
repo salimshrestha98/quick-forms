@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
+$options_list = NNForms\Helpers\BlockHelper::parse_radio_options( $options );
 ?>
 
 <div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
@@ -10,7 +10,7 @@ $options_list = QuickForms\Helpers\BlockHelper::parse_radio_options( $options );
 			<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>
 		</label>
 
-		<div class="qf-field qf-select-field">
+		<div class="nnf-field nnf-select-field">
 			<?php if ( ! empty( $options_list ) ) : ?>
 				<select
 					name="<?php echo esc_attr( $id ); ?>"

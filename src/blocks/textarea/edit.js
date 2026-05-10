@@ -28,11 +28,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				settingsTab={
 					<>
 						<PanelBody
-							title={ __( 'General Settings', 'quick-forms' ) }
+							title={ __( 'General Settings', '99forms' ) }
 						>
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Field Label', 'quick-forms' ) }
+								label={ __( 'Field Label', '99forms' ) }
 								value={ fieldLabel }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -46,7 +46,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 								isShiftStepEnabled={ true }
 								shiftStep={ 1 }
 								min={ 1 }
-								label={ __( 'Number of Rows', 'quick-forms' ) }
+								label={ __( 'Number of Rows', '99forms' ) }
 								value={ rowsCount }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -57,10 +57,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 							<TextControl
 								__next40pxDefaultSize
-								label={ __(
-									'Placeholder Text',
-									'quick-forms'
-								) }
+								label={ __( 'Placeholder Text', '99forms' ) }
 								value={ placeholder }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -71,7 +68,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Default Vaue', 'quick-forms' ) }
+								label={ __( 'Default Vaue', '99forms' ) }
 								value={ defaultValue }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -81,11 +78,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Validation', 'quick-forms' ) }
+							title={ __( 'Validation', '99forms' ) }
 							initialOpen={ false }
 						>
 							<ToggleControl
-								label={ __( 'Required', 'quick-forms' ) }
+								label={ __( 'Required', '99forms' ) }
 								checked={ required }
 								onChange={ () => {
 									setAttributes( {
@@ -95,10 +92,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 							<NumberControl
 								__next40pxDefaultSize
-								label={ __(
-									'Maximum Characters',
-									'quick-forms'
-								) }
+								label={ __( 'Maximum Characters', '99forms' ) }
 								value={ maxLength }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -113,7 +107,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 			<div
 				{ ...useBlockProps( {
-					className: 'qf-block qf-textarea-block',
+					className: 'nnf-block nnf-textarea-block',
 				} ) }
 			>
 				<div className="wrapper">
@@ -123,10 +117,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( value ) =>
 							setAttributes( { fieldLabel: value } )
 						}
-						placeholder={ __( 'Field Label', 'quick-forms' ) }
+						placeholder={ __( 'Field Label', '99forms' ) }
 					/>
 
-					<div className="qf-field qf-textarea-field">
+					<div className="nnf-field nnf-textarea-field">
 						<textarea
 							placeholder={ placeholder }
 							value={ defaultValue }

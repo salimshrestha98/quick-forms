@@ -20,7 +20,7 @@ export default function Edit( {
 	const { id, fieldLabel, options, optionsLayout, defaultValue, required } =
 		attributes;
 
-	const { 'quick-form/fieldWidth': fieldWidth } = context;
+	const { 'nnform/fieldWidth': fieldWidth } = context;
 
 	useBlockId( id, clientId, setAttributes );
 
@@ -68,11 +68,11 @@ option-2 | Option 2`, // Do not change this.
 				settingsTab={
 					<>
 						<PanelBody
-							title={ __( 'General Settings', 'quick-forms' ) }
+							title={ __( 'General Settings', '99forms' ) }
 						>
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Field Label', 'quick-forms' ) }
+								label={ __( 'Field Label', '99forms' ) }
 								value={ fieldLabel }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -82,10 +82,10 @@ option-2 | Option 2`, // Do not change this.
 							/>
 
 							<TextareaControl
-								label={ __( 'Radio Options', 'quick-forms' ) }
+								label={ __( 'Radio Options', '99forms' ) }
 								help={ __(
 									'Enter the options for radio field in the pipe format: option-key | Option Label',
-									'quick-forms'
+									'99forms'
 								) }
 								value={ options }
 								onChange={ ( value ) =>
@@ -96,18 +96,15 @@ option-2 | Option 2`, // Do not change this.
 							/>
 
 							<SelectControl
-								label={ __( 'Options Layout', 'quick-forms' ) }
+								label={ __( 'Options Layout', '99forms' ) }
 								value={ optionsLayout }
 								options={ [
 									{
-										label: __(
-											'Horizontal',
-											'quick-forms'
-										),
+										label: __( 'Horizontal', '99forms' ),
 										value: 'inline',
 									},
 									{
-										label: __( 'Vertical', 'quick-forms' ),
+										label: __( 'Vertical', '99forms' ),
 										value: 'block',
 									},
 								] }
@@ -121,7 +118,7 @@ option-2 | Option 2`, // Do not change this.
 
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Default Vaue', 'quick-forms' ) }
+								label={ __( 'Default Vaue', '99forms' ) }
 								value={ defaultValue }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -131,11 +128,11 @@ option-2 | Option 2`, // Do not change this.
 							/>
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Validation', 'quick-forms' ) }
+							title={ __( 'Validation', '99forms' ) }
 							initialOpen={ false }
 						>
 							<ToggleControl
-								label={ __( 'Required', 'quick-forms' ) }
+								label={ __( 'Required', '99forms' ) }
 								checked={ required }
 								onChange={ () => {
 									setAttributes( {
@@ -149,7 +146,9 @@ option-2 | Option 2`, // Do not change this.
 			/>
 
 			<div
-				{ ...useBlockProps( { className: `qf-block qf-radio-block` } ) }
+				{ ...useBlockProps( {
+					className: `nnf-block nnf-radio-block`,
+				} ) }
 			>
 				<div className="wrapper">
 					<RichText
@@ -158,16 +157,16 @@ option-2 | Option 2`, // Do not change this.
 						onChange={ ( value ) =>
 							setAttributes( { fieldLabel: value } )
 						}
-						placeholder={ __( 'Field Label', 'quick-forms' ) }
+						placeholder={ __( 'Field Label', '99forms' ) }
 					/>
 					<div
-						className="qf-field qf-radio-field"
+						className="nnf-field nnf-radio-field"
 						style={ { maxWidth: fieldWidth } }
 					>
 						{ optionsList.map( ( option, index ) => (
 							<div
 								key={ index }
-								className="qf-radio-item"
+								className="nnf-radio-item"
 								style={ radioStyles }
 							>
 								<input

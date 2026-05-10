@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
-		<div class="qf-field qf-checkbox-field">
+		<div class="nnf-field nnf-checkbox-field">
 			<input type="checkbox" name=
 			<?php
 			echo esc_attr( $id );

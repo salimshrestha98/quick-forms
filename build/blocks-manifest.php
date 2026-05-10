@@ -4,14 +4,14 @@ return array(
 	'checkbox' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/checkbox',
+		'name' => 'nnforms/checkbox',
 		'version' => '0.1.0',
 		'title' => 'Checkbox',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'yes',
 		'description' => 'Checkbox Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -44,21 +44,21 @@ return array(
 				'default' => false
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'country' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/country',
+		'name' => 'nnforms/country',
 		'version' => '0.1.0',
 		'title' => 'Country',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'admin-site-alt2',
 		'description' => 'Country Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -91,21 +91,21 @@ return array(
 				'default' => false
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'file-upload' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/file-upload',
+		'name' => 'nnforms/file-upload',
 		'version' => '0.1.0',
 		'title' => 'File Upload',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'cloud-upload',
 		'description' => 'File Upload Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -138,19 +138,19 @@ return array(
 				'default' => false
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'form' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/form',
+		'name' => 'nnforms/form',
 		'version' => '0.1.0',
 		'title' => 'Form',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'feedback',
-		'description' => 'Quick Form wrapper block',
+		'description' => '99Forms wrapper block',
 		'example' => array(
 			
 		),
@@ -235,7 +235,7 @@ return array(
 				)
 			)
 		),
-		'textdomain' => 'quick-forms',
+		'textdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
@@ -245,14 +245,14 @@ return array(
 	'input' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/input',
+		'name' => 'nnforms/input',
 		'version' => '0.1.0',
 		'title' => 'Input',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'editor-textcolor',
 		'description' => 'Input Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -297,21 +297,21 @@ return array(
 				'default' => 100
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'radio' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/radio',
+		'name' => 'nnforms/radio',
 		'version' => '0.1.0',
 		'title' => 'Radio',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'editor-ul',
 		'description' => 'Radio Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -344,21 +344,21 @@ return array(
 				'default' => false
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'recaptcha' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/recaptcha',
+		'name' => 'nnforms/recaptcha',
 		'version' => '0.1.0',
 		'title' => 'Recaptcha',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'lock',
 		'description' => 'Recaptcha Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -371,21 +371,21 @@ return array(
 				'type' => 'string'
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'select' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/select',
+		'name' => 'nnforms/select',
 		'version' => '0.1.0',
 		'title' => 'Select',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'arrow-down-alt2',
 		'description' => 'Select Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -418,21 +418,21 @@ return array(
 				'default' => false
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'submit' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/submit',
+		'name' => 'nnforms/submit',
 		'version' => '0.1.0',
 		'title' => 'Submit',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'arrow-right-alt',
 		'description' => 'Submit Button',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -474,21 +474,21 @@ return array(
 				)
 			)
 		),
-		'textdomain' => 'quick-forms',
+		'textdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	),
 	'textarea' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'quick-forms/textarea',
+		'name' => 'nnforms/textarea',
 		'version' => '0.1.0',
 		'title' => 'Textarea',
-		'category' => 'quick-forms',
+		'category' => 'nnforms',
 		'icon' => 'editor-paragraph',
 		'description' => 'Textarea Field',
 		'parent' => array(
-			'quick-forms/form'
+			'nnforms/form'
 		),
 		'example' => array(
 			
@@ -525,7 +525,7 @@ return array(
 				'default' => 500
 			)
 		),
-		'inputdomain' => 'quick-forms',
+		'inputdomain' => 'nnforms',
 		'editorScript' => 'file:./index.js',
 		'render' => 'file:./render.php'
 	)

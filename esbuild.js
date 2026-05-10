@@ -1,8 +1,8 @@
-const esbuild = require('esbuild');
-const { sassPlugin } = require('esbuild-sass-plugin');
+const esbuild = require( 'esbuild' );
+const { sassPlugin } = require( 'esbuild-sass-plugin' );
 
 const config = {
-	entryPoints: ['src/admin/admin.js'],
+	entryPoints: [ 'src/admin/admin.js' ],
 
 	bundle: true,
 	minify: false,
@@ -13,13 +13,11 @@ const config = {
 	entryNames: 'admin/[name]',
 	assetNames: 'admin/[name]',
 
-	plugins: [
-		sassPlugin({ type: 'css' }),
-	],
+	plugins: [ sassPlugin( { type: 'css' } ) ],
 };
 
-(async () => {
-	const ctx = await esbuild.context(config);
+( async () => {
+	const ctx = await esbuild.context( config );
 
 	// CRITICAL: force initial full build
 	await ctx.rebuild();
@@ -27,5 +25,5 @@ const config = {
 	// then start watch
 	await ctx.watch();
 
-	console.log('Watching admin build...');
-})();
+	console.log( 'Watching admin build...' );
+} )();

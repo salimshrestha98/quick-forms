@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "quick-forms/input",
+	"name": "nnforms/input",
 	"version": "0.1.0",
 	"title": "Input",
-	"category": "quick-forms",
+	"category": "nnforms",
 	"icon": "editor-textcolor",
 	"description": "Input Field",
 	"parent": [
-		"quick-forms/form"
+		"nnforms/form"
 	],
 	"example": {},
 	"supports": {
@@ -51,7 +51,7 @@
 			"default": 100
 		}
 	},
-	"inputdomain": "quick-forms",
+	"inputdomain": "nnforms",
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

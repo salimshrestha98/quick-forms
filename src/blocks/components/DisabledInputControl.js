@@ -23,19 +23,19 @@ export default function DisabledInputControl( { label = '', value = '' } ) {
 	};
 
 	return (
-		<BaseControl id={ value } label={ label } className="qf-copy-id-field">
-			<div className="qf-copy-id-wrapper">
-				<div className="qf-copy-id-value">{ `{{${ value }}}` }</div>
+		<BaseControl id={ value } label={ label } className="nnf-copy-id-field">
+			<div className="nnf-copy-id-wrapper">
+				<div className="nnf-copy-id-value">{ `{{${ value }}}` }</div>
 
 				<Button
 					icon="admin-page"
 					label="Copy ID"
 					onClick={ handleCopy }
-					className="qf-copy-id-button"
+					className="nnf-copy-id-button"
 					isSmall
 				/>
 
-				{ copied && <span className="qf-copy-feedback">Copied</span> }
+				{ copied && <span className="nnf-copy-feedback">Copied</span> }
 			</div>
 		</BaseControl>
 	);

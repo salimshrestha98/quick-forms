@@ -1,9 +1,9 @@
 <?php
 
-namespace QuickForms\Admin;
+namespace NNForms\Admin;
 
 use WP_List_Table;
-use QuickForms\Helpers\BlockHelper;
+use NNForms\Helpers\BlockHelper;
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
@@ -44,7 +44,7 @@ class Submissions_Table extends WP_List_Table {
 		);
 
 		global $wpdb;
-		$this->table = $wpdb->prefix . 'qf_submissions';
+		$this->table = $wpdb->prefix . 'nnforms_submissions';
 		$this->get_available_forms();
 
 		$this->form = BlockHelper::get_form_settings( $this->get_form_filter() );
@@ -83,12 +83,12 @@ class Submissions_Table extends WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb' => '<input type="checkbox" />',
-			'id' => __( 'ID', 'quick-forms' ),
+			'id' => __( 'ID', '99forms' ),
 		);
 
 		if ( isset( $this->form['fields'] ) ) {
 			foreach ( $this->form['fields'] as $field ) {
-				$ignoreBlocks = array( 'quick-forms/recaptcha', 'quick-forms/submit' );
+				$ignoreBlocks = array( 'nnforms/recaptcha', 'nnforms/submit' );
 
 				if ( in_array( $field['blockName'], $ignoreBlocks, true ) ) {
 					continue;
@@ -101,7 +101,7 @@ class Submissions_Table extends WP_List_Table {
 		}
 
 		// Add Date column to last only.
-		$columns['submitted_at'] = __( 'Date', 'quick-forms' );
+		$columns['submitted_at'] = __( 'Date', '99forms' );
 
 		return $columns;
 	}
@@ -130,25 +130,25 @@ class Submissions_Table extends WP_List_Table {
 		$field      = $this->form['fields'][ $column_name ] ?? array();
 		$field_name = $field['blockName'] ?? '';
 
-		if ( 'quick-forms/country' === $field_name ) {
+		if ( 'nnforms/country' === $field_name ) {
 			$country = BlockHelper::get_country( $value );
 
 			return esc_html( $country['name'] ?? $value );
-		} elseif ( 'quick-forms/file-upload' === $field_name && is_array( $value ) ) {
+		} elseif ( 'nnforms/file-upload' === $field_name && is_array( $value ) ) {
 			return sprintf(
 				'<a href=%s target="_blank">%s</a>',
 				esc_url( $value['url'] ),
 				esc_html( $value['name'] )
 			);
-		} elseif ( 'quick-forms/radio' === $field_name || 'quick-forms/select' === $field_name ) {
+		} elseif ( 'nnforms/radio' === $field_name || 'nnforms/select' === $field_name ) {
 			$options = BlockHelper::parse_radio_options( $field['attrs']['options'] ?? '' );
 			return esc_html( $options[ $value ] ?? $value );
-		} elseif ( 'quick-forms/textarea' === $field_name && strlen( $value ) > 60 ) {
+		} elseif ( 'nnforms/textarea' === $field_name && strlen( $value ) > 60 ) {
 			return esc_html( substr( $value, 0, 60 ) ) . '...';
 		}
 
 		if ( is_iterable( $value ) ) {
-			return __( '[Non string value]', 'quick-forms' );
+			return __( '[Non string value]', '99forms' );
 		}
 
 		return esc_html( $value );
@@ -161,7 +161,7 @@ class Submissions_Table extends WP_List_Table {
 	 */
 	protected function get_bulk_actions() {
 		return array(
-			'delete' => __( 'Delete', 'quick-forms' ),
+			'delete' => __( 'Delete', '99forms' ),
 		);
 	}
 
@@ -182,7 +182,7 @@ class Submissions_Table extends WP_List_Table {
 		check_admin_referer( 'bulk-submissions' );
 
 		if ( ! current_user_can( 'delete_posts' ) ) {
-			wp_die( esc_html__( 'You do not have permission to do this.', 'quick-forms' ) );
+			wp_die( esc_html__( 'You do not have permission to do this.', '99forms' ) );
 		}
 
 		if ( $this->current_action() === 'delete' ) {
@@ -218,7 +218,7 @@ class Submissions_Table extends WP_List_Table {
 		<?php
 		foreach ( $this->form_ids as $form_id ) {
 			$form_settings = BlockHelper::get_form_settings( $form_id );
-			$form_name     = $form_settings['attrs']['formName'] ?? __( 'Contact Form', 'quick-forms' );
+			$form_name     = $form_settings['attrs']['formName'] ?? __( 'Contact Form', '99forms' );
 
 			printf(
 				"<option value='%s' %s>%s</option>",
@@ -229,13 +229,13 @@ class Submissions_Table extends WP_List_Table {
 		}
 		?>
 			</select>
-		<?php submit_button( __( 'Filter', 'quick-forms' ), '', 'filter_action', false ); ?>
+		<?php submit_button( __( 'Filter', '99forms' ), '', 'filter_action', false ); ?>
 
 	</div>
 	<div class="alignleft actions" style="margin-left: 10px">
 		<a class="button button-primary" href="<?php echo esc_url( $form_post_url ); ?>" target="_blank" style="display:flex;align-items:center;gap:5px;">
 			<span class="dashicons dashicons-edit"></span>
-			<?php esc_html_e( 'Edit Form', 'quick-forms' ); ?>
+			<?php esc_html_e( 'Edit Form', '99forms' ); ?>
 		</a>
 	</div>
 		<?php

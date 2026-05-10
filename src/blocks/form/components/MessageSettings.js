@@ -9,9 +9,9 @@ export default function MessageSettings( { attributes, setAttributes } ) {
 				__next40pxDefaultSize
 				help={ __(
 					'Message to show when form submits successfully.',
-					'quick-forms'
+					'99forms'
 				) }
-				label={ __( 'Success Message', 'quick-forms' ) }
+				label={ __( 'Success Message', '99forms' ) }
 				value={ messages.success }
 				onChange={ ( value ) =>
 					setAttributes( {
@@ -24,10 +24,10 @@ export default function MessageSettings( { attributes, setAttributes } ) {
 			/>
 			<TextControl
 				__next40pxDefaultSize
-				label={ __( 'Error Message', 'quick-forms' ) }
+				label={ __( 'Error Message', '99forms' ) }
 				help={ __(
 					'Message to show when form submission fails.',
-					'quick-forms'
+					'99forms'
 				) }
 				value={ messages.error }
 				onChange={ ( value ) =>

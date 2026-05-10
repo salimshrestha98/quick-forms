@@ -1,12 +1,12 @@
 <?php
 
-namespace QuickForms;
+namespace NNForms;
 
 defined( 'ABSPATH' ) || exit;
 
-use QuickForms\Database\Submission;
-use QuickForms\Helpers\BlockHelper;
-use QuickForms\Helpers\EmailHelper;
+use NNForms\Database\Submission;
+use NNForms\Helpers\BlockHelper;
+use NNForms\Helpers\EmailHelper;
 
 /**
  * Submission Handler class.
@@ -33,8 +33,8 @@ final class Submission_Handler {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_qf_form_submit', array( $this, 'handle' ) );
-		add_action( 'wp_ajax_nopriv_qf_form_submit', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_nnforms_form_submit', array( $this, 'handle' ) );
+		add_action( 'wp_ajax_nopriv_nnforms_form_submit', array( $this, 'handle' ) );
 	}
 
 	/**
@@ -43,7 +43,7 @@ final class Submission_Handler {
 	public function handle() {
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 
-		if ( ! wp_verify_nonce( $nonce, 'qf_form_submit' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'nnforms_form_submit' ) ) {
 			die( 'Nonce error.' );
 		}
 
@@ -58,7 +58,7 @@ final class Submission_Handler {
 		/**
 		 * Perform actions before the form is saved.
 		 */
-		do_action( 'qf_before_save_form', $this->form_data, $this->form_settings );
+		do_action( 'nnforms_before_save_form', $this->form_data, $this->form_settings );
 
 		$this->handle_uploads();
 		$this->save();
@@ -69,8 +69,8 @@ final class Submission_Handler {
 
 	private function handle_honeypot() {
 		if ( $this->form_settings['attrs']['honeypot'] ?? false ) {
-			if ( isset( $_POST['qfhpfld'] ) && ! empty( $_POST['qfhpfld'] ) ) {  // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				wp_send_json_error( __( 'Some error occured.', 'quick-forms' ) );
+			if ( isset( $_POST['nnfhpfld'] ) && ! empty( $_POST['nnfhpfld'] ) ) {  // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				wp_send_json_error( __( 'Some error occured.', '99forms' ) );
 				exit;
 			}
 		}
@@ -83,7 +83,7 @@ final class Submission_Handler {
 		$recaptcha_field = array_find(
 			$this->form_settings['fields'],
 			function ( $field ) {
-				return 'quick-forms/recaptcha' === $field['blockName'];
+				return 'nnforms/recaptcha' === $field['blockName'];
 			}
 		);
 
@@ -91,7 +91,7 @@ final class Submission_Handler {
 			$recaptcha_valid = $this->validate_recaptcha();
 
 			if ( ! $recaptcha_valid ) {
-				wp_send_json_error( __( 'Invalid captcha.', 'quick-forms' ) );
+				wp_send_json_error( __( 'Invalid captcha.', '99forms' ) );
 				exit;
 			}
 		}
@@ -106,7 +106,7 @@ final class Submission_Handler {
 
 		if ( isset( $form_settings['fields'] ) ) {
 			foreach ( $form_settings['fields'] as $field_key => $field ) {
-				if ( 'quick-forms/file-upload' === $field['blockName'] ) {
+				if ( 'nnforms/file-upload' === $field['blockName'] ) {
 					$file_upload_fields[ $field_key ] = $field;
 				}
 			}
@@ -118,13 +118,13 @@ final class Submission_Handler {
 
 				$file = $_FILES[ $field_key ]; // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				if ( UPLOAD_ERR_OK !== $file['error'] ) {
-					wp_send_json_error( __( 'File upload failed.', 'quick-forms' ) );
+					wp_send_json_error( __( 'File upload failed.', '99forms' ) );
 				}
 
 				$max_size = 2 * 1024 * 1024;
 
 				if ( $file['size'] > $max_size ) {
-					wp_send_json_error( __( 'File exceeds maximum size of 2MB.', 'quick-forms' ) );
+					wp_send_json_error( __( 'File exceeds maximum size of 2MB.', '99forms' ) );
 				}
 
 				$allowed_mimes = array(
@@ -136,7 +136,7 @@ final class Submission_Handler {
 				$filetype = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'], $allowed_mimes );
 
 				if ( ! $filetype['ext'] || ! $filetype['type'] ) {
-					wp_send_json_error( __( 'Invalid file type.', 'quick-forms' ) );
+					wp_send_json_error( __( 'Invalid file type.', '99forms' ) );
 				}
 
 				$file['name'] = sanitize_file_name( $file['name'] );
@@ -168,7 +168,7 @@ final class Submission_Handler {
 	 * Validate reCaptcha if enabled.
 	 */
 	private function validate_recaptcha() {
-		$options = get_option( 'quick_forms_settings' );
+		$options = get_option( 'nnforms_settings' );
 		$secret  = $options['recaptcha_secret_key'] ?? '';
 
 		$response = sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing

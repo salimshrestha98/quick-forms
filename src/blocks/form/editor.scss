@@ -1,4 +1,4 @@
-.qf-hidden-field-placeholder {
+.nnf-hidden-field-placeholder {
 	border: 1px solid #ddd;
 	border-radius: 6px;
 	color: #ccc;
@@ -6,7 +6,7 @@
 	padding: 10px 10px;
 }
 
-.qf-tab-panel {
+.nnf-tab-panel {
 	.components-button.components-tab-panel__tabs-item {
 		flex: 1;
 		display: flex;
@@ -22,13 +22,13 @@
 	}
 }
 
-.qf-radio-field .qf-radio-item {
+.nnf-radio-field .nnf-radio-item {
 	input {
 		margin-right: 6px !important;
 	}
 }
 
-.qf-recaptcha-placeholder {
+.nnf-recaptcha-placeholder {
 	opacity: 0.6;
 	font-size: 0.8rem;
 	padding: 16px;
@@ -36,7 +36,7 @@
 	background: #eee;
 }
 
-.qf-form-advanced-settings-modal {
+.nnf-form-advanced-settings-modal {
 	max-height: 80vh;
 	width: 90vw;
 	max-width: 1200px;
@@ -47,7 +47,7 @@
 		height: 100%;
 	}
 
-	.qf-fasm {
+	.nnf-fasm {
 		display: flex;
 		height: 80vh;
 		background: #fff;
@@ -119,13 +119,13 @@
 			margin-top: 30px;
 		}
 
-		.qf-email-list {
+		.nnf-email-list {
 			margin-top: 16px;
 			display: flex;
 			flex-direction: column;
 			gap: 12px;
 
-			.qf-email-item {
+			.nnf-email-item {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
@@ -143,15 +143,15 @@
 					transform: translateY(-1px);
 				}
 
-				.qf-email-info {
-					.qf-email-label {
+				.nnf-email-info {
+					.nnf-email-label {
 						font-weight: 600;
 						font-size: 13px;
 						color: #1e1e1e;
 					}
 				}
 
-				.qf-email-actions {
+				.nnf-email-actions {
 					display: flex;
 					gap: 8px;
 				}
@@ -160,8 +160,8 @@
 	}
 }
 
-.qf-copy-id-field {
-	.qf-copy-id-wrapper {
+.nnf-copy-id-field {
+	.nnf-copy-id-wrapper {
 		display: flex;
 		align-items: center;
 		gap: 8px;
@@ -172,7 +172,7 @@
 		background: #f6f7f7;
 	}
 
-	.qf-copy-id-value {
+	.nnf-copy-id-value {
 		flex: 1;
 		font-family: monospace;
 		font-size: 12px;
@@ -181,7 +181,7 @@
 		user-select: all;
 	}
 
-	.qf-copy-id-button {
+	.nnf-copy-id-button {
 		height: 28px;
 		min-width: 28px;
 		display: flex;
@@ -189,7 +189,7 @@
 		justify-content: center;
 	}
 
-	.qf-copy-feedback {
+	.nnf-copy-feedback {
 		font-size: 11px;
 		color: #1a7f37;
 		margin-left: 6px;

@@ -1,10 +1,10 @@
 <?php
 
-namespace QuickForms\Blocks;
+namespace NNForms\Blocks;
 
 defined( 'ABSPATH' ) || exit;
 
-use QuickForms\Helpers\BlockHelper;
+use NNForms\Helpers\BlockHelper;
 
 /**
  * Form Block class.
@@ -20,7 +20,7 @@ final class Form extends Block {
 		extract( $attributes );
 
 		$styles = array(
-			''                            => array(
+			''                             => array(
 				'margin' => sprintf(
 					'%s %s %s %s',
 					$margin['top'],
@@ -29,7 +29,7 @@ final class Form extends Block {
 					$margin['left']
 				),
 			),
-			' > .wrapper'                 => array(
+			' > .wrapper'                  => array(
 				'padding' => sprintf(
 					'%s %s %s %s',
 					$padding['top'],
@@ -38,7 +38,7 @@ final class Form extends Block {
 					$padding['left']
 				),
 			),
-			' .qf-block'                  => array(
+			' .nnf-block'                  => array(
 				'margin' => sprintf(
 					'%s %s %s %s',
 					$fieldMargin['top'],
@@ -47,35 +47,35 @@ final class Form extends Block {
 					$fieldMargin['left']
 				),
 			),
-			' .qf-block .wrapper'         => array(
+			' .nnf-block .wrapper'         => array(
 				'display'        => 'flex',
 				'flex-direction' => 'inline' === $labelPosition ? 'row' : 'column',
 			),
-			' .qf-block .wrapper > label' => array(
+			' .nnf-block .wrapper > label' => array(
 				'display' => $showLabel ? 'unset' : 'none',
 				'width'   => $labelWidth,
 			),
-			' input[type="text"]'         => array(
+			' input[type="text"]'          => array(
 				'width'     => $fieldWidth,
 				'max-width' => $fieldWidth,
 			),
-			' input[type="email"]'        => array(
+			' input[type="email"]'         => array(
 				'width'     => $fieldWidth,
 				'max-width' => $fieldWidth,
 			),
-			' input[type="password"]'     => array(
+			' input[type="password"]'      => array(
 				'width'     => $fieldWidth,
 				'max-width' => $fieldWidth,
 			),
-			' input[type="number"]'       => array(
+			' input[type="number"]'        => array(
 				'width'     => $fieldWidth,
 				'max-width' => $fieldWidth,
 			),
-			' input[type="range"]'        => array(
+			' input[type="range"]'         => array(
 				'width'     => $fieldWidth,
 				'max-width' => $fieldWidth,
 			),
-			' textarea'                   => array(
+			' textarea'                    => array(
 				'width'     => $fieldWidth,
 				'max-width' => $fieldWidth,
 			),

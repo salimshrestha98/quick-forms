@@ -45,12 +45,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			<BlockInspectorTabs
 				settingsTab={
 					<>
-						<PanelBody
-							title={ __( 'Field Settings', 'quick-forms' ) }
-						>
+						<PanelBody title={ __( 'Field Settings', '99forms' ) }>
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Button Text', 'quick-forms' ) }
+								label={ __( 'Button Text', '99forms' ) }
 								value={ buttonText }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -60,15 +58,15 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 
 							<SelectControl
-								label={ __( 'Button Width', 'quick-forms' ) }
+								label={ __( 'Button Width', '99forms' ) }
 								value={ buttonWidthType }
 								options={ [
 									{
-										label: __( 'Auto', 'quick-forms' ),
+										label: __( 'Auto', '99forms' ),
 										value: 'auto',
 									},
 									{
-										label: __( 'Custom', 'quick-forms' ),
+										label: __( 'Custom', '99forms' ),
 										value: 'custom',
 									},
 								] }
@@ -97,7 +95,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				stylesTab={
 					<>
 						<PanelBody
-							title={ __( 'Color Settings', 'quick-forms' ) }
+							title={ __( 'Color Settings', '99forms' ) }
 							initialOpen={ false }
 						>
 							<ColorPicker
@@ -118,12 +116,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Spacing Settings', 'quick-forms' ) }
+							title={ __( 'Spacing Settings', '99forms' ) }
 							initialOpen={ false }
 						>
 							<BoxControl
 								__next40pxDefaultSize
-								label={ __( 'Padding', 'quick-forms' ) }
+								label={ __( 'Padding', '99forms' ) }
 								values={ padding }
 								onChange={ ( val ) =>
 									setAttributes( {
@@ -138,11 +136,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 			<div
 				{ ...useBlockProps( {
-					className: 'qf-block qf-submit-button',
+					className: 'nnf-block nnf-submit-button',
 				} ) }
 			>
 				<div className="wrapper">
-					<div className="qf-field qf-submit-field">
+					<div className="nnf-field nnf-submit-field">
 						<button style={ buttonStyles } onClick={ () => null }>
 							<RichText
 								tagName="span"
@@ -152,7 +150,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 								}
 								placeholder={ __(
 									'Enter Button Text Here',
-									'quick-forms'
+									'99forms'
 								) }
 							/>
 						</button>

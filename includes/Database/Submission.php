@@ -1,6 +1,6 @@
 <?php
 
-namespace QuickForms\Database;
+namespace NNForms\Database;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +21,7 @@ final class Submission {
 	public function __construct() {
 		global $wpdb;
 
-		$this->table = $wpdb->prefix . 'qf_submissions';
+		$this->table = $wpdb->prefix . 'nnforms_submissions';
 	}
 
 	/**

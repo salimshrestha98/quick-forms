@@ -1,5 +1,5 @@
 <?php
-namespace QuickForms\Helpers;
+namespace NNForms\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 

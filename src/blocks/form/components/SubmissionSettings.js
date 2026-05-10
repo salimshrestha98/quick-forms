@@ -8,9 +8,9 @@ export default function SubmissionSettings( { attributes, setAttributes } ) {
 			<ToggleControl
 				help={ __(
 					'Hide the form after the form is submitted successfully.',
-					'quick-forms'
+					'99forms'
 				) }
-				label={ __( 'Hide Form after Submission', 'quick-forms' ) }
+				label={ __( 'Hide Form after Submission', '99forms' ) }
 				checked={ hideFormAfterSubmit }
 				onChange={ () => {
 					setAttributes( {
@@ -22,9 +22,9 @@ export default function SubmissionSettings( { attributes, setAttributes } ) {
 				__next40pxDefaultSize
 				help={ __(
 					'Redirect the user to certain page after the form is submitted successfully.',
-					'quick-forms'
+					'99forms'
 				) }
-				label={ __( 'Redirection URL', 'quick-forms' ) }
+				label={ __( 'Redirection URL', '99forms' ) }
 				value={ redirectionUrl }
 				placeholder="https://example.com/"
 				onChange={ ( value ) =>

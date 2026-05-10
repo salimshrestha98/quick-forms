@@ -6,9 +6,9 @@ export default function AntiSpamSettings( { attributes, setAttributes } ) {
 	return (
 		<div>
 			<ToggleControl
-				label={ __( 'Enable Honeypot', 'quick-forms' ) }
+				label={ __( 'Enable Honeypot', '99forms' ) }
 				checked={ honeypot }
-				help={ __( 'Enable Honeypot for this form.', 'quick-forms' ) }
+				help={ __( 'Enable Honeypot for this form.', '99forms' ) }
 				onChange={ () => {
 					setAttributes( {
 						honeypot: ! honeypot,

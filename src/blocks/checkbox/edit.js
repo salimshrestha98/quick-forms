@@ -16,11 +16,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				settingsTab={
 					<>
 						<PanelBody
-							title={ __( 'General Settings', 'quick-forms' ) }
+							title={ __( 'General Settings', '99forms' ) }
 						>
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Field Label', 'quick-forms' ) }
+								label={ __( 'Field Label', '99forms' ) }
 								value={ fieldLabel }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -31,10 +31,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 							<TextControl
 								__next40pxDefaultSize
-								label={ __(
-									'Placeholder Text',
-									'quick-forms'
-								) }
+								label={ __( 'Placeholder Text', '99forms' ) }
 								value={ placeholder }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -44,10 +41,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 
 							<ToggleControl
-								label={ __(
-									'Checked by Default',
-									'quick-forms'
-								) }
+								label={ __( 'Checked by Default', '99forms' ) }
 								checked={ checkedByDefault }
 								onChange={ () => {
 									setAttributes( {
@@ -57,11 +51,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Validation', 'quick-forms' ) }
+							title={ __( 'Validation', '99forms' ) }
 							initialOpen={ false }
 						>
 							<ToggleControl
-								label={ __( 'Required', 'quick-forms' ) }
+								label={ __( 'Required', '99forms' ) }
 								checked={ required }
 								onChange={ () => {
 									setAttributes( {
@@ -76,11 +70,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 			<div
 				{ ...useBlockProps( {
-					className: `qf-block qf-checkbox-block`,
+					className: `nnf-block nnf-checkbox-block`,
 				} ) }
 			>
 				<div className="wrapper">
-					<div className="qf-field qf-checkbox-field">
+					<div className="nnf-field nnf-checkbox-field">
 						<input type="checkbox" onChange={ () => false } />
 						<span>{ placeholder }</span>
 					</div>

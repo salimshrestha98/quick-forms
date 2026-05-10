@@ -2,17 +2,17 @@ import domReady from '@wordpress/dom-ready';
 
 ( function ( window, document ) {
 	const l10n = window.l10n ?? {};
-	const QF = {
+	const NNF = {
 		init() {
-			QF.bindEvents();
+			NNF.bindEvents();
 		},
 
 		bindEvents() {
-			const forms = document.querySelectorAll( 'form.quick-form' );
+			const forms = document.querySelectorAll( 'form.nnform' );
 
 			forms.forEach( ( form ) => {
 				if ( form ) {
-					form.addEventListener( 'submit', QF.handleSubmit );
+					form.addEventListener( 'submit', NNF.handleSubmit );
 				}
 			} );
 		},
@@ -29,13 +29,13 @@ import domReady from '@wordpress/dom-ready';
 
 			// Hide previous success/error messages.
 			form.parentElement
-				.querySelectorAll( '.qf-message-success, .qf-message-error' )
+				.querySelectorAll( '.nnf-message-success, .nnf-message-error' )
 				.forEach( ( el ) => el.classList.add( 'hidden' ) );
 
 			// Collect form data
 			const formData = new FormData( form );
 
-			formData.append( 'action', 'qf_form_submit' );
+			formData.append( 'action', 'nnforms_form_submit' );
 			formData.append( 'nonce', l10n?.ajax_nonce );
 
 			fetch( l10n?.ajax_url, {
@@ -47,9 +47,9 @@ import domReady from '@wordpress/dom-ready';
 				.then( ( res ) => {
 					if ( res.success ) {
 						form.reset();
-						QF.handleSuccess( form );
+						NNF.handleSuccess( form );
 					} else {
-						QF.handleError( form, res?.data?.errors );
+						NNF.handleError( form, res?.data?.errors );
 					}
 				} )
 				.catch( () => {} )
@@ -66,7 +66,7 @@ import domReady from '@wordpress/dom-ready';
 			}
 
 			form.parentElement
-				.querySelector( '.qf-message-success' )
+				.querySelector( '.nnf-message-success' )
 				.classList.remove( 'hidden' );
 
 			if (
@@ -84,7 +84,7 @@ import domReady from '@wordpress/dom-ready';
 		 */
 		handleError( form, errors ) {
 			const errorWrapper =
-				form.parentElement.querySelector( '.qf-message-error' );
+				form.parentElement.querySelector( '.nnf-message-error' );
 
 			errorWrapper.querySelector( '.error-list' )?.remove();
 
@@ -102,5 +102,5 @@ import domReady from '@wordpress/dom-ready';
 		},
 	};
 
-	domReady( QF.init );
+	domReady( NNF.init );
 } )( window, document );

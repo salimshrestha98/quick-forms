@@ -18,7 +18,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	useBlockId( id, clientId, setAttributes );
 
 	const blockProps = useBlockProps( {
-		className: `qf-block qf-file-upload-block`,
+		className: `nnf-block nnf-file-upload-block`,
 	} );
 
 	return (
@@ -27,10 +27,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				settingsTab={
 					<>
 						<PanelBody
-							title={ __( 'General Settings', 'quick-forms' ) }
+							title={ __( 'General Settings', '99forms' ) }
 						>
 							<TextControl
-								label={ __( 'Field Label', 'quick-forms' ) }
+								label={ __( 'Field Label', '99forms' ) }
 								value={ fieldLabel }
 								onChange={ ( val ) =>
 									setAttributes( {
@@ -41,12 +41,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							<TextControl
 								label={ __(
 									'Allowed File Types (accept)',
-									'quick-forms'
+									'99forms'
 								) }
-								help={ __(
-									'e.g. .jpg,.png,.pdf',
-									'quick-forms'
-								) }
+								help={ __( 'e.g. .jpg,.png,.pdf', '99forms' ) }
 								value={ accept }
 								onChange={ ( val ) =>
 									setAttributes( { accept: val } )
@@ -56,7 +53,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							<ToggleControl
 								label={ __(
 									'Allow Multiple Files',
-									'quick-forms'
+									'99forms'
 								) }
 								checked={ multiple }
 								onChange={ ( val ) =>
@@ -67,10 +64,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 							<TextControl
 								__next40pxDefaultSize
-								label={ __(
-									'Placeholder Text',
-									'quick-forms'
-								) }
+								label={ __( 'Placeholder Text', '99forms' ) }
 								value={ placeholder }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -80,10 +74,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 
 							<ToggleControl
-								label={ __(
-									'Checked by Default',
-									'quick-forms'
-								) }
+								label={ __( 'Checked by Default', '99forms' ) }
 								checked={ checkedByDefault }
 								onChange={ () => {
 									setAttributes( {
@@ -93,11 +84,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Validation', 'quick-forms' ) }
+							title={ __( 'Validation', '99forms' ) }
 							initialOpen={ false }
 						>
 							<ToggleControl
-								label={ __( 'Required', 'quick-forms' ) }
+								label={ __( 'Required', '99forms' ) }
 								checked={ required }
 								onChange={ () => {
 									setAttributes( {
@@ -118,17 +109,17 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( value ) =>
 							setAttributes( { fieldLabel: value } )
 						}
-						placeholder={ __( 'Field Label', 'quick-forms' ) }
+						placeholder={ __( 'Field Label', '99forms' ) }
 					/>
-					<div className="qf-field qf-file-upload-field">
+					<div className="nnf-field nnf-file-upload-field">
 						<input type="file" disabled />
 						<p style={ { fontSize: '12px', opacity: 0.6 } }>
 							{ __(
 								'File upload field preview (disabled in editor)',
-								'quick-forms'
+								'99forms'
 							) }
 						</p>
-						<span className="qf-file-upload-placeholder">
+						<span className="nnf-file-upload-placeholder">
 							{ placeholder }
 						</span>
 					</div>

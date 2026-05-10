@@ -1,10 +1,10 @@
 <?php
 
-namespace QuickForms\Blocks;
+namespace NNForms\Blocks;
 
 defined( 'ABSPATH' ) || exit;
 
-use QuickForms\Helpers\BlockHelper;
+use NNForms\Helpers\BlockHelper;
 
 /**
  * Base Block Class.
@@ -49,9 +49,9 @@ class Block {
 	 * @return string
 	 */
 	public function get_template_path(): string {
-		$block_name = str_replace( 'quick-forms/', '', $this->block->name );
+		$block_name = str_replace( 'nnforms/', '', $this->block->name );
 
-		return QF_TEMPLATES_PATH . 'blocks/' . $block_name . '.php';
+		return NNFORMS_TEMPLATES_PATH . 'blocks/' . $block_name . '.php';
 	}
 
 	/**
@@ -62,7 +62,7 @@ class Block {
 	public function get_attributes(): array {
 		$defaults = BlockHelper::get_block_default_attributes( $this->block->name );
 		$context  = array_combine(
-			array_map( fn( $key ) => str_replace( 'quick-form/', '', $key ), array_keys( $this->block->context ) ),
+			array_map( fn( $key ) => str_replace( 'nnform/', '', $key ), array_keys( $this->block->context ) ),
 			$this->block->context
 		);
 
@@ -82,10 +82,10 @@ class Block {
 
 		extract( $attributes );
 
-		$block_name    = str_replace( 'quick-forms/', '', $this->block->name );
+		$block_name    = str_replace( 'nnforms/', '', $this->block->name );
 		$blockProps    = get_block_wrapper_attributes(
 			array(
-				'class'   => "qf-block qf-{$block_name}-block",
+				'class'   => "nnf-block nnf-{$block_name}-block",
 				'data-id' => esc_attr( $id ),
 			)
 		);

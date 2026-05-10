@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "quick-forms/file-upload",
+	"name": "nnforms/file-upload",
 	"version": "0.1.0",
 	"title": "File Upload",
-	"category": "quick-forms",
+	"category": "nnforms",
 	"icon": "cloud-upload",
 	"description": "File Upload Field",
 	"parent": [
-		"quick-forms/form"
+		"nnforms/form"
 	],
 	"example": {},
 	"supports": {
@@ -39,7 +39,7 @@
 			"default": false
 		}
 	},
-	"inputdomain": "quick-forms",
+	"inputdomain": "nnforms",
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

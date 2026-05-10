@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$country_file = QF_PATH . 'country_list.json';
+$country_file = NNFORMS_PATH . 'country_list.json';
 $country_list = array();
 
 if ( file_exists( $country_file ) ) {
@@ -24,7 +24,7 @@ if ( ! empty( $country_list ) ) {
 <div class="wrapper">
 	<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>
 
-	<div class="qf-field qf-country-field">
+	<div class="nnf-field nnf-country-field">
 		<?php if ( ! empty( $country_list ) ) : ?>
 			<select
 				name="<?php echo esc_attr( $id ); ?>"

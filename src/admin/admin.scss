@@ -1,4 +1,4 @@
-.qf-admin {
+.nnf-admin {
 	width: 100%;
 	max-width: none;
 	margin: 0;
@@ -9,7 +9,7 @@
 		margin: 0;
 	}
 
-	.qf-settings__title {
+	.nnf-settings__title {
 		font-size: 22px;
 		font-weight: 600;
 		margin: 16px 0 20px;
@@ -17,7 +17,7 @@
 		padding: 0 20px;
 	}
 
-	.qf-settings__form {
+	.nnf-settings__form {
 		background: #fff;
 		border: 1px solid #dcdcde;
 		border-radius: 10px;
@@ -28,14 +28,14 @@
 		flex-direction: column;
 	}
 
-	.qf-settings__layout {
+	.nnf-settings__layout {
 		display: flex;
 		flex: 1;
 		min-height: 100%;
 		background: #f6f7f7;
 	}
 
-	.qf-settings__nav {
+	.nnf-settings__nav {
 		width: 260px;
 		background: #f0f0f1;
 		border-right: 1px solid #dcdcde;
@@ -46,7 +46,7 @@
 		align-self: stretch;
 	}
 
-	.qf-settings__tab {
+	.nnf-settings__tab {
 		all: unset;
 		cursor: pointer;
 		padding: 10px 12px;
@@ -68,23 +68,23 @@
 		}
 	}
 
-	.qf-settings__panels {
+	.nnf-settings__panels {
 		flex: 1;
 		background: #fff;
 		padding: 32px 40px;
 		min-width: 0; /* prevents flex overflow issues */
 	}
 
-	.qf-settings__panel {
+	.nnf-settings__panel {
 		display: none;
 
 		&.is-active {
 			display: block;
-			animation: qfFade 0.15s ease-in-out;
+			animation: nnfFade 0.15s ease-in-out;
 		}
 	}
 
-	@keyframes qfFade {
+	@keyframes nnfFade {
 		from {
 			opacity: 0;
 			transform: translateY(6px);
@@ -95,7 +95,7 @@
 		}
 	}
 
-	.qf-field {
+	.nnf-field {
 		margin-bottom: 20px;
 		max-width: 600px;
 
@@ -129,7 +129,7 @@
 	}
 }
 
-body.toplevel_page_quick-forms-settings {
+body.toplevel_page_nnforms-settings {
 	.wrap {
 		max-width: none !important;
 	}

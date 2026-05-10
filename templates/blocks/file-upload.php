@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="wrapper">
 		<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>
 
-		<div class="qf-field qf-file-upload-field">
+		<div class="nnf-field nnf-file-upload-field">
 			<input
 				type="file"
 				name="<?php echo esc_attr( $id ); ?><?php echo $multiple ? '[]' : ''; ?>"
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 				<?php echo $multiple ? 'multiple' : ''; ?>
 				<?php echo $required ? 'required' : ''; ?>
 			/>
-			<span class="qf-file-upload-placeholder"><?php echo esc_html( $placeholder ); ?></span>
+			<span class="nnf-file-upload-placeholder"><?php echo esc_html( $placeholder ); ?></span>
 		</div>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-=== Quick Forms ===
+=== 99Forms ===
 Contributors: salimlabs
 Tags: form, contact form, gutenberg, block, form builder
 Requires at least: 6.8
@@ -12,11 +12,11 @@ A native Gutenberg block-based contact form builder. Build contact forms directl
 
 == Description ==
 
-Quick Forms is a lightweight, Gutenberg-native contact form builder built for WordPress 6.8+. Every form field is a proper block — drag, drop, and configure directly inside the editor. No shortcodes, no page builders required.
+99Forms is a lightweight, Gutenberg-native contact form builder built for WordPress 6.8+. Every form field is a proper block — drag, drop, and configure directly inside the editor. No shortcodes, no page builders required.
 
-**Why Quick Forms?**
+**Why 99Forms?**
 
-Most form plugins were built before the block editor existed. They bolt on Gutenberg support as an afterthought — a single shortcode block wrapping a separate form builder UI. Quick Forms is built block-first from day one.
+Most form plugins were built before the block editor existed. They bolt on Gutenberg support as an afterthought — a single shortcode block wrapping a separate form builder UI. 99Forms is built block-first from day one.
 
 **Available Field Blocks**
 
@@ -65,7 +65,7 @@ The free version covers all core form-building needs. A Pro version is planned w
 
 == Installation ==
 
-1. Upload the `quick-forms` folder to `/wp-content/plugins/`.
+1. Upload the `nnforms` folder to `/wp-content/plugins/`.
 2. Activate the plugin from **Plugins → Installed Plugins**.
 3. Open any page or post in the block editor.
 4. Search for "Form" in the block inserter — add the **Form** block.
@@ -74,7 +74,7 @@ The free version covers all core form-building needs. A Pro version is planned w
 
 **reCAPTCHA Setup (optional)**
 
-1. Go to **Quick Forms → Settings**.
+1. Go to **99Forms → Settings**.
 2. Enter your Google reCAPTCHA v2 Site Key and Secret Key.
 3. Add the **reCAPTCHA** block inside your form.
 
@@ -82,11 +82,11 @@ The free version covers all core form-building needs. A Pro version is planned w
 
 = Does this work with the classic editor? =
 
-No. Quick Forms is built exclusively for the Gutenberg block editor (WordPress 6.8+). It has no shortcode or classic editor support by design.
+No. 99Forms is built exclusively for the Gutenberg block editor (WordPress 6.8+). It has no shortcode or classic editor support by design.
 
 = Where are form submissions stored? =
 
-Submissions are stored in a custom database table (`wp_qf_submissions`) created on plugin activation. View them under **Quick Forms → Submissions** in the admin.
+Submissions are stored in a custom database table (`wp_nnforms_submissions`) created on plugin activation. View them under **99Forms → Submissions** in the admin.
 
 = How do I filter submissions by form? =
 

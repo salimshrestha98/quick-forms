@@ -11,15 +11,15 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		<>
 			<div
 				{ ...useBlockProps( {
-					className: 'qf-block qf-recaptcha-block',
+					className: 'nnf-block nnf-recaptcha-block',
 				} ) }
 			>
 				<div className="wrapper">
-					<div className="qf-field qf-recaptcha-field">
-						<span className="qf-recaptcha-placeholder">
+					<div className="nnf-field nnf-recaptcha-field">
+						<span className="nnf-recaptcha-placeholder">
 							{ __(
 								'reCaptcha is not visible in the edior. Preview the page to view it.',
-								'quick-forms'
+								'99forms'
 							) }
 						</span>
 					</div>

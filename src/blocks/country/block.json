@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "quick-forms/country",
+	"name": "nnforms/country",
 	"version": "0.1.0",
 	"title": "Country",
-	"category": "quick-forms",
+	"category": "nnforms",
 	"icon": "admin-site-alt2",
 	"description": "Country Field",
 	"parent": [
-		"quick-forms/form"
+		"nnforms/form"
 	],
 	"example": {},
 	"supports": {
@@ -39,7 +39,7 @@
 			"default": false
 		}
 	},
-	"inputdomain": "quick-forms",
+	"inputdomain": "nnforms",
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

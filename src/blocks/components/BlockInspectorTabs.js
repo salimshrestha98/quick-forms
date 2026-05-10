@@ -16,21 +16,21 @@ export default function BlockInspectorTabs( {
 	const TABS = [
 		{
 			name: 'settings',
-			title: __( 'Settings', 'quick-forms' ),
+			title: __( 'Settings', '99forms' ),
 			icon: <Dashicon icon="admin-generic" />,
 			className: 'tab-settings',
 			disabled: settingsTab ? false : true,
 		},
 		{
 			name: 'styles',
-			title: __( 'Styles', 'quick-forms' ),
+			title: __( 'Styles', '99forms' ),
 			icon: <Dashicon icon="admin-customizer" />,
 			className: 'tab-styles',
 			disabled: stylesTab ? false : true,
 		},
 		{
 			name: 'advanced',
-			title: __( 'Advanced', 'quick-forms' ),
+			title: __( 'Advanced', '99forms' ),
 			icon: <Dashicon icon="admin-tools" />,
 			className: 'tab-advanced',
 			disabled: hasAdvanced ? false : true,
@@ -40,7 +40,7 @@ export default function BlockInspectorTabs( {
 	return (
 		<InspectorControls>
 			<TabPanel
-				className="qf-tab-panel"
+				className="nnf-tab-panel"
 				activeClass="active-tab"
 				key={ activeTab }
 				tabs={ TABS }

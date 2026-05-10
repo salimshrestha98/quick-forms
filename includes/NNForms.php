@@ -1,15 +1,15 @@
 <?php
 
-namespace QuickForms;
+namespace NNForms;
 
 defined( 'ABSPATH' ) || exit;
 
-use QuickForms\Admin\Admin;
+use NNForms\Admin\Admin;
 
 /**
- * QuickForms class
+ * NNForms class
  */
-class QuickForms {
+class NNForms {
 	public function __construct() {
 		$this->init();
 
@@ -32,16 +32,16 @@ class QuickForms {
 	 * Register gutenberg blocks.
 	 */
 	public function register_blocks() {
-		wp_register_block_types_from_metadata_collection( QF_BUILD_PATH . 'blocks', QF_BUILD_PATH . 'blocks-manifest.php' );
+		wp_register_block_types_from_metadata_collection( NNFORMS_BUILD_PATH . 'blocks', NNFORMS_BUILD_PATH . 'blocks-manifest.php' );
 	}
 
 	/**
-	 * Register own block category for quick form blocks.
+	 * Register own block category for 99form blocks.
 	 */
 	public function add_block_category( $categories ) {
 		$my_category = array(
-			'slug'  => 'quick-forms',
-			'title' => 'Quick Forms',
+			'slug'  => 'nnforms',
+			'title' => '99Forms',
 		);
 
 		array_unshift( $categories, $my_category );
@@ -53,34 +53,34 @@ class QuickForms {
 	 * Enqueue form styles in frontend in footer.
 	 */
 	public function add_css() {
-		global $quick_forms_styles;
+		global $nnforms_styles;
 
-		$css = wp_strip_all_tags( $quick_forms_styles );
+		$css = wp_strip_all_tags( $nnforms_styles );
 		$css = str_replace( '<', '', $css );
 
-		echo "<style id='quick-forms-styles'>" . $css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo "<style id='nnforms-styles'>" . $css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
 	 * Enqueue styles, scripts and localizations.
 	 */
 	public function enqueue_resources() {
-		if ( is_singular() && has_block( 'quick-forms/recaptcha' ) ) {
+		if ( is_singular() && has_block( 'nnforms/recaptcha' ) ) {
 			wp_enqueue_script(
 				'google-recaptcha',
 				'https://www.google.com/recaptcha/api.js',
 				array(),
-				QF_VERSION,
+				NNFORMS_VERSION,
 				true
 			);
 		}
 
 		wp_localize_script(
-			'quick-forms-form-view-script',
+			'nnforms-form-view-script',
 			'l10n',
 			array(
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
-				'ajax_nonce' => wp_create_nonce( 'qf_form_submit' ),
+				'ajax_nonce' => wp_create_nonce( 'nnforms_form_submit' ),
 			)
 		);
 	}

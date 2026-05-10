@@ -1,5 +1,5 @@
 <?php
-namespace QuickForms\Admin;
+namespace NNForms\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,10 +23,10 @@ final class Admin {
 	public function register_menus() {
 		// Main menu
 		add_menu_page(
-			__( 'Quick Forms', 'quick-forms' ),
-			__( 'Quick Forms', 'quick-forms' ),
+			__( '99Forms', '99forms' ),
+			__( '99Forms', '99forms' ),
 			'manage_options',
-			'quick-forms',
+			'99forms',
 			array( $this, 'render_dashboard_page' ),
 			'dashicons-feedback',
 			25
@@ -34,42 +34,42 @@ final class Admin {
 
 		// Submenu: Forms
 		add_submenu_page(
-			'quick-forms',
-			__( 'Form Submissions', 'quick-forms' ),
-			__( 'Submissions', 'quick-forms' ),
+			'99forms',
+			__( 'Form Submissions', '99forms' ),
+			__( 'Submissions', '99forms' ),
 			'manage_options',
-			'quick-forms-submissions',
+			'nnforms-submissions',
 			array( $this, 'render_forms_page' )
 		);
 
 		// Submenu: Settings
 		add_submenu_page(
-			'quick-forms',
-			__( 'Quick Forms Settings', 'quick-forms' ),
-			__( 'Settings', 'quick-forms' ),
+			'99forms',
+			__( '99Forms Settings', '99forms' ),
+			__( 'Settings', '99forms' ),
 			'manage_options',
-			'quick-forms-settings',
+			'nnforms-settings',
 			array( $this, 'render_settings_page' )
 		);
 
-		remove_submenu_page( 'quick-forms', 'quick-forms' );
+		remove_submenu_page( '99forms', '99forms' );
 	}
 
 	/**
 	 * Forms page callback
 	 */
 	public function render_forms_page() {
-		$table = new \QuickForms\Admin\Submissions_Table();
+		$table = new \NNForms\Admin\Submissions_Table();
 
 		$table->process_bulk_action();
 		$table->prepare_items();
 		?>
 
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Form Submissions', 'quick-forms' ); ?></h1>
+			<h1><?php esc_html_e( 'Form Submissions', '99forms' ); ?></h1>
 
 			<form method="get">
-				<input type="hidden" name="page" value="quick-forms-submissions" />
+				<input type="hidden" name="page" value="nnforms-submissions" />
 
 				<?php $table->display(); ?>
 			</form>
@@ -79,47 +79,47 @@ final class Admin {
 	}
 
 	public function render_settings_page() {
-		$options = get_option( 'quick_forms_settings' );
+		$options = get_option( 'nnforms_settings' );
 		?>
-		<div class="qf-admin qf-settings">
-			<h1 class="qf-settings__title">
-				<?php esc_html_e( 'Quick Forms Settings', 'quick-forms' ); ?>
+		<div class="nnf-admin nnf-settings">
+			<h1 class="nnf-settings__title">
+				<?php esc_html_e( '99Forms Settings', '99forms' ); ?>
 			</h1>
 
-			<form class="qf-settings__form" method="post" action="options.php">
-				<?php settings_fields( 'quick_forms_settings_group' ); ?>
+			<form class="nnf-settings__form" method="post" action="options.php">
+				<?php settings_fields( 'nnforms_settings_group' ); ?>
 
-				<div class="qf-settings__layout">
+				<div class="nnf-settings__layout">
 
 					<!-- Sidebar -->
-					<div class="qf-settings__nav" role="tablist">
-						<button type="button" class="qf-settings__tab is-active" data-tab="recaptcha">
-							<?php esc_html_e( 'reCAPTCHA', 'quick-forms' ); ?>
+					<div class="nnf-settings__nav" role="tablist">
+						<button type="button" class="nnf-settings__tab is-active" data-tab="recaptcha">
+							<?php esc_html_e( 'reCAPTCHA', '99forms' ); ?>
 						</button>
 					</div>
 
 					<!-- Panels -->
-					<div class="qf-settings__panels">
+					<div class="nnf-settings__panels">
 
-						<div class="qf-settings__panel is-active" data-panel="recaptcha">
-							<div class="qf-field">
-								<label class="qf-field__label">
-									<?php esc_html_e( 'reCAPTCHA Site Key', 'quick-forms' ); ?>
+						<div class="nnf-settings__panel is-active" data-panel="recaptcha">
+							<div class="nnf-field">
+								<label class="nnf-field__label">
+									<?php esc_html_e( 'reCAPTCHA Site Key', '99forms' ); ?>
 								</label>
-								<div class="qf-field__control">
+								<div class="nnf-field__control">
 									<input type="text"
-										name="quick_forms_settings[recaptcha_site_key]"
+										name="nnforms_settings[recaptcha_site_key]"
 										value="<?php echo esc_attr( $options['recaptcha_site_key'] ?? '' ); ?>">
 								</div>
 							</div>
 
-							<div class="qf-field">
-								<label class="qf-field__label">
-									<?php esc_html_e( 'reCAPTCHA Secret Key', 'quick-forms' ); ?>
+							<div class="nnf-field">
+								<label class="nnf-field__label">
+									<?php esc_html_e( 'reCAPTCHA Secret Key', '99forms' ); ?>
 								</label>
-								<div class="qf-field__control">
+								<div class="nnf-field__control">
 									<input type="text"
-										name="quick_forms_settings[recaptcha_secret_key]"
+										name="nnforms_settings[recaptcha_secret_key]"
 										value="<?php echo esc_attr( $options['recaptcha_secret_key'] ?? '' ); ?>">
 								</div>
 							</div>
@@ -135,14 +135,14 @@ final class Admin {
 	}
 
 	/**
-	 * Register quick forms setting group.
+	 * Register 99Forms setting group.
 	 *
 	 * @return void
 	 */
 	public function register_setting() {
 		register_setting(
-			'quick_forms_settings_group',
-			'quick_forms_settings',
+			'nnforms_settings_group',
+			'nnforms_settings',
 			array(
 				'type'              => 'array',
 				'sanitize_callback' => array( $this, 'sanitize_settings' ),
@@ -179,12 +179,12 @@ final class Admin {
 
 		$blocks = parse_blocks( $content );
 
-		$forms = $this->get_qf_block_attributes( $blocks );
+		$forms = $this->get_nnforms_block_attributes( $blocks );
 
 		foreach ( $forms as $form_id => $form_data ) {
 			$form_data['post_id'] = $post_id;
 
-			update_option( 'qf_form_' . $form_id, $form_data );
+			update_option( 'nnforms_form_' . $form_id, $form_data );
 		}
 	}
 
@@ -196,12 +196,12 @@ final class Admin {
 	 * @param [int] $form_id
 	 * @return array
 	 */
-	private function get_qf_block_attributes( $blocks, &$results = array(), $form_id = null ) {
+	private function get_nnforms_block_attributes( $blocks, &$results = array(), $form_id = null ) {
 		foreach ( $blocks as $block ) {
-			if ( str_starts_with( $block['blockName'] ?? '', 'quick-forms/' ) ) {
+			if ( str_starts_with( $block['blockName'] ?? '', 'nnforms/' ) ) {
 				$block_id = $block['attrs']['id'] ?? null;
 
-				if ( 'quick-forms/form' === $block['blockName'] ) {
+				if ( 'nnforms/form' === $block['blockName'] ) {
 					$form_id = $block_id;
 
 					$results[ $form_id ] = array_intersect_key(
@@ -220,7 +220,7 @@ final class Admin {
 			}
 
 			if ( ! empty( $block['innerBlocks'] ) ) {
-				$this->get_qf_block_attributes( $block['innerBlocks'], $results, $form_id );
+				$this->get_nnforms_block_attributes( $block['innerBlocks'], $results, $form_id );
 			}
 		}
 
@@ -229,20 +229,20 @@ final class Admin {
 
 	public function enqueue_scripts() {
 		wp_enqueue_script(
-			'quick_forms_admin',
-			QF_BUILD_URL . 'admin/admin.js',
+			'nnforms_admin',
+			NNFORMS_BUILD_URL . 'admin/admin.js',
 			array(),
-			QF_VERSION,
+			NNFORMS_VERSION,
 			array(
 				'in_footer' => true,
 			)
 		);
 
 		wp_enqueue_style(
-			'quick_forms_admin',
-			QF_BUILD_URL . 'admin/admin.css',
+			'nnforms_admin',
+			NNFORMS_BUILD_URL . 'admin/admin.css',
 			array(),
-			QF_VERSION,
+			NNFORMS_VERSION,
 		);
 	}
 }

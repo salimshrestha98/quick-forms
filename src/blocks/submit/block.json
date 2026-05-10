@@ -1,14 +1,14 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "quick-forms/submit",
+	"name": "nnforms/submit",
 	"version": "0.1.0",
 	"title": "Submit",
-	"category": "quick-forms",
+	"category": "nnforms",
 	"icon": "arrow-right-alt",
 	"description": "Submit Button",
 	"parent": [
-		"quick-forms/form"
+		"nnforms/form"
 	],
 	"example": {},
 	"supports": {
@@ -48,7 +48,7 @@
 			}
 		}
 	},
-	"textdomain": "quick-forms",
+	"textdomain": "nnforms",
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"
 }

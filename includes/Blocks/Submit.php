@@ -1,10 +1,10 @@
 <?php
 
-namespace QuickForms\Blocks;
+namespace NNForms\Blocks;
 
 defined( 'ABSPATH' ) || exit;
 
-use QuickForms\Helpers\BlockHelper;
+use NNForms\Helpers\BlockHelper;
 
 /**
  * Submit block class.

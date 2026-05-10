@@ -1,5 +1,5 @@
 <?php
-namespace QuickForms\Helpers;
+namespace NNForms\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -15,7 +15,7 @@ class BlockHelper {
 	 * @return void
 	 */
 	public static function generate_css( array $styles_map, string $wrapper_id = '' ): void {
-		global $quick_forms_styles;
+		global $nnforms_styles;
 
 		$css = '';
 
@@ -32,7 +32,7 @@ class BlockHelper {
 			$css .= sprintf( '%s{%s}', $wrapper_id . $element, $temp );
 		}
 
-		$quick_forms_styles .= $css;
+		$nnforms_styles .= $css;
 	}
 
 	/**
@@ -42,8 +42,8 @@ class BlockHelper {
 	 * @return array
 	 */
 	public static function get_block_default_attributes( string $block_name ): array {
-		$block_name = str_replace( 'quick-forms/', '', $block_name );
-		$block_path = QF_BUILD_PATH . $block_name;
+		$block_name = str_replace( 'nnforms/', '', $block_name );
+		$block_path = NNFORMS_BUILD_PATH . $block_name;
 
 		// Normalize path
 		$block_json_path = trailingslashit( $block_path ) . 'block.json';
@@ -84,7 +84,7 @@ class BlockHelper {
 			return array();
 		}
 
-		$form = get_option( 'qf_form_' . $form_id );
+		$form = get_option( 'nnforms_form_' . $form_id );
 
 		if ( ! $form ) {
 			return array();
@@ -163,7 +163,7 @@ class BlockHelper {
 	 * @return array
 	 */
 	public static function get_country( string $country_code ): array {
-		$country_file = QF_PATH . 'country_list.json';
+		$country_file = NNFORMS_PATH . 'country_list.json';
 		$country_list = array();
 
 		if ( file_exists( $country_file ) ) {
@@ -183,6 +183,6 @@ class BlockHelper {
 	 * @return string
 	 */
 	public static function required( bool $required ): string {
-		return $required ? "<span class='qf-required' title='" . esc_attr__( 'Required Field', 'quick-forms' ) . "'>*</span>" : '';
+		return $required ? "<span class='nnf-required' title='" . esc_attr__( 'Required Field', '99forms' ) . "'>*</span>" : '';
 	}
 }

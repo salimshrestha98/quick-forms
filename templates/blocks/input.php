@@ -22,7 +22,7 @@ $input_attributes .= $maxLength ? sprintf( ' maxlength="%s"', esc_attr( $maxLeng
 			echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" );
 		}
 		?>
-		<div class="qf-field qf-input-field">
+		<div class="nnf-field nnf-input-field">
 			<input <?php echo $input_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>/>
 		</div>
 	</div>

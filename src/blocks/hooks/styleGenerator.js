@@ -21,16 +21,16 @@ export function generateStyles( attributes, clientId ) {
 			};
 		
 		}
-        #block-${ clientId } .qf-block {
+        #block-${ clientId } .nnf-block {
 			margin: ${ fieldMargin.top } ${ fieldMargin.right } ${ fieldMargin.bottom } ${
 				fieldMargin.left
 			};
 			}
-		#block-${ clientId } .qf-block .wrapper {
+		#block-${ clientId } .nnf-block .wrapper {
 			display: flex;
 			flex-direction: ${ labelPosition === 'inline' ? 'row' : 'column' };
 		}
-		#block-${ clientId } .qf-block .wrapper > label {
+		#block-${ clientId } .nnf-block .wrapper > label {
 			display: ${ showLabel ? 'unset' : 'none' };
 			width: ${ labelWidth }
 		}
@@ -41,7 +41,7 @@ export function generateStyles( attributes, clientId ) {
 		#block-${ clientId } input[type="range"],
 		#block-${ clientId } input[type="tel"],
 		#block-${ clientId } input[type="url"],
-		#block-${ clientId } .qf-hidden-field-placeholder,
+		#block-${ clientId } .nnf-hidden-field-placeholder,
 		#block-${ clientId } textarea {
 			width: ${ fieldWidth };
 			max-width: ${ fieldWidth };

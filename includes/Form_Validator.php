@@ -1,10 +1,10 @@
 <?php
 
-namespace QuickForms;
+namespace NNForms;
 
 defined( 'ABSPATH' ) || exit;
 
-use QuickForms\Helpers\BlockHelper;
+use NNForms\Helpers\BlockHelper;
 
 /**
  * Form_Validator
@@ -14,7 +14,7 @@ use QuickForms\Helpers\BlockHelper;
 final class Form_Validator {
 
 	public function __construct() {
-		add_action( 'qf_before_save_form', array( $this, 'validate' ), 10, 2 );
+		add_action( 'nnforms_before_save_form', array( $this, 'validate' ), 10, 2 );
 	}
 
 	/**
@@ -39,7 +39,7 @@ final class Form_Validator {
 			if ( ! empty( $attrs['required'] ) && $this->is_empty( $value, $block_name ) ) {
 				$errors[ $field_id ] = sprintf(
 					/* translators: %s: field label */
-					__( '%s is required.', 'quick-forms' ),
+					__( '%s is required.', '99forms' ),
 					esc_html( $attrs['fieldLabel'] ?? $field_id )
 				);
 				// Skip type-specific rules when field is empty — no point validating format of nothing.
@@ -70,14 +70,14 @@ final class Form_Validator {
 	 */
 	private function validate_field( string $block_name, array $attrs, string $value ): ?string {
 		switch ( $block_name ) {
-			case 'quick-forms/input':
+			case 'nnforms/input':
 				return $this->validate_input( $attrs, $value );
 
-			case 'quick-forms/select':
-			case 'quick-forms/radio':
+			case 'nnforms/select':
+			case 'nnforms/radio':
 				return $this->validate_option( $attrs, $value );
 
-			case 'quick-forms/checkbox':
+			case 'nnforms/checkbox':
 				return $this->validate_checkbox( $attrs, $value );
 
 			default:
@@ -86,7 +86,7 @@ final class Form_Validator {
 	}
 
 	/**
-	 * Validate quick-forms/input based on its inputType attribute.
+	 * Validate nnforms/input based on its inputType attribute.
 	 */
 	private function validate_input( array $attrs, string $value ): ?string {
 		$label      = esc_html( $attrs['fieldLabel'] ?? '' );
@@ -97,7 +97,7 @@ final class Form_Validator {
 				if ( ! is_email( $value ) ) {
 					return sprintf(
 						/* translators: %s: field label */
-						__( '%s must be a valid email address.', 'quick-forms' ),
+						__( '%s must be a valid email address.', '99forms' ),
 						$label
 					);
 				}
@@ -107,7 +107,7 @@ final class Form_Validator {
 				if ( ! wp_http_validate_url( $value ) ) {
 					return sprintf(
 						/* translators: %s: field label */
-						__( '%s must be a valid URL.', 'quick-forms' ),
+						__( '%s must be a valid URL.', '99forms' ),
 						$label
 					);
 				}
@@ -117,7 +117,7 @@ final class Form_Validator {
 				if ( ! preg_match( '/^[0-9\s\+\-\(\)]+$/', $value ) ) {
 					return sprintf(
 						/* translators: %s: field label */
-						__( '%s must be a valid phone number.', 'quick-forms' ),
+						__( '%s must be a valid phone number.', '99forms' ),
 						$label
 					);
 				}
@@ -127,7 +127,7 @@ final class Form_Validator {
 				if ( ! is_numeric( $value ) ) {
 					return sprintf(
 						/* translators: %s: field label */
-						__( '%s must be a number.', 'quick-forms' ),
+						__( '%s must be a number.', '99forms' ),
 						$label
 					);
 				}
@@ -138,7 +138,7 @@ final class Form_Validator {
 				if ( '' !== $min && is_numeric( $min ) && (float) $value < (float) $min ) {
 					return sprintf(
 						/* translators: 1: field label, 2: minimum value */
-						__( '%1$s must be at least %2$s.', 'quick-forms' ),
+						__( '%1$s must be at least %2$s.', '99forms' ),
 						$label,
 						$min
 					);
@@ -147,7 +147,7 @@ final class Form_Validator {
 				if ( '' !== $max && is_numeric( $max ) && (float) $value > (float) $max ) {
 					return sprintf(
 						/* translators: 1: field label, 2: maximum value */
-						__( '%1$s must be no greater than %2$s.', 'quick-forms' ),
+						__( '%1$s must be no greater than %2$s.', '99forms' ),
 						$label,
 						$max
 					);
@@ -159,7 +159,7 @@ final class Form_Validator {
 				if ( ! $date || $date->format( 'Y-m-d' ) !== $value ) {
 					return sprintf(
 						/* translators: %s: field label */
-						__( '%s must be a valid date (YYYY-MM-DD).', 'quick-forms' ),
+						__( '%s must be a valid date (YYYY-MM-DD).', '99forms' ),
 						$label
 					);
 				}
@@ -170,7 +170,7 @@ final class Form_Validator {
 	}
 
 	/**
-	 * Validate quick-forms/select and quick-forms/radio.
+	 * Validate nnforms/select and nnforms/radio.
 	 * The submitted value must be one of the options configured in the block.
 	 */
 	private function validate_option( array $attrs, string $value ): ?string {
@@ -185,7 +185,7 @@ final class Form_Validator {
 		if ( ! array_key_exists( $value, $allowed_options ) ) {
 			return sprintf(
 				/* translators: %s: field label */
-				__( '%s contains an invalid selection.', 'quick-forms' ),
+				__( '%s contains an invalid selection.', '99forms' ),
 				$label
 			);
 		}
@@ -194,14 +194,14 @@ final class Form_Validator {
 	}
 
 	/**
-	 * Validate quick-forms/checkbox.
+	 * Validate nnforms/checkbox.
 	 * A required checkbox must have value 'on' (standard browser submit value).
 	 */
 	private function validate_checkbox( array $attrs, string $value ): ?string {
 		if ( ! empty( $attrs['required'] ) && 'on' !== $value ) {
 			return sprintf(
 				/* translators: %s: field label */
-				__( '%s must be checked.', 'quick-forms' ),
+				__( '%s must be checked.', '99forms' ),
 				esc_html( $attrs['fieldLabel'] ?? '' )
 			);
 		}
@@ -217,13 +217,13 @@ final class Form_Validator {
 		return in_array(
 			$block_name,
 			array(
-				'quick-forms/input',
-				'quick-forms/textarea',
-				'quick-forms/select',
-				'quick-forms/radio',
-				'quick-forms/checkbox',
-				'quick-forms/country',
-				'quick-forms/file-upload',
+				'nnforms/input',
+				'nnforms/textarea',
+				'nnforms/select',
+				'nnforms/radio',
+				'nnforms/checkbox',
+				'nnforms/country',
+				'nnforms/file-upload',
 			),
 			true
 		);
@@ -236,7 +236,7 @@ final class Form_Validator {
 	 * handled by handle_uploads(). Required file checks belong there, not here.
 	 */
 	private function is_empty( string $value, string $block_name ): bool {
-		if ( 'quick-forms/file-upload' === $block_name ) {
+		if ( 'nnforms/file-upload' === $block_name ) {
 			return false;
 		}
 

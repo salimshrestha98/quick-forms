@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "quick-forms/form",
+	"name": "nnforms/form",
 	"version": "0.1.0",
 	"title": "Form",
-	"category": "quick-forms",
+	"category": "nnforms",
 	"icon": "feedback",
-	"description": "Quick Form wrapper block",
+	"description": "99Forms wrapper block",
 	"example": {},
 	"supports": {
 		"html": false,
@@ -87,7 +87,7 @@
 			}
 		}
 	},
-	"textdomain": "quick-forms",
+	"textdomain": "nnforms",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

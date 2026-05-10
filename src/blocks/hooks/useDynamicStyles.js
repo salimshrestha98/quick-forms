@@ -5,7 +5,7 @@ export default function useDynamicStyles( { css, clientId } ) {
 		if ( ! css ) {
 			return;
 		}
-		const styleId = `qf-style-${ clientId }`;
+		const styleId = `nnf-style-${ clientId }`;
 		let styleTag = document.getElementById( styleId );
 		if ( ! styleTag ) {
 			styleTag = document.createElement( 'style' );

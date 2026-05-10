@@ -33,7 +33,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 	function handleDeleteEmail( index ) {
 		// eslint-disable-next-line no-alert
 		const proceed = window.confirm(
-			__( 'Are you sure you want to delete this email?', 'quick-forms' )
+			__( 'Are you sure you want to delete this email?', '99forms' )
 		);
 
 		if ( ! proceed ) {
@@ -52,7 +52,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 			window.alert(
 				__(
 					'One or more of the email fields are empty. Please fill all the fields.',
-					'quick-forms'
+					'99forms'
 				)
 			);
 			return;
@@ -74,28 +74,28 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 	return (
 		<div>
 			<Button variant="secondary" onClick={ handleAddNewEmail }>
-				{ __( 'Add Email', 'quick-forms' ) }
+				{ __( 'Add Email', '99forms' ) }
 			</Button>
 
 			{ emails.length > 0 && (
-				<div className="qf-email-list">
+				<div className="nnf-email-list">
 					{ emails.map( ( email, index ) => (
 						<div
 							key={ email.id || index }
-							className="qf-email-item"
+							className="nnf-email-item"
 						>
-							<div className="qf-email-info">
-								<div className="qf-email-label">
+							<div className="nnf-email-info">
+								<div className="nnf-email-label">
 									{ email.label }
 								</div>
 							</div>
 
-							<div className="qf-email-actions">
+							<div className="nnf-email-actions">
 								<Button
 									variant="secondary"
 									onClick={ () => handleEditEmail( index ) }
 								>
-									{ __( 'Edit', 'quick-forms' ) }
+									{ __( 'Edit', '99forms' ) }
 								</Button>
 
 								<Button
@@ -103,7 +103,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 									variant="secondary"
 									onClick={ () => handleDeleteEmail( index ) }
 								>
-									{ __( 'Delete', 'quick-forms' ) }
+									{ __( 'Delete', '99forms' ) }
 								</Button>
 							</div>
 						</div>
@@ -112,9 +112,9 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 			) }
 
 			{ open && (
-				<div className="qf-fasm__email-wrapper">
+				<div className="nnf-fasm__email-wrapper">
 					<TextControl
-						label={ __( 'Label', 'quick-forms' ) }
+						label={ __( 'Label', '99forms' ) }
 						required
 						value={ emailData.label }
 						onChange={ ( value ) =>
@@ -124,7 +124,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 
 					<TextControl
 						type="email"
-						label={ __( 'To', 'quick-forms' ) }
+						label={ __( 'To', '99forms' ) }
 						required
 						value={ emailData.mailTo }
 						onChange={ ( value ) =>
@@ -133,7 +133,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 					/>
 
 					<TextControl
-						label={ __( 'Subject', 'quick-forms' ) }
+						label={ __( 'Subject', '99forms' ) }
 						required
 						value={ emailData.mailSubject }
 						onChange={ ( value ) =>
@@ -143,7 +143,7 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 
 					<BaseControl
 						id="mailBody"
-						label={ __( 'Body', 'quick-forms' ) }
+						label={ __( 'Body', '99forms' ) }
 					>
 						<RichText
 							tagName="div"
@@ -154,17 +154,14 @@ export default function EmailSettings( { attributes, setAttributes } ) {
 									mailBody: value,
 								} )
 							}
-							placeholder={ __(
-								'Write your email…',
-								'quick-forms'
-							) }
+							placeholder={ __( 'Write your email…', '99forms' ) }
 						/>
 					</BaseControl>
 
 					<Button variant="primary" onClick={ saveEmail }>
 						{ editIndex !== null
-							? __( 'Update', 'quick-forms' )
-							: __( 'Save', 'quick-forms' ) }
+							? __( 'Update', '99forms' )
+							: __( 'Save', '99forms' ) }
 					</Button>
 				</div>
 			) }

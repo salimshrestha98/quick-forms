@@ -28,20 +28,17 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	} = attributes;
 
 	const TEMPLATE = [
-		[ 'quick-forms/input', { inputType: 'text', fieldLabel: 'Your Name' } ],
-		[
-			'quick-forms/input',
-			{ inputType: 'email', fieldLabel: 'Your Email' },
-		],
-		[ 'quick-forms/textarea', { fieldLabel: 'Your Message' } ],
-		[ 'quick-forms/submit', { lock: { move: false, remove: true } } ],
+		[ 'nnforms/input', { inputType: 'text', fieldLabel: 'Your Name' } ],
+		[ 'nnforms/input', { inputType: 'email', fieldLabel: 'Your Email' } ],
+		[ 'nnforms/textarea', { fieldLabel: 'Your Message' } ],
+		[ 'nnforms/submit', { lock: { move: false, remove: true } } ],
 	];
 
 	useBlockId( id, clientId, setAttributes );
 
 	const css = generateStyles( attributes, clientId );
 	const blockProps = useBlockProps( {
-		className: `qf-block qf-form-block`,
+		className: `nnf-block nnf-form-block`,
 	} );
 
 	return (
@@ -50,13 +47,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				settingsTab={
 					<>
 						<PanelBody
-							title={ __( 'General Settings', 'quick-forms' ) }
+							title={ __( 'General Settings', '99forms' ) }
 							initialOpen={ false }
 						>
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Form Name', 'quick-forms' ) }
-								placeholder={ __( 'Form Name', 'quick-forms' ) }
+								label={ __( 'Form Name', '99forms' ) }
+								placeholder={ __( 'Form Name', '99forms' ) }
 								value={ formName }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -66,11 +63,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Field Settings', 'quick-forms' ) }
+							title={ __( 'Field Settings', '99forms' ) }
 							initialOpen={ false }
 						>
 							<ToggleControl
-								label={ __( 'Show Label', 'quick-forms' ) }
+								label={ __( 'Show Label', '99forms' ) }
 								checked={ showLabel }
 								onChange={ ( val ) => {
 									setAttributes( {
@@ -81,21 +78,15 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 							{ showLabel && (
 								<RadioControl
-									label={ __(
-										'Label Position',
-										'quick-forms'
-									) }
+									label={ __( 'Label Position', '99forms' ) }
 									selected={ labelPosition }
 									options={ [
 										{
-											label: __(
-												'Inline',
-												'quick-forms'
-											),
+											label: __( 'Inline', '99forms' ),
 											value: 'inline',
 										},
 										{
-											label: __( 'Above', 'quick-forms' ),
+											label: __( 'Above', '99forms' ),
 											value: 'above',
 										},
 									] }
@@ -110,7 +101,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							{ showLabel && 'inline' === labelPosition && (
 								<UnitControl
 									__next40pxDefaultSize
-									label={ __( 'Label Width', 'quick-forms' ) }
+									label={ __( 'Label Width', '99forms' ) }
 									onChange={ ( value ) =>
 										setAttributes( {
 											labelWidth: value,
@@ -121,7 +112,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							) }
 							<UnitControl
 								__next40pxDefaultSize
-								label={ __( 'Field Width', 'quick-forms' ) }
+								label={ __( 'Field Width', '99forms' ) }
 								onChange={ ( value ) =>
 									setAttributes( {
 										fieldWidth: value,
@@ -131,7 +122,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 							<BoxControl
 								__next40pxDefaultSize
-								label={ __( 'Field Margin', 'quick-forms' ) }
+								label={ __( 'Field Margin', '99forms' ) }
 								resetValues={ {
 									top: '20px',
 									right: '0px',
@@ -151,13 +142,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				stylesTab={
 					<>
 						<PanelBody
-							title={ __( 'Spacing Settings', 'quick-forms' ) }
+							title={ __( 'Spacing Settings', '99forms' ) }
 							initialOpen={ false }
 						>
 							<BoxControl
 								__next40pxDefaultSize
 								__nextHasNoMarginBottom
-								label={ __( 'Margin', 'quick-forms' ) }
+								label={ __( 'Margin', '99forms' ) }
 								values={ margin }
 								onChange={ ( val ) =>
 									setAttributes( { margin: val } )
@@ -172,7 +163,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							<BoxControl
 								__next40pxDefaultSize
 								__nextHasNoMarginBottom
-								label={ __( 'Padding', 'quick-forms' ) }
+								label={ __( 'Padding', '99forms' ) }
 								values={ padding }
 								onChange={ ( val ) =>
 									setAttributes( {
@@ -196,13 +187,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			<div { ...blockProps }>
 				<style>{ css }</style>
 				<div className="wrapper">
-					<div className="quick-form">
+					<div className="nnform">
 						<InnerBlocks template={ TEMPLATE } />
 					</div>
-					<div className="qf-form-message qf-message-success">
+					<div className="nnf-form-message nnf-message-success">
 						{ messages.success }
 					</div>
-					<div className="qf-form-message qf-message-error">
+					<div className="nnf-form-message nnf-message-error">
 						{ messages.error }
 					</div>
 				</div>

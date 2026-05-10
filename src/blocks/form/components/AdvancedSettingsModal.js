@@ -8,16 +8,16 @@ import SubmissionSettings from './SubmissionSettings';
 
 const SETTINGS = {
 	'anti-spam': {
-		label: __( 'Anti-Spam', 'quick-forms' ),
+		label: __( 'Anti-Spam', '99forms' ),
 		Component: AntiSpamSettings,
 	},
 	messages: {
-		label: __( 'Messages', 'quick-forms' ),
+		label: __( 'Messages', '99forms' ),
 		Component: MessageSettings,
 	},
-	email: { label: __( 'Email', 'quick-forms' ), Component: EmailSettings },
+	email: { label: __( 'Email', '99forms' ), Component: EmailSettings },
 	submission: {
-		label: __( 'Submission', 'quick-forms' ),
+		label: __( 'Submission', '99forms' ),
 		Component: SubmissionSettings,
 	},
 };
@@ -33,17 +33,17 @@ export default function AdvancedSettingsModal( {
 
 	return (
 		<Modal
-			title={ __( 'Form Advanced Settings', 'quick-forms' ) }
+			title={ __( 'Form Advanced Settings', '99forms' ) }
 			onRequestClose={ () => setActiveTab( 'settings' ) }
-			className="qf-form-advanced-settings-modal"
+			className="nnf-form-advanced-settings-modal"
 		>
-			<div className="qf-fasm">
+			<div className="nnf-fasm">
 				{ /* Sidebar */ }
-				<div className="qf-fasm__sidebar">
+				<div className="nnf-fasm__sidebar">
 					{ Object.entries( SETTINGS ).map( ( [ key, setting ] ) => (
 						<Button
 							key={ key }
-							className={ `qf-fasm__tab ${
+							className={ `nnf-fasm__tab ${
 								activeSetting === key ? 'is-active' : ''
 							}` }
 							onClick={ () => setActiveSetting( key ) }
@@ -54,7 +54,7 @@ export default function AdvancedSettingsModal( {
 				</div>
 
 				{ /* Main content */ }
-				<div className="qf-fasm__main">
+				<div className="nnf-fasm__main">
 					<Component
 						attributes={ attributes }
 						setAttributes={ setAttributes }

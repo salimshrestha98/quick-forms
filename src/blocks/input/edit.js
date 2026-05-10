@@ -43,62 +43,59 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				settingsTab={
 					<>
 						<PanelBody
-							title={ __( 'General Settings', 'quick-forms' ) }
+							title={ __( 'General Settings', '99forms' ) }
 						>
 							<DisabledInputControl
-								label={ __( 'Field ID', 'quick-forms' ) }
+								label={ __( 'Field ID', '99forms' ) }
 								value={ id }
 							/>
 
 							<SelectControl
-								label={ __( 'Input Type', 'quick-forms' ) }
+								label={ __( 'Input Type', '99forms' ) }
 								value={ inputType }
 								options={ [
 									{
-										label: __( 'Text', 'quick-forms' ),
+										label: __( 'Text', '99forms' ),
 										value: 'text',
 									},
 									{
-										label: __( 'Email', 'quick-forms' ),
+										label: __( 'Email', '99forms' ),
 										value: 'email',
 									},
 									{
-										label: __( 'Number', 'quick-forms' ),
+										label: __( 'Number', '99forms' ),
 										value: 'number',
 									},
 									{
-										label: __( 'URL', 'quick-forms' ),
+										label: __( 'URL', '99forms' ),
 										value: 'url',
 									},
 									{
-										label: __( 'Password', 'quick-forms' ),
+										label: __( 'Password', '99forms' ),
 										value: 'password',
 									},
 									{
-										label: __( 'Hidden', 'quick-forms' ),
+										label: __( 'Hidden', '99forms' ),
 										value: 'hidden',
 									},
 									{
-										label: __(
-											'Phone Number',
-											'quick-forms'
-										),
+										label: __( 'Phone Number', '99forms' ),
 										value: 'tel',
 									},
 									{
-										label: __( 'Color', 'quick-forms' ),
+										label: __( 'Color', '99forms' ),
 										value: 'color',
 									},
 									{
-										label: __( 'Range', 'quick-forms' ),
+										label: __( 'Range', '99forms' ),
 										value: 'range',
 									},
 									{
-										label: __( 'Date', 'quick-forms' ),
+										label: __( 'Date', '99forms' ),
 										value: 'date',
 									},
 									{
-										label: __( 'Time', 'quick-forms' ),
+										label: __( 'Time', '99forms' ),
 										value: 'time',
 									},
 								] }
@@ -112,7 +109,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Field Label', 'quick-forms' ) }
+								label={ __( 'Field Label', '99forms' ) }
 								value={ fieldLabel }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -126,7 +123,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									__next40pxDefaultSize
 									label={ __(
 										'Placeholder Text',
-										'quick-forms'
+										'99forms'
 									) }
 									value={ placeholder }
 									onChange={ ( value ) =>
@@ -139,7 +136,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 							<TextControl
 								__next40pxDefaultSize
-								label={ __( 'Default Value', 'quick-forms' ) }
+								label={ __( 'Default Value', '99forms' ) }
 								value={ defaultValue }
 								onChange={ ( value ) =>
 									setAttributes( {
@@ -149,12 +146,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							/>
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Validation', 'quick-forms' ) }
+							title={ __( 'Validation', '99forms' ) }
 							initialOpen={ false }
 						>
 							{ ! isHidden() && (
 								<ToggleControl
-									label={ __( 'Required', 'quick-forms' ) }
+									label={ __( 'Required', '99forms' ) }
 									checked={ required }
 									onChange={ () => {
 										setAttributes( {
@@ -170,7 +167,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										__next40pxDefaultSize
 										label={ __(
 											'Minimum Value',
-											'quick-forms'
+											'99forms'
 										) }
 										value={ minValue }
 										onChange={ ( value ) =>
@@ -183,7 +180,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										__next40pxDefaultSize
 										label={ __(
 											'Maximum Value',
-											'quick-forms'
+											'99forms'
 										) }
 										value={ maxValue }
 										onChange={ ( value ) =>
@@ -205,7 +202,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									__next40pxDefaultSize
 									label={ __(
 										'Maximum Characters',
-										'quick-forms'
+										'99forms'
 									) }
 									value={ maxLength }
 									onChange={ ( value ) =>
@@ -222,7 +219,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 
 			<div
 				{ ...useBlockProps( {
-					className: `qf-block qf-input-block qf-input-${ inputType }`,
+					className: `nnf-block nnf-input-block nnf-input-${ inputType }`,
 				} ) }
 			>
 				<div className="wrapper">
@@ -237,9 +234,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						/>
 					) }
 
-					<div className="qf-field qf-input-field">
+					<div className="nnf-field nnf-input-field">
 						{ 'hidden' === inputType && (
-							<p className="qf-hidden-field-placeholder">
+							<p className="nnf-hidden-field-placeholder">
 								This is a hidden field and will not be visible
 								to users.
 							</p>

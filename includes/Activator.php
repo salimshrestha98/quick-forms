@@ -1,6 +1,6 @@
 <?php
 
-namespace QuickForms;
+namespace NNForms;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +21,7 @@ final class Activator {
 	public static function create_submissions_table() {
 		global $wpdb;
 
-		$table_name      = $wpdb->prefix . 'qf_submissions';
+		$table_name      = $wpdb->prefix . 'nnforms_submissions';
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$sql = "CREATE TABLE IF NOT EXISTS $table_name (

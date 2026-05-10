@@ -13,7 +13,7 @@ $textarea_attributes .= $required ? 'required' : '';
 <div <?php echo $blockProps; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="wrapper">
 		<?php echo wp_kses_post( "<label for='$id'>$fieldLabel $required_icon</label>" ); ?>
-		<div class="qf-field qf-textarea-field">
+		<div class="nnf-field nnf-textarea-field">
 			<textarea<?php echo $textarea_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $defaultValue ); ?></textarea>
 		</div>
 	</div>
