@@ -125,3 +125,16 @@ Currently: JPEG, PNG, and PDF. Maximum file size is 2MB per upload.
 
 = 1.0.0 =
 Initial release. No upgrade steps required.
+
+== External Services ==
+
+This plugin optionally uses Google reCAPTCHA v2 to protect forms from spam.
+When the reCAPTCHA field is added to a form, the Google reCAPTCHA script is
+loaded from Google's servers and the user's response token is sent to Google
+for verification on form submission.
+
+Service: Google reCAPTCHA
+Data sent: CAPTCHA response token, IP address (handled by Google)
+Condition: Only when a form with the reCAPTCHA block is submitted
+Terms of Service: https://policies.google.com/terms
+Privacy Policy: https://policies.google.com/privacy
