@@ -29,7 +29,7 @@ final class Admin {
 			'99forms',
 			array( $this, 'render_dashboard_page' ),
 			'dashicons-feedback',
-			25
+			49
 		);
 
 		// Submenu: Forms
