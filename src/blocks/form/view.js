@@ -1,7 +1,7 @@
 import domReady from '@wordpress/dom-ready';
 
 ( function ( window, document ) {
-	const l10n = window.l10n ?? {};
+	const l10n = window.nnforms_l10n ?? {};
 	const NNF = {
 		init() {
 			NNF.bindEvents();

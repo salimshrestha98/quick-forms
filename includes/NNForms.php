@@ -65,7 +65,7 @@ class NNForms {
 
 		wp_localize_script(
 			'nnforms-form-view-script',
-			'l10n',
+			'nnforms_l10n',
 			array(
 				'ajax_url'   => admin_url( 'admin-ajax.php' ),
 				'ajax_nonce' => wp_create_nonce( 'nnforms_form_submit' ),
