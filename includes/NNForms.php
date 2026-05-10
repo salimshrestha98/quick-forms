@@ -15,8 +15,8 @@ class NNForms {
 
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		add_filter( 'block_categories_all', array( $this, 'add_block_category' ) );
-		add_action( 'wp_footer', array( $this, 'add_css' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_resources' ) );
+		add_action( 'wp_footer', array( $this, 'add_css' ) );
 	}
 
 	/**
@@ -50,18 +50,6 @@ class NNForms {
 	}
 
 	/**
-	 * Enqueue form styles in frontend in footer.
-	 */
-	public function add_css() {
-		global $nnforms_styles;
-
-		$css = wp_strip_all_tags( $nnforms_styles );
-		$css = str_replace( '<', '', $css );
-
-		echo "<style id='nnforms-styles'>" . $css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
 	 * Enqueue styles, scripts and localizations.
 	 */
 	public function enqueue_resources() {
@@ -83,5 +71,21 @@ class NNForms {
 				'ajax_nonce' => wp_create_nonce( 'nnforms_form_submit' ),
 			)
 		);
+
+		// Dynamic styles for forms.
+		wp_register_style( 'nnforms-styles', '', array(), NNFORMS_VERSION, true );
+	}
+
+	/**
+	 * Enqueue form styles in frontend in footer.
+	 */
+	public function add_css() {
+		global $nnforms_styles;
+
+		$css = wp_strip_all_tags( $nnforms_styles );
+		$css = str_replace( '<', '', $css );
+
+		wp_add_inline_style( 'nnforms-styles', $css );
+		wp_print_styles( 'nnforms-styles' );
 	}
 }
