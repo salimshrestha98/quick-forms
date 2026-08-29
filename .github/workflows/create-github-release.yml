@@ -31,7 +31,7 @@ jobs:
 
             - name: Zip Folder
               run: |
-                  zip -r 99forms.zip . -x ".git/*" ".github/*" "node_modules/*" ".vscode/*" ".editorconfig" ".eslintrc.json" ".gitignore" "composer.lock" "package.json" "package-lock.json" "phpcs.xml"
+                  zip -r 99forms.zip . -x ".git/*" ".github/*" "node_modules/*" ".vscode/*" ".editorconfig" ".eslintrc.json" ".gitignore" "composer.lock" "package.json" "package-lock.json" "phpcs.xml" "composer.json" "src/*" "esbuild.js" "webpack.config.js"
 
             - name: Release
               uses: softprops/action-gh-release@v2
