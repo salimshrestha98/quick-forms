@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name:       99Forms
- * Plugin URI:        https://labs.salim.com.np/99forms
+ * Plugin URI:        https://bodhiwp.com/99forms/
  * Description:       A native Gutenberg block-based form builder. Build forms directly inside the block editor — no shortcodes, no iframes.
  * Version:           1.0.0
  * Requires at least: 6.8
  * Requires PHP:      7.4
- * Author:            salimlabs
- * Author URI:        https://profiles.wordpress.org/salimlabs
+ * Author:            bodhiwp
+ * Author URI:        https://bodhiwp.com
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       99forms
